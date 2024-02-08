@@ -1,0 +1,68 @@
+// Comaint Single Page Application frontend (Single page application frontend of Comaint project)
+// Copyright (C) 2023-2024 Dominique Parisot
+//
+// Footer.scss
+//
+// This program is free software: you can redistribute it and/or modify it under the terms of the 
+// GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied 
+// warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+//
+
+$screen-width-limit-small: 0px !default;
+$screen-width-limit-medium: 0px !default;
+
+footer {
+	display: grid;
+	grid-template-areas: 
+		"links links"
+		"copyright copyright"
+		"concept   concept";
+	background-color: var(--banner-background-color);
+	color: var(--banner-first-text-color);
+	padding: 0.5rem;
+	ul {
+		grid-area: links;
+		display: flex;
+		flex-direction: column;
+		padding: 0.2rem;
+		li {
+			margin-left: 3rem;
+			list-style: circle;
+			padding: 1rem;
+			a {
+				color: var(--banner-link-color);
+				text-decoration: none;
+			}
+			a:hover {
+				color: var(--banner-link-hover-color);
+			}
+		}
+	}
+	p {
+		margin:0.5rem;
+	}
+	p.copyright {
+		grid-area: copyright;
+	}
+	p.concept {
+		grid-area: concept;
+	}
+	@media (min-width: $screen-width-limit-small)  {
+		grid-template-areas: 
+			"links links"
+			"copyright concept";
+		ul {
+			flex-direction: row;
+		}
+		
+		p.concept {
+			justify-self: end;
+		}
+	}
+}

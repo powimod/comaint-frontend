@@ -1,0 +1,110 @@
+// Comaint Single Page Application frontend (Single page application frontend of Comaint project)
+// Copyright (C) 2023-2024 Dominique Parisot
+//
+// palette-icon.scss
+//
+// This program is free software: you can redistribute it and/or modify it under the terms of the 
+// GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied 
+// warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+//
+
+.palette-icon {
+	width: 84px;
+	height: 84px;
+	object-fit: none;
+	padding: 10px;
+}
+
+.palette-icon-unknown {
+	object-position: 64px 0px;
+}
+.palette-icon-border {
+	border: solid black 1px;
+	border-radius: 5px;
+}
+.palette-icon-button {
+	border: solid black 1px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+.palette-icon-button:hover {
+	border: solid black 2px;
+}
+
+/* first line */
+.palette-icon-user {
+	object-position: 0px 0px;
+}
+.palette-icon-company {
+	object-position: -64px 0px;
+}
+.palette-icon-unit{
+	object-position: -128px 0px;
+}
+.palette-icon-section{
+	object-position: -192px 0px;
+}
+.palette-icon-equipment{
+	object-position: -256px 0px;
+}
+.palette-icon-article{
+	object-position: -320px 0px;
+}
+.palette-icon-intervention{
+	object-position: -384px 0px;
+}
+.palette-icon-workorder{
+	object-position: -448px 0px;
+}
+.palette-icon-supply{
+	object-position: -512px 0px;
+}
+.palette-icon-order{
+	object-position: -576px 0px;
+}
+.palette-icon-supplier{
+	object-position: -640px 0px;
+}
+
+
+
+/* second line */
+.palette-icon-category{
+	object-position: 0px -64px;
+}
+.palette-icon-subcategory {
+	object-position: -64px -64px;
+}
+.palette-icon-create{
+	object-position: -128px -64px;
+}
+.palette-icon-delete{
+	object-position: -192px -64px;
+}
+.palette-icon-add{
+	object-position: -256px -64px;
+}
+.palette-icon-remove{
+	object-position: -320px -64px;
+}
+.palette-icon-validate{
+	object-position: -384px -64px;
+}
+.palette-icon-cancel{
+	object-position: -448px -64px;
+}
+.palette-icon-display{
+	object-position: -512px -64px;
+}
+.palette-icon-edit{
+	object-position: -576px -64px;
+}
+.palette-icon-erase{
+	object-position: -640px -64px;
+}

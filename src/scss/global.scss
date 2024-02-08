@@ -1,0 +1,133 @@
+// Comaint Single Page Application frontend (Single page application frontend of Comaint project)
+// Copyright (C) 2023-2024 Dominique Parisot
+//
+// global.scss
+//
+// This program is free software: you can redistribute it and/or modify it under the terms of the 
+// GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied 
+// warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+//
+
+
+$max-page-width: 1024px;
+
+*{
+        box-sizing: border-box;
+        margin: 0;
+	padding: 0;
+	font-size: 1.5rem;
+
+}
+
+html {
+        font-size: 62.5%;
+	height:100%; /* move footer at the bottom of the window */
+}
+
+/* color managment */
+:root {
+	--global-color-1: #104992; /* dark blue */
+	--global-color-2: #ffffff; /* white */
+	--global-color-3: #72b6fe; /* light blue */
+	--global-color-4: #000000; /* black */
+	--global-color-5: #323232; /* dark gray*/
+	--global-color-6: #102a4c; /* very dark blue*/
+	--global-color-7: #b4b3c6; /* light gray */
+	--global-color-8: #0d0e0f; /* very dark gray */
+}
+
+body {
+	--banner-first-text-color: var(--global-color-2);
+	--banner-second-text-color: var(--global-color-3);
+	--banner-background-color: var(--global-color-1);
+	--banner-link-color: var(--global-color-3);
+	--banner-link-hover-color: var(--global-color-2);
+
+	--main-first-text-color: var(--global-color-4);
+	--main-second-text-color: var(--global-color-5);
+	--main-first-title-color: var(--global-color-1);
+	--main-second-title-color: var(--global-color-1);
+	--main-background-color: var(--global-color-2);
+	--main-link-color: var(--global-color-6);
+	--main-link-hover-color: var(--global-color-5);
+
+	--footer-first-text-color: var(--global-color-2);
+	--footer-second-text-color: var(--global-color-3);
+	--footer-background-color: var(--global-color-1);
+
+	--bottom-color: var(--global-color-5); /* fond en arrière de la page */
+}
+
+body.dark-theme {
+	--banner-background-color: var(--global-color-6);
+
+	--main-first-text-color: var(--global-color-2);
+	--main-second-text-color: var(--global-color-7);
+	--main-first-title-color: var(--global-color-3);
+	--main-second-title-color: var(--global-color-3);
+	--main-background-color: var(--global-color-5);
+	--main-link-color: var(--global-color-3);
+	--main-link-hover-color: var(--global-color-6);
+
+	--bottom-color: var(--global-color-8);
+}
+
+body.line-spacing-theme {
+	line-height: 2;
+}
+
+body > div#root {
+	font-family: 'Roboto';
+	min-height: 100vh;
+	display:grid;
+	grid-template-columns: auto minmax(auto, $max-page-width) auto;
+	grid-template-rows: auto 1fr auto; /* header / content / footer */
+	grid-template-areas: ". header ."
+	                     ". main   ."
+	                     ". footer .";
+	background-color: var(--bottom-color); 
+	font-family: 'Roboto';
+}
+
+
+header {
+	grid-area: header;
+}
+main {
+	grid-area: main;
+	overflow:scroll;
+}
+footer {
+	grid-area: footer;
+}
+
+label {
+	padding: 0.3rem;
+}
+input {
+	padding: 0.3rem;
+}
+button {
+	padding: 0.3rem 1rem;
+}
+
+option {
+	border:solid red 1px;
+}
+
+a:link, a:visited {
+	color: var(--first-text-color);
+}
+
+.error-message {
+	font-weight: bolder;
+	color: red;
+	padding: 0.2rem;
+}
+

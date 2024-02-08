@@ -1,0 +1,96 @@
+{
+	"yes" : "Yes",
+	"no" : "No",
+	"ok" : "OK",
+	"cancel": "Cancel",
+	"validate": "Validate",
+	"previous": "Previous",
+	"home": "Accueil",
+
+	"header_title" : "Comaint CMMS",
+	"header_subtitle": "Computerized Maintenance Management System",
+
+	"contact_us": "Contact us",
+	"privacy_policy": "Privacy policy",
+	"terms_of_use": "Terms of use",
+	"all_right_reserved": "© All right reserved {{name}} - {{years}}", 
+	"product_conception": "{{name}} conception", 
+
+	"public_welcome_text": "Welcome to Comaint",
+
+	"login-message": "Identify",
+	"already-customer-question": "Already a customer",
+	"email-field": "EMail",
+	"password-field": "Password",
+	"forget-password-button" : "Forgotten password",
+	"login-button": "Login",
+	"new-customer-question" : "New customer",
+	"create-account-button" : "Create account",
+	"close": "Close",
+	"invalid-email-error": "Invalid Email",
+	"invalid-password-error": "Invalid Password",
+	
+	"create-account-message" : "Create an account",
+	"create-account-instruction": "Please provide a valid email address and a password in order to create an account",
+	"password-rules": "Minimum 8 characters with at least one uppercase, one lowercase, one number, and one special character",
+	"firstname-field": "Firstname",
+	"lastname-field": "Lastname",
+	"empty-firstname-error": "Firstname can not be empty",
+	"empty-lastname-error": "Lastname can not be empty",
+
+	"ask-code-message": "Please enter the confirmation code that was sent to you by email",
+	"resend-validation-code": "Resend validation code",
+	"validation-code": "Validation code",
+	"invalid-validation-code-error": "Validation code must be a six digits number",
+
+	"accessibility-theme" : "Theme",
+	"accessibility-light-theme" : "Light",
+	"accessibility-dark-theme" : "Dark",
+	"accessibility-line-spacing" : "Line spacing",
+	"accessibility-line-spacing-simple" : "Simple",
+	"accessibility-line-spacing-double" : "Double",
+
+	"accessibility-lang" : "Language",
+	"accessibility-lang-en" : "English",
+	"accessibility-lang-fr" : "French",
+
+	"error-page-title": "Oops!",
+	"error-page-message": "Sorry, an unexpected error has occurred",
+	"error-page-home-link": "Home",
+
+	"about-link": "About",
+	"frontend_version": "Frontal version : {{version}}", 
+	"backend_version": "Backend version : {{version}}", 
+	"website": "Website",
+	"contact": "Contact",
+
+	"logout-button": "Logout",
+	"logout-question": "Do you want to disconnect ?",
+
+	"error": {
+		"prop": {
+			"is_not_defined": "Property {{property}} is not defined",
+			"is_null": "Property {{property}} is null",
+			"is_not_an_integer": "Property {{property}} is not an integer",
+			"is_too_small": "Property {{property}} is too small",
+			"is_too_large": "Property {{property}} is too large",
+			"is_not_a_string": "Property {{property}} is not a string",
+			"is_too_short": "Property {{property}} is too short",
+			"is_too_long": "Property {{property}} is too long",
+			"is_not_a_boolean": "Property {{property}} is not a boolean",
+			"is_not_a_date": "Property {{property}} is not a date",
+			"is_not_a_pure_date": "Property {{property}} is not a (pure) date",
+			"is_not_a_date_time": "Property {{property}} is not a date/time",
+			"is_malformed_email": "Property {{property}} is not a valid email",
+			"is_malformed_uuid": "Property {{property}} is not a valid uuid",
+			"is_malformed": "Property {{property}} is malformed",
+			"password_to_small": "Password is too small",
+			"password_no_lowercase_letter": "Password does not contain lowercase letter",
+			"password_no_uppercase_letter": "Password does not contain uppercase letter",
+			"password_no_digit_character": "Password does not contain digit character",
+			"password_no_special_character": "Password does not contain special character"
+		}
+
+
+	}
+}

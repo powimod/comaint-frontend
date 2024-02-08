@@ -1,0 +1,3 @@
+[submodule "src/comaint-api-lib"]
+	path = src/comaint-api-lib
+	url = git@github.com:powimod/comaint-api-lib.git

@@ -1,0 +1,92 @@
+// Comaint Single Page Application frontend (Single page application frontend of Comaint project)
+// Copyright (C) 2023-2024 Dominique Parisot
+//
+// Header.scss
+//
+// This program is free software: you can redistribute it and/or modify it under the terms of the 
+// GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied 
+// warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+//
+
+$screen-width-limit-tiny: 480px !default;
+$screen-width-limit-small: 640px !default;
+
+body > #root > header {
+	padding:0.5rem;
+	display: grid;
+	grid-template-areas: 
+		"logo title    accessibility account"
+		"logo subtitle accessibility account"
+		"logo userid   userid        userid";
+	grid-template-columns: auto 1fr;
+	background-color: var(--banner-background-color);
+	color: var(--banner-first-text-color);
+
+	.logo {
+		grid-area: logo;
+		align-self: center;
+	}
+	.logo img {
+		width: 150px;
+		margin-right:2rem;
+		filter: invert(1);
+	}
+
+	.title {
+		align-self: end;
+		margin-bottom: 0rem;
+		display: none;
+		grid-area: title;
+		font-size: 2.8rem;
+		font-style: italic;
+		@media (min-width: $screen-width-limit-tiny)  {
+			display: block;
+		}
+	}
+
+	.subtitle {
+		justify-self: start;
+		margin-top: 0.1rem;
+		display: none;
+		grid-area: subtitle;
+		font-size: 1.3rem;
+		font-style: italic;
+		color: var(--banner-second-text-color);
+		@media (min-width: $screen-width-limit-small)  {
+			display: block;
+		}
+	}
+
+	.accessibility-button {
+		grid-area: accessibility;
+		border: 1rem;
+		border: solid white 1px;
+		width: 64px; /* TODO hard coded button size */
+		height: 64px;
+		padding: 10px;
+		margin-right: 1rem;
+		border-radius: 5px;
+		cursor: pointer;
+		&:hover {
+			border: solid lightblue 1px;
+		}
+	}
+
+	.account-button {
+		grid-area: account;
+		filter: invert(1);
+	}
+
+	.userid {
+		justify-self: end; /* right */
+		grid-area: userid;
+		margin-right: 1rem;
+	}
+
+}

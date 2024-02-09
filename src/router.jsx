@@ -22,6 +22,7 @@ import Home from "./containers/Home"
 import ContactUs from "./containers/ContactUs"
 import PrivacyPolicy from "./containers/PrivacyPolicy"
 import TermsOfUse from "./containers/TermsOfUse"
+import UnlockAccount from "./containers/UnlockAccount"
 import About, {loader as aboutLoader} from "./containers/About"
 
 const createRouter = () => {
@@ -35,6 +36,7 @@ const createRouter = () => {
 				{ path: '/contact-us',     element:<ContactUs/> },
 				{ path: '/privacy-policy', element:<PrivacyPolicy/> },
 				{ path: '/terms-of-use',   element:<TermsOfUse/> },
+				{ path: '/unlock-account', element:<UnlockAccount/> },
 				{
 					path: '/about',
 					element:<About/>,

@@ -30,6 +30,10 @@ function App({children}) {
 	useEffect( () => {
 		if (accountLoaded)
 			navigate('/'); // force navigation to home page on login or logout 
+		if (account && account.accountLocked) {
+			console.log('Account is locked, navigate to unlock-account page')
+			navigate('/unlock-account');
+		}
 		setAccountLoaded(true); // do not redirect on the first account changed which is due to page loading
 	}, [account]);
 

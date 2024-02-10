@@ -19,6 +19,7 @@ import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next';
 
 import { AccountContext } from '../AccountContext'
+import authApi from '../api/auth-api.js'
 
 const UnlockAccount = (props) => {
 	const { t } = useTranslation();
@@ -35,14 +36,21 @@ const UnlockAccount = (props) => {
 		}
 	}, [ account ])
 
-	const onSendCodeButtonClick = () => {
+	const onSendCodeButtonClick = async () => {
 		setError(null);
-		// TODO implement code send
-		// TODO display a popup to inform mail has been sent
-		console.log("Send code button")
+		try {
+			const result = await authApi.sendUnlockAccountValidationCode();
+			if (! result.ok) 
+				throw new Error(result.error);
+			// TODO display a popup to inform mail has been sent
+			console.log(result)
+		}
+		catch (error) {
+			setError(error.message ? error.message : error);
+		}
 	}
 
-	const onValidateCodeButtonClick = () => {
+	const onValidateCodeButtonClick = async () => {
 		setError(null);
 		let code = codeInput.current.value
 		if (code.length === 0) {
@@ -54,8 +62,19 @@ const UnlockAccount = (props) => {
 			return
 		}
 		code = parseInt(code)
-		// TODO implement code validation
-		console.log("Validate code", code)
+		try {
+			const result = await authApi.unlockAccount(code);
+			if (! result.ok) 
+				throw new Error(result.error);
+			if (! result.isValid)
+				throw new Error(t('invalid-code-error'))
+			// TODO display a popup to inform account has been unlocked
+			navigate('/');
+		}
+		catch (error) {
+			setError(error.message ? error.message : error);
+		}
+
 	}
 
 	return (

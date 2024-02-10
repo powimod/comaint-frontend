@@ -15,13 +15,11 @@
  */
 
 import { useState, useContext, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 import { AccountContext } from '../AccountContext'
 import PrivateHomePageContent from '../components/PrivateHomePageContent'
 import PublicHomePageContent from '../components/PublicHomePageContent'
 
 const Home = (props) => {
-	const { t } = useTranslation();
 
 	const { account } = useContext(AccountContext);
 

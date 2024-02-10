@@ -29,6 +29,7 @@
 	"close": "Close",
 	"invalid-email-error": "Invalid Email",
 	"invalid-password-error": "Invalid Password",
+	"invalid-code-error": "Invalid code",
 	
 	"create-account-message" : "Create an account",
 	"create-account-instruction": "Please provide a valid email address and a password in order to create an account",
@@ -66,6 +67,14 @@
 
 	"logout-button": "Logout",
 	"logout-question": "Do you want to disconnect ?",
+
+	"unlock_account" : {
+		"title": "Unlock your account",
+		"send_code_message": "Your account is locked. To unlock it, press the button to send code a validation code by mail...",
+		"send_code_button": "Send a validation code by email",
+		"validate_code_message": "Next, enter the validation code and validate",
+		"code": "code"
+	},
 
 	"error": {
 		"prop": {

@@ -29,6 +29,7 @@
 	"close": "Fermer",
 	"invalid-email-error": "Adresse mail invalide",
 	"invalid-password-error": "Mot de passe invalide",
+	"invalid-code-error": "Code invalide",
 
 	"create-account-message" : "Créez un compte",
 	"create-account-instruction": "Veuillez fournir une adresse mail valide et un mot de passe pour pouvoir vous créer un compte",
@@ -66,6 +67,14 @@
 
 	"logout-button": "Se déconnecter",
 	"logout-question": "Voulez-vous vous déconnecter ?",
+
+	"unlock_account" : {
+		"title": "Déverrouillez votre compte",
+		"send_code_message": "Votre compte est verrouillé. Pour le débloquer, appuyez sur le bouton pour envoyer un code par mail...",
+		"send_code_button": "Envoyer un code de validation par mail",
+		"validate_code_message": "Ensuite, entrez le code reçu et validez",
+		"code": "code"
+	},
 
 	"error": {
 		"prop": {

@@ -20,9 +20,12 @@ import { Outlet, Navigate, useNavigate } from 'react-router-dom'
 import Header from "./components/Header"
 import Footer from "./components/Footer"
 import { AccountContext } from './AccountContext'
+import FlashPopupStack, {newFlashPopupStack} from './components/dialog/FlashPopupStack'; 
+
 
 function App({children}) {
 
+	const flashPopupStack = newFlashPopupStack()
 	const { account } = useContext(AccountContext)
 	const [ accountLoaded, setAccountLoaded] = useState(false);
 	const navigate = useNavigate()
@@ -46,6 +49,7 @@ function App({children}) {
 			<Header/>
 			<Outlet/>
 			<Footer/>
+			<FlashPopupStack flashPopupStack={flashPopupStack}/> 
 		</>
 	)
 }

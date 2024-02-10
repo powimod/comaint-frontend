@@ -20,6 +20,7 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider, u
 
 import createRouter from './router'
 import AccountContext from './AccountContext'
+import DialogProvider from './components/dialog/DialogContext'; 
 
 import './i18n'
 import './scss/main.scss'
@@ -30,7 +31,9 @@ function main() {
 		<React.StrictMode>
 			<Suspense fallback={<div>Loading...</div>}>
 				<AccountContext>
+				<DialogProvider>
 					<RouterProvider router={createRouter()} />
+				</DialogProvider>
 				</AccountContext>
 			</Suspense>
 		</React.StrictMode>

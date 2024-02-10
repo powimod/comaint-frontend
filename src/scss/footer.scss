@@ -30,6 +30,7 @@ footer {
 		grid-area: links;
 		display: flex;
 		flex-direction: column;
+		flex-wrap: wrap;
 		padding: 0.2rem;
 		li {
 			margin-left: 3rem;

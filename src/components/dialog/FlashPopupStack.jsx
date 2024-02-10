@@ -14,16 +14,32 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {useState, useRef} from 'react'
+import {useState, useRef, useEffect, useContext} from 'react'
+import { DialogContext} from './DialogContext';
 
 const FlashPopupStack = ({flashPopupStack}) => {
+
+	const [ dialogState, dialogDispatch ] = useContext(DialogContext)
+
 	const onCloseButtonClicked = (popupId) => {
 		removeFlashPopupStack(flashPopupStack, popupId);
 	}
+
+	useEffect( () => {
+		for (const dialogRequest of dialogState) {
+			if (dialogRequest.type === 'flash') {
+				flashPopupStackAppend(flashPopupStack, dialogRequest.message, dialogRequest.duration)
+				dialogDispatch({type:'acquit', id: dialogRequest.id})
+			}
+		}
+	}, [dialogState])
+
+
+
 	return (<div className="popupStack"> {
 			flashPopupStack.messageStack.map( (popup) =>  (
 				<div key={popup.id}> {
-					(popup.tempo !== null) ? popup.message : <>
+					(popup.duration !== null) ? popup.message : <>
 						<div>{popup.message}</div>
 						<div><button onClick={ev => onCloseButtonClicked(popup.id)}>OK</button></div>
 					</>
@@ -42,17 +58,17 @@ const newFlashPopupStack = () => {
 	}
 }
 
-const flashPopupStackAppend = (flashPopupStack, newMessage, tempo = null) => {
+const flashPopupStackAppend = (flashPopupStack, newMessage, duration = null) => {
 	flashPopupStack.keyRef.current++
 	const popupId = flashPopupStack.keyRef.current
-	if (tempo !== null) 
+	if (duration !== null) 
 		setTimeout( () => {
 			removeFlashPopupStack(flashPopupStack, popupId);
-		}, tempo);
+		}, duration);
 	flashPopupStack.setMessageStack( (messageStack) => [{ 
 		id: popupId, 
 		message:newMessage, 
-		tempo: tempo
+		duration: duration
 	}, ...messageStack ])
 }
 

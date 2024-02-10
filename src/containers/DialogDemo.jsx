@@ -1,7 +1,7 @@
 /* Comaint Single Page Application frontend (Single page application frontend of Comaint project)
  * Copyright (C) 2023-2024 Dominique Parisot
  *
- * components/PublicHomePageContent.jsx
+ * containers/DialogDemo.jsx
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the 
  * GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or
@@ -14,17 +14,29 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { useContext } from 'react';
-import { AccountContext } from '../AccountContext'
+import { useState, useContext, useEffect } from 'react'
+import { DialogContext} from '../components/dialog/DialogContext'
 
+const DialogDemo = (props) => {
 
-const PrivateHomePageContent = () => {
-	const { account } = useContext(AccountContext);
+	const [ dialogRequestList, pushDialogRequest ] = useContext(DialogContext)
 
+	const showPopup = () => {
+		const duration = parseInt(500 + Math.random() * 3000)
+		pushDialogRequest({type:'flash', message: `message ${Date.now()} (${duration}ms)`, duration:duration})
+	}
 
-	return (<>
-		<div>User connected ID:{ (account) ? account.userId : '???'}</div>
-	</>)
+	const showBlockingPopup = () => {
+		pushDialogRequest({type:'flash', message: `message ${Date.now()}`})
+	}
+
+	return (
+		<main>
+			<h1>Dialog demo</h1>
+			<div><button onClick={showPopup}>Flash popup</button></div>
+			<div><button onClick={showBlockingPopup}>Blocking popup</button></div>
+		</main>
+	)
 }
 
-export default PrivateHomePageContent
+export default DialogDemo

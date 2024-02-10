@@ -21,15 +21,17 @@ import {Link} from 'react-router-dom'
 // TODO code cleanup
 //import MessageDialog from './dialog/MessageDialog';
 //import BubblePopup, {showBubblePopup, newBubblePopup, hideBubblePopup} from './dialog/BubblePopup';
-//import FlashPopupStack, {flashPopupStackAppend, newFlashPopupStack, flashPopupStackClear} from './dialog/FlashPopupStack'; 
 
 
 const Footer = (props) => {
 	const { t } = useTranslation();
 
 	//const popup = newBubblePopup()
-	//const flashPopupStack = newFlashPopupStack()
 
+
+	const testPopup = () => {
+		flashPopupStackAppend(flashPopupStack, "Contact us by email", 1000);
+	}
 
 	/*
 	//const [isContactUsDialogOpen, setContactUsDialogOpen] = useState(false);
@@ -59,7 +61,6 @@ const Footer = (props) => {
 		</footer>
 		{/* <MessageDialog isOpen={isContactUsDialogOpen} onClose={onContactUsDialogClose}>Contact us by email</MessageDialog> */}
 		{/* <BubblePopup popup={popup}/> */}
-		{/* <FlashPopupStack flashPopupStack={flashPopupStack}/> */}
 		</>
 	)
 }

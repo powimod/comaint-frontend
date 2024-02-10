@@ -29,6 +29,7 @@
 	"close": "Close",
 	"invalid-email-error": "Invalid Email",
 	"invalid-password-error": "Invalid Password",
+	"different-password-error": "Passwords does not match",
 	"invalid-code-error": "Invalid code",
 	
 	"create-account-message" : "Create an account",
@@ -74,6 +75,19 @@
 		"send_code_button": "Send a validation code by email",
 		"validate_code_message": "Next, enter the validation code and validate",
 		"code": "code"
+	},
+
+	"forgotten_password" : {
+		"title": "Forgotten password",
+		"send_code_message": "To reset your password, enter your email address and press the send code button...",
+		"email_field": "Email address",
+		"send_code_button": "Send code",
+		"validate_code_message": "Next, enter the received code...",
+		"code": "code",
+		"password_input_message": "Finally, enter the new password and validate",
+		"new_password_field": "New password",
+		"confirm_password_field": "Confirm password",
+		"password_changed_message": "Password has been changed"
 	},
 
 	"error": {

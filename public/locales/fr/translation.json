@@ -29,6 +29,7 @@
 	"close": "Fermer",
 	"invalid-email-error": "Adresse mail invalide",
 	"invalid-password-error": "Mot de passe invalide",
+	"different-password-error": "Les mots de passe ne correpondent pas",
 	"invalid-code-error": "Code invalide",
 
 	"create-account-message" : "Créez un compte",
@@ -74,6 +75,19 @@
 		"send_code_button": "Envoyer un code de validation par mail",
 		"validate_code_message": "Ensuite, entrez le code reçu et validez",
 		"code": "code"
+	},
+
+	"forgotten_password" : {
+		"title": "Mot de passe oublié",
+		"send_code_message": "Pour réinitialiser votre mot de passe, entrez votre adresse mail et appuyer sur le bouton d'envoi de code",
+		"email_field": "Adresse mail",
+		"send_code_button": "Envoyer le code",
+		"validate_code_message": "Ensuite entrez le code reçu...",
+		"code": "code",
+		"password_input_message": "Et enfin, saisissez le nouveau mot de passe et validez",
+		"new_password_field": "Nouveau mot de passe",
+		"confirm_password_field": "Confirmation du mot de passe",
+		"password_changed_message": "Le mot de passe a été changé"
 	},
 
 	"error": {

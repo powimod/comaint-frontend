@@ -16,7 +16,7 @@
 
 import { useState, useContext, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import authApi from '../api/auth-api.js'
 
@@ -34,6 +34,7 @@ const LoginDialog = ({isOpen, onClose, onCreateAccount}) => {
 	const [ password, setPassword] = useState('');
 	const emailRef = useRef();
 	const passwordRef = useRef();
+	const navigate = useNavigate()
 
 	const EMAIL_STORAGE_KEY = 'login-email';
 
@@ -83,7 +84,8 @@ const LoginDialog = ({isOpen, onClose, onCreateAccount}) => {
 
 	const onForgetPasswordButtonClick = (ev) => {
 		ev.preventDefault()
-		console.log('Forget password')
+		navigate('/forgotten-password')
+		onClose() // close dialog
 	}
 
 	const onEmailChanged = (ev) => {

@@ -37,17 +37,15 @@ const ForgottenPassword = (props) => {
 	const EMAIL_STORAGE_KEY = 'login-email';
 
 	useEffect( () => {
-		setTimeout( () => {
-			const email = localStorage.getItem(EMAIL_STORAGE_KEY);
-			if (email !== null)
-				setEmail(email)
-		}, 0)
+		const email = localStorage.getItem(EMAIL_STORAGE_KEY);
+		if (email !== null)
+			setEmail(email)
 	}, []);
 
 	useEffect( () => {
-		if (email.length === 0)
+		if (email.length === 0) 
 			localStorage.removeItem(EMAIL_STORAGE_KEY);
-		else
+		else 
 			localStorage.setItem(EMAIL_STORAGE_KEY, email);
 	}, [email]);
 
@@ -126,7 +124,7 @@ const ForgottenPassword = (props) => {
 				t('forgotten_password.password_changed_message'),
 				duration:3000
 			})
-			navigate('/') // TODO issue-8 navigate to login-route
+			navigate('/') // TODO Display login dialog
 		}
 		catch (error) {
 			setError(error.message ? error.message : error);

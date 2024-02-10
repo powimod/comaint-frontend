@@ -87,7 +87,7 @@
 		"password_input_message": "Et enfin, saisissez le nouveau mot de passe et validez",
 		"new_password_field": "Nouveau mot de passe",
 		"confirm_password_field": "Confirmation du mot de passe",
-		"password_changed_message": "Le mot de passe a été changé"
+		"password_changed_message": "Le mot de passe a été changé, vous pouvez vous connecter"
 	},
 
 	"error": {

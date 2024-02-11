@@ -81,7 +81,7 @@ const Header = (props) => {
 
 	return (<>
 		<header>
-			<Link className="logo" to="/"> <img src="logo.svg"/> </Link>
+			<Link className="logo" to="/"> <img src="/logo.svg"/> </Link>
 			<span className="title">{t('header_title')}</span>
 			<span className="subtitle">{t('header_subtitle')}</span>
 			<FontAwesomeIcon className="accessibility-button" icon={faWheelchair} onClick={onAccessibilityButtonClick} size="2x" inverse/>

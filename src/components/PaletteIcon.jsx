@@ -29,7 +29,7 @@ const PaletteIcon = ({element, className = null, border = null, button = null, o
 	if (button && button.trim().toLowerCase() === 'true')
 		classNameTab.push( 'palette-icon-button' );
 	className = classNameTab.join(' ');
-	return ( <img className={className} src="./icons.png" onClick={onClick}/> )
+	return ( <img className={className} src="/icons.png" onClick={onClick}/> )
 }
 
 export default PaletteIcon;

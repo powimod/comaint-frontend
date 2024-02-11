@@ -1,7 +1,7 @@
 /* Comaint Single Page Application frontend (Single page application frontend of Comaint project)
  * Copyright (C) 2023-2024 Dominique Parisot
  *
- * components/PublicHomePageContent.jsx
+ * containers/OfferAdminPage.jsx
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the 
  * GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or
@@ -14,27 +14,27 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom'
+import { useState, useContext, useEffect } from 'react';
+import { Link, useNavigate, Navigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next';
 
 import { AccountContext } from '../AccountContext'
 import ErrorDisplay from '../components/ErrorDisplay'
 
-const AdminHomePageContent = () => {
+const OfferAdminPage = (props) => {
 	const { t } = useTranslation();
 
 	const { account } = useContext(AccountContext);
 	if (! account.administrator) 
 		return <ErrorDisplay message={'You are not administrator'}/>
 
-	return (<>
-		<h1>Administration</h1>
-		<ul>
-			<li> <Link to="/admin/offers">{t('admin.offers.title')}</Link> </li>
-			<li> <Link to="/admin/account">{t('admin.accounts.title')}</Link> </li>
-		</ul>
-	</>)
+	return (
+		<main>
+			<section>
+				<h1>Offer admin page</h1>
+			</section>
+		</main>
+	)
 }
 
-export default AdminHomePageContent
+export default OfferAdminPage

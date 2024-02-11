@@ -25,6 +25,7 @@ import TermsOfUse from "./containers/TermsOfUse"
 import UnlockAccount from "./containers/UnlockAccount"
 import ForgottenPassword from "./containers/ForgottenPassword"
 import DialogDemo from "./containers/DialogDemo"
+import OfferAdminPage from './containers/OfferAdminPage'
 import About, {loader as aboutLoader} from "./containers/About"
 
 const createRouter = () => {
@@ -41,6 +42,7 @@ const createRouter = () => {
 				{ path: '/unlock-account'    , element:<UnlockAccount/> },
 				{ path: '/forgotten-password', element:<ForgottenPassword/> },
 				{ path: '/dialog-demo'       , element:<DialogDemo/> },
+				{ path: '/admin/offers'      , element:<OfferAdminPage/> },
 				{
 					path: '/about',
 					element:<About/>,

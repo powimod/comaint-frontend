@@ -35,6 +35,7 @@ $screen-size-large : 1024px;
 @use 'accessibility-dialog';
 @use 'about';
 @use 'popup-menu';
+@use 'editor';
 
 main {
 	padding : 1rem;

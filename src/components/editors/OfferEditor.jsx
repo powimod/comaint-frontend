@@ -65,7 +65,6 @@ const OfferEditor = ({onClose = null}) => {
 	}, [ editorAction ])
 
 	return (<>
-			<div>Offer editor</div>
 			<EditorToolbar 
 				title="Offer editor toolbar" 
 				setMode={setEditorMode}
@@ -74,7 +73,12 @@ const OfferEditor = ({onClose = null}) => {
 				canDelete={true}
 				canClose={(onClose !== null)}
 			/> {/* TODO title translation */}
-
+			<div className="editor-content">
+				<div>abc</div>
+				<div>cde</div>
+				<div>efg</div>
+				<div>ghi</div>
+			</div>
 		</>)
 }
 

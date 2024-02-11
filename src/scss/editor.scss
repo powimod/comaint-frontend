@@ -1,0 +1,14 @@
+.editor-toolbar {
+	display: flex;
+	flex-direction: row;
+	background-color: var(--editor-toolbar-background-color); 
+	color: var(--editor-toolbar-color);
+}
+.editor-toolbar img{
+	margin: 1rem;
+}
+.editor-content {
+	background-color:yellow;
+	margin: 1rem;
+}
+

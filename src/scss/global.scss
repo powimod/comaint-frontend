@@ -62,6 +62,9 @@ body {
 	--footer-background-color: var(--global-color-1);
 
 	--bottom-color: var(--global-color-5); /* fond en arrière de la page */
+
+	--editor-toolbar-background-color: var(--global-color-6);
+	--editor-toolbar-color: var(--global-color-2);
 }
 
 body.dark-theme {
@@ -131,10 +134,4 @@ a:link, a:visited {
 	padding: 0.2rem;
 }
 
-.editor-toolbar {
-	display: flex;
-	flex-direction: row;
-}
-.editor-toolbar img{
-	margin: 1rem;
-}
+

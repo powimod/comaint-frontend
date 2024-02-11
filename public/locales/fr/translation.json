@@ -77,6 +77,15 @@
 		"code": "code"
 	},
 
+	"admin": {
+		"offers" : {
+			"title": "Gestion des offres"
+		},
+		"accounts": {
+			"title": "Gestion des comptes utilisateur"
+		}
+	},
+
 	"forgotten_password" : {
 		"title": "Mot de passe oublié",
 		"send_code_message": "Pour réinitialiser votre mot de passe, entrez votre adresse mail et appuyer sur le bouton d'envoi de code",

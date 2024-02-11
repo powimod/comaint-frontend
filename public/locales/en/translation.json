@@ -90,6 +90,15 @@
 		"password_changed_message": "Password has been changed, you can login"
 	},
 
+	"admin": {
+		"offers" : {
+			"title": "Offer managment"
+		},
+		"accounts": {
+			"title": "User account managment"
+		}
+	},
+
 	"error": {
 		"prop": {
 			"is_not_defined": "Property {{property}} is not defined",

@@ -21,13 +21,16 @@ import { useTranslation } from 'react-i18next';
 import { AccountContext } from '../AccountContext'
 import PagedList from '../components/PagedList'
 import ErrorDisplay from '../components/ErrorDisplay'
-import Dialog from '../components/dialog/Dialog';
+import { OfferEditorDialog } from '../components/editors/OfferEditor'
 import offerApi from '../api/offer-api.js'
+
 
 const OfferAdminPage = (props) => {
 	const { t } = useTranslation();
 	const [ offerList, setOfferList ] = useState([])
 	const [ error, setError ] = useState(null);
+	const [ isEditorDialogOpen, setIsEditorDialogOpen ] = useState(false)
+	const [ editedId, setEditedId ] = useState(-1)
 
 	const { account } = useContext(AccountContext);
 
@@ -39,14 +42,21 @@ const OfferAdminPage = (props) => {
 		setOfferList(result.offerList)
 	}
 
-	const onOfferClick = (id) => {
-		console.log(`Edit offer n°${id}`);
-	}
-
 	useEffect( () => {
 		asyncGetOfferList()
 	}, [ account ])
 
+	const onOfferClick = (id) => {
+		console.log(`Edit offer n°${id}`);
+		setEditedId(id)
+		setIsEditorDialogOpen(true)
+	}
+
+	const onEditorDialogClose = () => {
+		console.log("Close editor")
+		setEditedId(-1)
+		setIsEditorDialogOpen(false)
+	}
 
 	if (! account || ! account.administrator) 
 		return <ErrorDisplay message={'You are not administrator'}/>
@@ -56,6 +66,7 @@ const OfferAdminPage = (props) => {
 			<h1>Offer admin page</h1>
 			{ error !== null && <div className='error-message'>{error}</div> }
 			<PagedList list={offerList} label='title' onItemClick={onOfferClick}/>
+			<OfferEditorDialog offerId={editedId} isDialogOpen={isEditorDialogOpen} onDialogClose={onEditorDialogClose}/>
 		</main>
 	)
 }

@@ -21,32 +21,10 @@ import EditorToolbar, {EditorToolBarModes, EditorToolBarActions} from './EditorT
 import Dialog from '../dialog/Dialog'
 import offerApi from '../../api/offer-api.js'
 
-const OfferEditor = () => {
-	const { t } = useTranslation();
-
-	return (<>
-			<div>Offer editor</div>
-		</>)
-}
-
-const OfferEditorDialog = ({offerId, isDialogOpen, onDialogClose}) => {
+const OfferEditor = ({onClose = null}) => {
 	const { t } = useTranslation();
 	const [editorMode, setEditorMode] = useState(0)
 	const [editorAction, setEditorAction] = useState(0)
-
-	useEffect( () => {
-		switch (editorMode){
-			case EditorToolBarModes.display:
-				console.log("dOm Editor mode : display")
-				break
-			case EditorToolBarModes.edit:
-				console.log("dOm Editor mode : edit")
-				break
-			case EditorToolBarModes.create:
-				console.log("dOm Editor mode : create")
-				break
-		}
-	}, [ editorMode ])
 
 	useEffect( () => {
 
@@ -80,23 +58,29 @@ const OfferEditorDialog = ({offerId, isDialogOpen, onDialogClose}) => {
 				onDialogClose()
 				break;
 			case EditorToolBarActions.close:
-				console.log("dOm close action")
-				onDialogClose()
+				if (onClose)
+					onClose()
 				break;
 		}
 	}, [ editorAction ])
 
-
-	return (<Dialog isOpen={isDialogOpen} onClose={onDialogClose} className='object-editor'>
-			<div>Offer edit dialog</div>
+	return (<>
+			<div>Offer editor</div>
 			<EditorToolbar 
 				title="Offer editor toolbar" 
 				setMode={setEditorMode}
 				setAction={setEditorAction}
-				canCreate={true}
+				canCreate={false}
 				canDelete={true}
+				canClose={(onClose !== null)}
 			/> {/* TODO title translation */}
-			<OfferEditor/>
+
+		</>)
+}
+
+const OfferEditorDialog = ({offerId, isDialogOpen, onDialogClose}) => {
+	return (<Dialog isOpen={isDialogOpen} onClose={onDialogClose} className='object-editor'>
+			<OfferEditor onClose={onDialogClose}/>
 		</Dialog>)
 }
 

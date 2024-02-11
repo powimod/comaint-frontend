@@ -1,7 +1,7 @@
 /* Comaint Single Page Application frontend (Single page application frontend of Comaint project)
  * Copyright (C) 2023-2024 Dominique Parisot
  *
- * containers/ErrorPage.jsx
+ * components/ErrorDisplay.jsx
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the 
  * GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or
@@ -17,16 +17,22 @@
 import { useRouteError, Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next';
 
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import ErrorDisplay from '../components/ErrorDisplay'
+const ErrorDisplay = ({message = null}) => {
 
-export default function ErrorPage() {
-	const error = useRouteError()
-	const message = error ? error.statusText || error.message : null
-	return (<>
-		<Header/>
-		<ErrorDisplay message={message}/> 
-		<Footer/>
-	</>);
+	if (typeof(message) !== 'string') 
+		throw new Error('Message property must be a string !')
+
+	const { t } = useTranslation();
+	return (
+		<main>
+			<h1>{t('error-page-title')}</h1>
+			<p>{t('error-page-message')}</p>
+			{ message != null && <p> <i>{message}</i> </p> }
+			<div>
+				<Link to="/">{t('error-page-home-link')}</Link>
+			</div>
+		</main>
+	)
 }
+
+export default ErrorDisplay

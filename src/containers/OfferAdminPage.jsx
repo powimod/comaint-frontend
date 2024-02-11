@@ -19,20 +19,43 @@ import { Link, useNavigate, Navigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next';
 
 import { AccountContext } from '../AccountContext'
+import PagedList from '../components/PagedList'
 import ErrorDisplay from '../components/ErrorDisplay'
+import Dialog from '../components/dialog/Dialog';
+import offerApi from '../api/offer-api.js'
 
 const OfferAdminPage = (props) => {
 	const { t } = useTranslation();
+	const [ offerList, setOfferList ] = useState([])
+	const [ error, setError ] = useState(null);
 
 	const { account } = useContext(AccountContext);
-	if (! account.administrator) 
+
+	const asyncGetOfferList = async () => {
+		setError(null)
+		const result = await offerApi.getOfferList()
+		if (! result.ok)
+			setError(result.error)
+		setOfferList(result.offerList)
+	}
+
+	const onOfferClick = (id) => {
+		console.log(`Edit offer n°${id}`);
+	}
+
+	useEffect( () => {
+		asyncGetOfferList()
+	}, [ account ])
+
+
+	if (! account || ! account.administrator) 
 		return <ErrorDisplay message={'You are not administrator'}/>
 
 	return (
 		<main>
-			<section>
-				<h1>Offer admin page</h1>
-			</section>
+			<h1>Offer admin page</h1>
+			{ error !== null && <div className='error-message'>{error}</div> }
+			<PagedList list={offerList} label='title' onItemClick={onOfferClick}/>
 		</main>
 	)
 }

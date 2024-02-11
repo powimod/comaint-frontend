@@ -1,7 +1,7 @@
 /* Comaint Single Page Application frontend (Single page application frontend of Comaint project)
  * Copyright (C) 2023-2024 Dominique Parisot
  *
- * containers/Home.jsx
+ * components/PublicHomePageContent.jsx
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the 
  * GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or
@@ -14,29 +14,25 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { useState, useContext, useEffect } from 'react';
+import { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next';
+
+
 import { AccountContext } from '../AccountContext'
-import PublicHomePageContent from '../components/PublicHomePageContent'
-import PrivateHomePageContent from '../components/PrivateHomePageContent'
-import AdminHomePageContent from '../components/AdminHomePageContent'
 
-const Home = (props) => {
 
+const AdminHomePageContent = () => {
 	const { account } = useContext(AccountContext);
+	const { t } = useTranslation();
 
-	return (
-		<main>
-		{
-			(account === null) ?
-				<PublicHomePageContent/>
-			: 
-			(account.administrator) ?
-				<AdminHomePageContent/>
-			:
-				<PrivateHomePageContent/>
-		}
-		</main>
-	)
+	return (<>
+		<h1>Administration</h1>
+		<ul>
+			<li> <Link to="/admin/offers">{t('admin.offers.title')}</Link> </li>
+			<li> <Link to="/admin/account">{t('admin.accounts.title')}</Link> </li>
+		</ul>
+	</>)
 }
 
-export default Home
+export default AdminHomePageContent

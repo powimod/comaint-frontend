@@ -131,3 +131,10 @@ a:link, a:visited {
 	padding: 0.2rem;
 }
 
+.editor-toolbar {
+	display: flex;
+	flex-direction: row;
+}
+.editor-toolbar img{
+	margin: 1rem;
+}

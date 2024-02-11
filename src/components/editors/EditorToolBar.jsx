@@ -16,6 +16,8 @@
 
 import { useState, useEffect } from 'react'
 
+import PaletteIcon from '../PaletteIcon';
+
 const MODE_DISPLAY = 0
 const MODE_EDIT = 1
 const MODE_CREATE = 2
@@ -101,15 +103,15 @@ const EditorToolbar = ({title=null, setMode, setAction, canEdit=true, canCreate=
 	return ( <div className="editor-toolbar">
 			{title && <span>{title}</span> }
 			{ internalMode === MODE_DISPLAY &&  <> 
-				{canEdit && <button onClick={onEditButtonClick}>Edit</button>}
-				{canCreate && <button onClick={onCreateButtonClick}>+</button>}
-				{canDelete && <button onClick={onDeleteButtonClick}>-</button>}
+				{ canEdit   && <PaletteIcon element="edit"   button="true" onClick={onEditButtonClick}/> }
+				{ canCreate && <PaletteIcon element="create" button="true" onClick={onCreateButtonClick}/> }
+				{ canDelete && <PaletteIcon element="delete" button="true" onClick={onDeleteButtonClick}/> }
+				{ canClose && <PaletteIcon element="cancel" button="true" onClick={onCloseButtonClick} /> }
 			</>}
 			{ internalMode !== MODE_DISPLAY &&  <> 
-				<button onClick={onValidateButtonClick}>OK</button>
-				<button onClick={onCancelButtonClick}>Cancel</button>
+				<PaletteIcon element="validate" button="true" onClick={onValidateButtonClick}/>
+				<PaletteIcon element="cancel"   button="true" onClick={onCancelButtonClick}/>
 			</>}
-			{ canClose && <button onClick={onCloseButtonClick}>Close</button>}
 		</div>)
 }
 

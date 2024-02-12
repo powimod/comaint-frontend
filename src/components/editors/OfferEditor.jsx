@@ -14,6 +14,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+/**
+ * @module OfferEditor
+ */
+
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -21,9 +25,23 @@ import EditorToolbar, {EditorToolBarModes, EditorToolBarActions} from './EditorT
 import Dialog from '../dialog/Dialog'
 import offerApi from '../../api/offer-api.js'
 
+/**
+ * Represent a offer editor.
+ * @component
+ * @param {Object} props - the props object.
+ * @param {integer} props.offerId - ID of object to edit or -1 to create a new offer
+ * @param {function=} props.onClose - function to callback when the close button is pressed.
+ *	If not specified, no close button will be shown.
+ * @returns {JSX.Element} - A React element representing the toolbar.
+ *
+ * @example
+ *   <OfferEditor offerId={-1} onClose={()=>console.log('Close button clicked')} />
+ * 
+ */
 const OfferEditor = ({offerId, onClose = null}) => {
 	if (offerId === undefined)
 		throw new Error('Offer ID is not defined')
+
 	const { t } = useTranslation();
 	const [editorMode, setEditorMode] = useState(0)
 	const [editorAction, setEditorAction] = useState(0)
@@ -31,30 +49,16 @@ const OfferEditor = ({offerId, onClose = null}) => {
 	useEffect( () => {
 
 		switch (editorAction){
+			case EditorToolBarActions.cancel:
+				console.log("dOm cancel")
+				if (onClose)
+					onClose()
+				break;
 			case EditorToolBarActions.validate:
-				console.log("dOm validate " + modeStr)
+				console.log("dOm validate")
+				if (onClose)
+					onClose()
 				break;
-
-			case EditorToolBarActions.create_start:
-				console.log("dOm create start")
-				break;
-			case EditorToolBarActions.create_cancel:
-				console.log("dOm create cancel")
-				break;
-			case EditorToolBarActions.create_validate:
-				console.log("dOm create validate")
-				break;
-
-			case EditorToolBarActions.edit_start:
-				console.log("dOm edit start")
-				break;
-			case EditorToolBarActions.edit_cancel:
-				console.log("dOm edit cancel")
-				break;
-			case EditorToolBarActions.edit_validate:
-				console.log("dOm edit validate")
-				break;
-
 			case EditorToolBarActions.delete:
 				console.log("dOm delete action")
 				if (onClose)
@@ -70,7 +74,7 @@ const OfferEditor = ({offerId, onClose = null}) => {
 	return (<>
 			<EditorToolbar 
 				title="Offer editor toolbar"  
-				mode={offerId === -1 ? EditorToolBarModes.create : EditorToolBarModes.edit}
+				baseMode={offerId === -1 ? EditorToolBarModes.create : EditorToolBarModes.edit}
 				setMode={setEditorMode}
 				setAction={setEditorAction}
 				canDelete={true}
@@ -85,6 +89,42 @@ const OfferEditor = ({offerId, onClose = null}) => {
 		</>)
 }
 
+/**
+ * Represent a dialog with a offer editor.
+ * @component
+ * @param {Object} props - the props object.
+ * @param {integer} props.offerId - ID of object to edit or -1 to create a new offer
+ * @param {boolean} props.isDialogOpen - indicate if dialog is shown or hidden
+ * @param {function=} props.onDialogClose - function to callback when the close button is pressed.
+ *	If not specified, no close button will be shown.
+ * @returns {JSX.Element} - A React element representing the toolbar.
+ *
+ * @example
+ *     const OfferAdminPage = (props) => {
+ *         const [ isEditorDialogOpen, setIsEditorDialogOpen ] = useState(false)
+ *         const [ editedId, setEditedId ] = useState(-1)
+ *
+ *         const onOfferClick = (id) => {
+ *             setEditedId(id)
+ *             setIsEditorDialogOpen(true)
+ *         }
+ *         const onCreateButtonClick = () => {
+ *             setEditedId(-1)
+ *             setIsEditorDialogOpen(true)
+ *         }
+ *         const onEditorDialogClose = () => {
+ *             setEditedId(-1)
+ *             setIsEditorDialogOpen(false)
+ *         }
+ *
+ *         // [...]
+ *
+ *         return (<>
+ *              [...]
+ *              <OfferEditorDialog offerId={editedId} isDialogOpen={isEditorDialogOpen} onDialogClose={onEditorDialogClose}/>
+ *         </>)
+ *     }
+ */
 const OfferEditorDialog = ({offerId, isDialogOpen, onDialogClose}) => {
 	return (<Dialog isOpen={isDialogOpen} onClose={onDialogClose} className='object-editor'>
 			<OfferEditor offerId={offerId} onClose={onDialogClose}/>

@@ -15,6 +15,10 @@
  */
 
 /**
+ * @module PaletteIcon
+ */
+
+/**
  * Array of possible icon names in the palette.
  * @typedef {string} iconList
  * @property {string} user - display the user icon
@@ -47,10 +51,11 @@ const iconList = [
 
 /**
  * Component to show an icon extracted from the palette icons of the project (file icons.png).
+ *
  * @component
  *
  * @param {Object} props - the props object
- * @param {iconList} props.element - name of the icon to display
+ * @param {PaletteIcon:iconList} props.element - name of the icon to display 
  * @param {string} props.className - name of a CSS style to apply to the component.
  * @param {boolean} props.border - display a border around the icon by adding the 'palette-icon-border' CSS style.
  * @param {boolean} props.button - display icon a clickage button by adding the 'palette-icon-button' CSS style.

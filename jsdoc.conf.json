@@ -1,0 +1,22 @@
+{
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc", "closure"]
+  },
+  "source": {
+    "include": ["src"],
+    "includePattern": ".+\\.js(doc|x)?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "plugins": [],
+  "templates": {
+    "better-docs": {
+      "name": "Comaint Frontend components"
+    }
+  },
+  "opts": {
+    "destination": "public/jsdoc",
+    "recurse": true,
+    "readme": "README.md"
+  }
+}

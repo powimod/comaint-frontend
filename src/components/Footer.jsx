@@ -20,14 +20,10 @@ import {Link} from 'react-router-dom'
 
 // TODO code cleanup
 //import MessageDialog from './dialog/MessageDialog';
-//import BubblePopup, {showBubblePopup, newBubblePopup, hideBubblePopup} from './dialog/BubblePopup';
 
 
 const Footer = (props) => {
 	const { t } = useTranslation();
-
-	//const popup = newBubblePopup()
-
 
 	const testPopup = () => {
 		flashPopupStackAppend(flashPopupStack, "Contact us by email", 1000);
@@ -37,12 +33,9 @@ const Footer = (props) => {
 	//const [isContactUsDialogOpen, setContactUsDialogOpen] = useState(false);
 	const openContactUsDialog = () => {
 		//setContactUsDialogOpen(true);
-		//showBubblePopup(popup, 'Contact us by email', 1500);
-		//flashPopupStackAppend(flashPopupStack, "Contact us by email");
 	}
 	const onContactUsDialogClose = () => {
 		//setContactUsDialogOpen(false);
-		//hideBubblePopup(popup);
 	}
 	*/
 
@@ -60,7 +53,6 @@ const Footer = (props) => {
 			<p className="concept"  >{t('product_conception', {name: 'Powimod' })}</p>
 		</footer>
 		{/* <MessageDialog isOpen={isContactUsDialogOpen} onClose={onContactUsDialogClose}>Contact us by email</MessageDialog> */}
-		{/* <BubblePopup popup={popup}/> */}
 		</>
 	)
 }

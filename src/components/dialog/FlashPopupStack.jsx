@@ -15,7 +15,7 @@
  */
 
 import {useState, useRef, useEffect, useContext} from 'react'
-import { DialogContext} from './DialogContext';
+import { DialogContext } from './DialogContext';
 
 const FlashPopupStack = ({flashPopupStack}) => {
 

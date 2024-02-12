@@ -30,11 +30,22 @@ const DialogDemo = (props) => {
 		pushDialogRequest({type:'flash', message: `message ${Date.now()}`})
 	}
 
+	const showBubbleMessage = () =>  {
+		const duration = parseInt(500 + Math.random() * 3000)
+		pushDialogRequest({type:'bubble.show', message: `message ${Date.now()} (${duration}ms)`, duration: duration})
+	}
+
+	const hideBubbleMessage = () =>  {
+		pushDialogRequest({type:'bubble.hide'})
+	}
+
 	return (
 		<main>
 			<h1>Dialog demo</h1>
 			<div><button onClick={showPopup}>Flash popup</button></div>
 			<div><button onClick={showBlockingPopup}>Blocking popup</button></div>
+			<div><button onClick={showBubbleMessage}>Show bubble popup</button></div>
+			<div><button onClick={hideBubbleMessage}>Hide bubble popup</button></div>
 		</main>
 	)
 }

@@ -21,11 +21,15 @@ import Header from "./components/Header"
 import Footer from "./components/Footer"
 import { AccountContext } from './AccountContext'
 import FlashPopupStack, {newFlashPopupStack} from './components/dialog/FlashPopupStack'; 
+import BubblePopup, {newBubblePopup} from './components/dialog/BubblePopup';
 
 
 function App({children}) {
 
+	// TODO new instances are created at each render
 	const flashPopupStack = newFlashPopupStack()
+	const bubblePopup = newBubblePopup()
+
 	const { account } = useContext(AccountContext)
 	const [ accountLoaded, setAccountLoaded] = useState(false);
 	const navigate = useNavigate()
@@ -50,6 +54,7 @@ function App({children}) {
 			<Outlet/>
 			<Footer/>
 			<FlashPopupStack flashPopupStack={flashPopupStack}/> 
+			<BubblePopup popup={bubblePopup}/>
 		</>
 	)
 }

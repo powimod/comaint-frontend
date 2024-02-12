@@ -121,9 +121,16 @@
 			"password_no_uppercase_letter": "Le mot de passe ne contient pas de lettre majsucule",
 			"password_no_digit_character": "Le mot de passe ne contient pas de caractère numérique",
 			"password_no_special_character": "Le mot de passe ne contient pas de caractère spécial"
+		},
+		"not_administrator" : "Vous n'êtes pas administrateur !",
+		"form_locked": "Le formulaire est verrouillé, appuyez sur le bouton d'édition pour le déverrouiller"
+	},
+	"form" : {
+		"offer" : {
+			"edit_title": "Édition d'une offre",
+			"create_title": "Création d'une offre",
+			"field_title": "Titre",
+			"field_description": "Description"
 		}
-
-
 	}
-
 }

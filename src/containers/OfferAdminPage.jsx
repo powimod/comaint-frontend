@@ -64,7 +64,7 @@ const OfferAdminPage = (props) => {
 
 
 	if (! account || ! account.administrator) 
-		return <ErrorDisplay message={'You are not administrator'}/>
+		return <ErrorDisplay message={t('error.not_administrator')}/>
 
 	return (
 		<main>

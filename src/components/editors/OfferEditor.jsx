@@ -120,14 +120,6 @@ const OfferEditor = ({offerId, onClose = null}) => {
 			}
 			setOriginalFieldSet(result.offer)
 			setEditedFieldSet(result.offer)
-			/* TODO cleanup
-			const newFieldSet = {
-				title: result.offer.title,
-				description: result.offer.description
-			}
-			setOriginalFieldSet(newFieldSet)
-			setEditedFieldSet(newFieldSet)
-			*/
 		}
 
 	}
@@ -135,7 +127,7 @@ const OfferEditor = ({offerId, onClose = null}) => {
 
 	const changeFieldValue = (ev) => {
 		if (editorMode === EditorToolBarModes.display) {
-			setError('Form is lock, press the edit button') // TODO translation
+			setError(t('error.form_locked'))
 			return
 		}
 		const newEditedFieldSet = {...editedFieldSet}
@@ -145,7 +137,7 @@ const OfferEditor = ({offerId, onClose = null}) => {
 
 	return (<>
 			<EditorToolbar 
-				title="Offer editor toolbar"  
+				title={ t( offerId === -1 ? 'form.offer.create_title' : 'form.offer.edit_title' ) }
 				baseMode={offerId === -1 ? EditorToolBarModes.create : EditorToolBarModes.edit}
 				setMode={setEditorMode}
 				setAction={setEditorAction}
@@ -154,13 +146,13 @@ const OfferEditor = ({offerId, onClose = null}) => {
 			/> 
 			{ error !== null && <div className='error-message'>{error}</div> }
 				<form className="editor-content">
-					<label htmlFor="title">Title</label>
+					<label htmlFor="title">{t('form.offer.field_title')}</label>
 					<input 
-						id="title"
-						type="text" 
+						id="text" 
+						type="text"
 						value={editedFieldSet.title} 
 						onChange={changeFieldValue}/>
-					<label htmlFor="description">Description</label>
+					<label htmlFor="title">{t('form.offer.field_description')}</label>
 					<textarea
 						id="description"
 						type="text"

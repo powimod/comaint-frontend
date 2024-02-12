@@ -43,11 +43,41 @@ const OfferEditor = ({offerId, onClose = null}) => {
 		throw new Error('Offer ID is not defined')
 
 	const { t } = useTranslation();
-	const [editorMode, setEditorMode] = useState(0)
-	const [editorAction, setEditorAction] = useState(0)
+	const [ error, setError ] = useState(null);
+	const [ editorMode, setEditorMode ] = useState(0)
+	const [ editorAction, setEditorAction ] = useState(0)
+	const [ offer, setOffer ] = useState(null)
+
+	const [ fieldSet, setFieldSet ] = useState({
+		title: '',
+		description: ''
+	})
 
 	useEffect( () => {
+		asyncLoadOfferFromDb()
+	}, [ offerId ])
 
+	const asyncLoadOfferFromDb = async () =>  {
+		setError(null)
+		if (offerId === -1) {
+			setOffer({ title: '' })
+		}
+		else {
+			const result = await offerApi.getOfferDetails(offerId)
+			console.log(result)
+			if (! result.ok) {
+				setError(result.error)
+				return
+			}
+			setOffer(result.offer)
+			setFieldSet({
+				title: result.offer.title,
+				description: result.offer.description
+			})
+		}
+	}
+
+	useEffect( () => {
 		switch (editorAction){
 			case EditorToolBarActions.cancel:
 				console.log("dOm cancel")
@@ -71,6 +101,16 @@ const OfferEditor = ({offerId, onClose = null}) => {
 		}
 	}, [ editorAction ])
 
+	useEffect( ()=> {
+		console.log(fieldSet)
+	}, [ fieldSet ])
+
+	const changeFieldValue = (ev) => {
+		const newFieldSet = {...fieldSet}
+		newFieldSet[ev.target.id] = ev.target.value
+		setFieldSet(newFieldSet)
+	}
+
 	return (<>
 			<EditorToolbar 
 				title="Offer editor toolbar"  
@@ -79,13 +119,26 @@ const OfferEditor = ({offerId, onClose = null}) => {
 				setAction={setEditorAction}
 				canDelete={true}
 				canClose={(onClose !== null)}
-			/> {/* TODO title translation */}
-			<div className="editor-content">
-				<div>abc</div>
-				<div>cde</div>
-				<div>efg</div>
-				<div>ghi</div>
-			</div>
+			/> 
+			{ error !== null && <div className='error-message'>{error}</div> }
+			{ offer === null ?
+				<div>No offer to edit</div>
+				: <form className="editor-content">
+					<label htmlFor="title">Title</label>
+					<input 
+						id="title"
+						type="text" 
+						value={fieldSet.title} 
+						onChange={changeFieldValue}/>
+					<label htmlFor="description">Description</label>
+					<textarea
+						id="description"
+						type="text"
+						rows={6} cols={40}
+						value={fieldSet.description}
+						onChange={changeFieldValue}/>
+				</form>
+			}
 		</>)
 }
 

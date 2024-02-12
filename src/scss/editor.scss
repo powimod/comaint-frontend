@@ -8,7 +8,8 @@
 	margin: 1rem;
 }
 .editor-content {
-	background-color:yellow;
+	display: flex;
+	flex-direction: column;
 	margin: 1rem;
 }
 

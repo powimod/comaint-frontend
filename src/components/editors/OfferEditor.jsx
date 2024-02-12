@@ -21,7 +21,9 @@ import EditorToolbar, {EditorToolBarModes, EditorToolBarActions} from './EditorT
 import Dialog from '../dialog/Dialog'
 import offerApi from '../../api/offer-api.js'
 
-const OfferEditor = ({onClose = null}) => {
+const OfferEditor = ({offerId, onClose = null}) => {
+	if (offerId === undefined)
+		throw new Error('Offer ID is not defined')
 	const { t } = useTranslation();
 	const [editorMode, setEditorMode] = useState(0)
 	const [editorAction, setEditorAction] = useState(0)
@@ -55,7 +57,8 @@ const OfferEditor = ({onClose = null}) => {
 
 			case EditorToolBarActions.delete:
 				console.log("dOm delete action")
-				onDialogClose()
+				if (onClose)
+					onClose()
 				break;
 			case EditorToolBarActions.close:
 				if (onClose)
@@ -66,10 +69,10 @@ const OfferEditor = ({onClose = null}) => {
 
 	return (<>
 			<EditorToolbar 
-				title="Offer editor toolbar" 
+				title="Offer editor toolbar"  
+				mode={offerId === -1 ? EditorToolBarModes.create : EditorToolBarModes.edit}
 				setMode={setEditorMode}
 				setAction={setEditorAction}
-				canCreate={false}
 				canDelete={true}
 				canClose={(onClose !== null)}
 			/> {/* TODO title translation */}
@@ -84,7 +87,7 @@ const OfferEditor = ({onClose = null}) => {
 
 const OfferEditorDialog = ({offerId, isDialogOpen, onDialogClose}) => {
 	return (<Dialog isOpen={isDialogOpen} onClose={onDialogClose} className='object-editor'>
-			<OfferEditor onClose={onDialogClose}/>
+			<OfferEditor offerId={offerId} onClose={onDialogClose}/>
 		</Dialog>)
 }
 

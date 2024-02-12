@@ -50,7 +50,33 @@ const EditorToolBarActions = {
 	create_cancel   : ACTION_CREATE_CANCEL,
 }
 
-const EditorToolbar = ({title=null, setMode, setAction, canEdit=true, canCreate=false, canDelete=false, canClose=true}) => {
+
+/**
+ *
+ * @param {string} title
+ * @param {EditorToolBarModes} baseMode - indique le mode de base de l'éditeur entre édition et création
+ * @param {function} setMode : fonction rappelée quand l'éditeur passe du mode affichage au mode édition
+ * @param {function} setAction : fonction rappelée indiquant le type d'action à prendre en compte (EditorToolBarActions)
+ * @param {boolean} canDelete - indique si un bouton de suppression doit être affiché
+ * @param {boolean} canClose - indique si un bouton de fermeture (de boîte de dialogue) doit être affiché
+ *
+ * La propriété 'baseMode' indique quel type d'action la barre représente, à savoir 'create' ou 'edit'
+ * Si 'baseMode' vaut 'edit' alors la barre affiche :
+ *  - un bouton Edit
+ *  - un bouton Delete si la propriété 'canDelete' est à true.
+ *  - un bouton Close si la propriété 'canClause' est à true.
+ * En cliquant sur le bouton 'edit', tous les boutons sont remplacés par un bouton OK et un bouton Cancel.
+ *
+ * Si 'baseMode' vaut 'create' alors la barre affiche :
+ *  - un bouton Edit
+ *  - un bouton Cancel
+ *  - un bouton Close si la propriété 'canClause' est à true.
+ *
+ */
+
+const EditorToolbar = ({title=null, baseMode, setMode, setAction, canDelete=false, canClose=true}) => {
+	if (baseMode === undefined)
+		throw new Error('baseMode argument is not defined')
 	if (setMode === undefined)
 		throw new Error('setAction argument is not defined')
 	if (setAction === undefined)
@@ -77,10 +103,12 @@ const EditorToolbar = ({title=null, setMode, setAction, canEdit=true, canCreate=
 		setInternalMode(MODE_EDIT)
 		setInternalAction( ACTION_EDIT_START)
 	}
+	/*
 	const onCreateButtonClick = () => {
 		setInternalMode(MODE_CREATE)
 		setInternalAction( ACTION_CREATE_START)
 	}
+	*/
 	const onDeleteButtonClick = () => {
 		setInternalAction(ACTION_DELETE)
 	}
@@ -102,16 +130,22 @@ const EditorToolbar = ({title=null, setMode, setAction, canEdit=true, canCreate=
 
 	return ( <div className="editor-toolbar">
 			{title && <span>{title}</span> }
-			{ internalMode === MODE_DISPLAY &&  <> 
-				{ canEdit   && <PaletteIcon element="edit"   button="true" onClick={onEditButtonClick}/> }
-				{ canCreate && <PaletteIcon element="create" button="true" onClick={onCreateButtonClick}/> }
-				{ canDelete && <PaletteIcon element="delete" button="true" onClick={onDeleteButtonClick}/> }
-				{ canClose && <PaletteIcon element="cancel" button="true" onClick={onCloseButtonClick} /> }
-			</>}
-			{ internalMode !== MODE_DISPLAY &&  <> 
+			{ baseMode === MODE_EDIT } && <>
+				{ internalMode === MODE_DISPLAY && <> 
+					<PaletteIcon element="edit"   button="true" onClick={onEditButtonClick}/>
+					{ canDelete && <PaletteIcon element="delete" button="true" onClick={onDeleteButtonClick}/> }
+					{ canClose && <PaletteIcon element="cancel" button="true" onClick={onCloseButtonClick} /> }
+				</>}
+				{ internalMode === MODE_EDIT && <> 
+					<PaletteIcon element="validate" button="true" onClick={onValidateButtonClick}/>
+					<PaletteIcon element="cancel"   button="true" onClick={onCancelButtonClick}/>
+				</>}
+			</>
+			{ baseMode === MODE_CREATE } && <>
 				<PaletteIcon element="validate" button="true" onClick={onValidateButtonClick}/>
 				<PaletteIcon element="cancel"   button="true" onClick={onCancelButtonClick}/>
-			</>}
+				{ canClose && <PaletteIcon element="cancel" button="true" onClick={onCloseButtonClick} /> }
+			</>
 		</div>)
 }
 

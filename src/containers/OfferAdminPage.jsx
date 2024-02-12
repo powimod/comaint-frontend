@@ -22,6 +22,7 @@ import { AccountContext } from '../AccountContext'
 import PagedList from '../components/PagedList'
 import ErrorDisplay from '../components/ErrorDisplay'
 import { OfferEditorDialog } from '../components/editors/OfferEditor'
+import PaletteIcon from '../components/PaletteIcon';
 import offerApi from '../api/offer-api.js'
 
 
@@ -47,16 +48,20 @@ const OfferAdminPage = (props) => {
 	}, [ account ])
 
 	const onOfferClick = (id) => {
-		console.log(`Edit offer n°${id}`);
 		setEditedId(id)
 		setIsEditorDialogOpen(true)
 	}
 
+	const onCreateButtonClick = () => {
+		setEditedId(-1)
+		setIsEditorDialogOpen(true)
+	}
+
 	const onEditorDialogClose = () => {
-		console.log("Close editor")
 		setEditedId(-1)
 		setIsEditorDialogOpen(false)
 	}
+
 
 	if (! account || ! account.administrator) 
 		return <ErrorDisplay message={'You are not administrator'}/>
@@ -65,6 +70,8 @@ const OfferAdminPage = (props) => {
 		<main>
 			<h1>Offer admin page</h1>
 			{ error !== null && <div className='error-message'>{error}</div> }
+			<PaletteIcon element="create" button="true" onClick={onCreateButtonClick}/>
+
 			<PagedList list={offerList} label='title' onItemClick={onOfferClick}/>
 			<OfferEditorDialog offerId={editedId} isDialogOpen={isEditorDialogOpen} onDialogClose={onEditorDialogClose}/>
 		</main>

@@ -152,13 +152,6 @@ const EditorToolbar = ({title=null, baseMode, setMode, setAction, canDelete=fals
 
 	return ( <div className="editor-toolbar">
 			{ title && <span>{title}</span> }
-			{ true === true && <>
-					{ true=== false&& <>
-						<div>OK1a</div>
-						<div>OK1b</div>
-					</>}
-					{ true === true && <div>OK2</div>}
-			</>}
 			{ baseMode === MODE_EDIT && <>
 				{ internalMode === MODE_DISPLAY && <> 
 					<PaletteIcon element="edit"   button="true" onClick={onEditButtonClick}/>

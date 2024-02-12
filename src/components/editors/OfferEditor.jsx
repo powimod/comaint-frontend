@@ -18,11 +18,12 @@
  * @module OfferEditor
  */
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import EditorToolbar, {EditorToolBarModes, EditorToolBarActions} from './EditorToolBar'
 import Dialog from '../dialog/Dialog'
+
 import offerApi from '../../api/offer-api.js'
 
 /**
@@ -43,51 +44,37 @@ const OfferEditor = ({offerId, onClose = null}) => {
 		throw new Error('Offer ID is not defined')
 
 	const { t } = useTranslation();
+
+	const initialFieldSet = { // FIXME is it necessary to initialize fields ?
+		id: -1,
+		title: '',
+		description: ''
+	}
+
 	const [ error, setError ] = useState(null);
 	const [ editorMode, setEditorMode ] = useState(0)
 	const [ editorAction, setEditorAction ] = useState(0)
-	const [ offer, setOffer ] = useState(null)
 
-	const [ fieldSet, setFieldSet ] = useState({
-		title: '',
-		description: ''
-	})
+	const [ editedFieldSet, setEditedFieldSet ] = useState(initialFieldSet)
+	const [ originalFieldSet, setOriginalFieldSet ] = useState(initialFieldSet)
+
+	useEffect( () => {
+		setError(null) // reset the "form is locked" error
+	}, [ editorMode ])
 
 	useEffect( () => {
 		asyncLoadOfferFromDb()
 	}, [ offerId ])
 
-	const asyncLoadOfferFromDb = async () =>  {
-		setError(null)
-		if (offerId === -1) {
-			setOffer({ title: '' })
-		}
-		else {
-			const result = await offerApi.getOfferDetails(offerId)
-			console.log(result)
-			if (! result.ok) {
-				setError(result.error)
-				return
-			}
-			setOffer(result.offer)
-			setFieldSet({
-				title: result.offer.title,
-				description: result.offer.description
-			})
-		}
-	}
-
 	useEffect( () => {
+		setError(null)
 		switch (editorAction){
 			case EditorToolBarActions.cancel:
-				console.log("dOm cancel")
-				if (onClose)
-					onClose()
+				// restore previous values
+				setEditedFieldSet({...originalFieldSet})
 				break;
 			case EditorToolBarActions.validate:
-				console.log("dOm validate")
-				if (onClose)
-					onClose()
+				asyncSaveOfferToDb()
 				break;
 			case EditorToolBarActions.delete:
 				console.log("dOm delete action")
@@ -101,14 +88,59 @@ const OfferEditor = ({offerId, onClose = null}) => {
 		}
 	}, [ editorAction ])
 
-	useEffect( ()=> {
-		console.log(fieldSet)
-	}, [ fieldSet ])
+
+	const asyncLoadOfferFromDb = async () =>  {
+		setError(null)
+		if (offerId === -1) {
+			// TODO
+		}
+		else {
+			const result = await offerApi.getOfferDetails(offerId)
+			if (! result.ok) {
+				setError(result.error)
+				return
+			}
+			setOriginalFieldSet(result.offer)
+			setEditedFieldSet(result.offer)
+		}
+	}
+
+	const asyncSaveOfferToDb = async () => {
+		setError(null)
+		if (offerId === -1) {
+			console.error('not implemented')
+		}
+		else {
+			console.log(editedFieldSet)
+			const result = await offerApi.editOffer(editedFieldSet)
+			console.log(result)
+			if (! result.ok) {
+				setError(result.error)
+				return
+			}
+			setOriginalFieldSet(result.offer)
+			setEditedFieldSet(result.offer)
+			/* TODO cleanup
+			const newFieldSet = {
+				title: result.offer.title,
+				description: result.offer.description
+			}
+			setOriginalFieldSet(newFieldSet)
+			setEditedFieldSet(newFieldSet)
+			*/
+		}
+
+	}
+
 
 	const changeFieldValue = (ev) => {
-		const newFieldSet = {...fieldSet}
-		newFieldSet[ev.target.id] = ev.target.value
-		setFieldSet(newFieldSet)
+		if (editorMode === EditorToolBarModes.display) {
+			setError('Form is lock, press the edit button') // TODO translation
+			return
+		}
+		const newEditedFieldSet = {...editedFieldSet}
+		newEditedFieldSet[ev.target.id] = ev.target.value
+		setEditedFieldSet(newEditedFieldSet)
 	}
 
 	return (<>
@@ -121,21 +153,19 @@ const OfferEditor = ({offerId, onClose = null}) => {
 				canClose={(onClose !== null)}
 			/> 
 			{ error !== null && <div className='error-message'>{error}</div> }
-			{ offer === null ?
-				<div>No offer to edit</div>
-				: <form className="editor-content">
+				<form className="editor-content">
 					<label htmlFor="title">Title</label>
 					<input 
 						id="title"
 						type="text" 
-						value={fieldSet.title} 
+						value={editedFieldSet.title} 
 						onChange={changeFieldValue}/>
 					<label htmlFor="description">Description</label>
 					<textarea
 						id="description"
 						type="text"
 						rows={6} cols={40}
-						value={fieldSet.description}
+						value={editedFieldSet.description}
 						onChange={changeFieldValue}/>
 				</form>
 			}

@@ -24,7 +24,7 @@ import { useTranslation } from 'react-i18next'
 import EditorToolbar, {EditorToolBarModes, EditorToolBarActions} from './EditorToolBar'
 import Dialog from '../dialog/Dialog'
 
-import { createObjectInstance, controlObjectProperty, controlObject } from '../../api/objects/object-util.mjs'
+import { createObjectInstance, controlObjectProperty, controlObject, diffObjects } from '../../api/objects/object-util.mjs'
 import offerObjectDef from '../../api/objects/offer-object-def.mjs'
 import offerApi from '../../api/offer-api.js'
 
@@ -47,11 +47,7 @@ const OfferEditor = ({offerId, onClose = null}) => {
 
 	const { t } = useTranslation();
 
-	const initialFieldSet = { // FIXME is it necessary to initialize fields ?
-		id: null,
-		title: '',
-		description: ''
-	}
+	const initialFieldSet = createObjectInstance(offerObjectDef) // important !
 
 	const [ error, setError ] = useState(null);
 	const [ editorMode, setEditorMode ] = useState(0)
@@ -82,15 +78,15 @@ const OfferEditor = ({offerId, onClose = null}) => {
 					onClose()
 				break;
 			case EditorToolBarActions.validate:
-				console.log(editedFieldSet)
 				const error = controlObject(offerObjectDef, editedFieldSet, /*controlId=*/false, t)
 				if (error) {
 					setError(error)
 					return
 				}
 				asyncSaveOfferToDb()
-				if (offerId === -1 && onClose)
-					onClose()
+				/* FIXME if dialog is closed before asynchronous save, it hides save errors
+				 * if (offerId === -1 && onClose) onClose()
+				 */
 				break;
 			case EditorToolBarActions.delete:
 				console.error("delete action not implemented")
@@ -125,6 +121,12 @@ const OfferEditor = ({offerId, onClose = null}) => {
 
 	const asyncSaveOfferToDb = async () => {
 		setError(null)
+		const deltaFieldSet = diffObjects(offerObjectDef, originalFieldSet, editedFieldSet)
+		console.log("Delta", deltaFieldSet)
+		if (Object.values(deltaFieldSet).length === 1) {
+			console.log("No change to save")
+			return // there is nothing to save if delta contains only ID 
+		}
 		if (offerId === -1) {
 			const result = await offerApi.createOffer(editedFieldSet)
 			if (! result.ok) {
@@ -135,7 +137,7 @@ const OfferEditor = ({offerId, onClose = null}) => {
 			setEditedFieldSet(result.offer)
 		}
 		else {
-			const result = await offerApi.editOffer(editedFieldSet)
+			const result = await offerApi.editOffer(deltaFieldSet)
 			if (! result.ok) {
 				setError(result.error)
 				return
@@ -153,12 +155,14 @@ const OfferEditor = ({offerId, onClose = null}) => {
 			return
 		}
 		const propName = ev.target.id
-		const propValue = ev.target.value
+		let propValue = ev.target.value
+		if (offerObjectDef[propName].type === 'boolean')
+			propValue = ! editedFieldSet[propName]
 		const error = controlObjectProperty(offerObjectDef, propName, propValue, t)
 		if (error) 
-			setError(error) // accept new value, it's only a warning
+			setError(error) // accept change, it's only a warning
 		const newEditedFieldSet = {...editedFieldSet}
-		newEditedFieldSet[ev.target.id] = ev.target.value
+		newEditedFieldSet[propName] = propValue
 		setEditedFieldSet(newEditedFieldSet)
 	}
 
@@ -188,8 +192,13 @@ const OfferEditor = ({offerId, onClose = null}) => {
 						value={editedFieldSet.description}
 						maxLength={offerObjectDef.description.maximum}
 						onChange={changeFieldValue}/>
+					<input
+						id="active"
+						type="checkbox"
+						checked={editedFieldSet.active}
+						onChange={changeFieldValue}/>
+					<label htmlFor="active">{t('form.offer.active')}</label>
 				</form>
-			}
 		</>)
 }
 

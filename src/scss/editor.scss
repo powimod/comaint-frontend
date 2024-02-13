@@ -1,8 +1,9 @@
 .editor-toolbar {
 	display: flex;
-	flex-direction: row;
+	column-gap: 3rem;
 	background-color: var(--editor-toolbar-background-color); 
 	color: var(--editor-toolbar-color);
+	justify-items: start;
 }
 .editor-toolbar span {
 	align-self: center;
@@ -15,8 +16,11 @@
 	filter: invert(1);
 }
 .editor-content {
-	display: flex;
-	flex-direction: column;
+	display: grid;
+	grid-template-columns: 1fr 3fr;
 	margin: 1rem;
+}
+.editor-content > textarea {
+	grid-column: 1 / -1;
 }
 

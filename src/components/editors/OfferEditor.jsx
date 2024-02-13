@@ -24,7 +24,7 @@ import { useTranslation } from 'react-i18next'
 import EditorToolbar, {EditorToolBarModes, EditorToolBarActions} from './EditorToolBar'
 import Dialog from '../dialog/Dialog'
 
-import { controlObjectProperty } from '../../api/objects/object-util.mjs'
+import { createObjectInstance, controlObjectProperty } from '../../api/objects/object-util.mjs'
 import offerObjectDef from '../../api/objects/offer-object-def.mjs'
 import offerApi from '../../api/offer-api.js'
 
@@ -48,7 +48,7 @@ const OfferEditor = ({offerId, onClose = null}) => {
 	const { t } = useTranslation();
 
 	const initialFieldSet = { // FIXME is it necessary to initialize fields ?
-		id: -1,
+		id: null,
 		title: '',
 		description: ''
 	}
@@ -74,12 +74,16 @@ const OfferEditor = ({offerId, onClose = null}) => {
 			case EditorToolBarActions.cancel:
 				// restore previous values
 				setEditedFieldSet({...originalFieldSet})
+				if (offerId === -1 && onClose)
+					onClose()
 				break;
 			case EditorToolBarActions.validate:
 				asyncSaveOfferToDb()
+				if (offerId === -1 && onClose)
+					onClose()
 				break;
 			case EditorToolBarActions.delete:
-				console.log("dOm delete action")
+				console.error("delete action not implemented")
 				if (onClose)
 					onClose()
 				break;
@@ -94,7 +98,9 @@ const OfferEditor = ({offerId, onClose = null}) => {
 	const asyncLoadOfferFromDb = async () =>  {
 		setError(null)
 		if (offerId === -1) {
-			// TODO
+			const fieldSet = createObjectInstance(offerObjectDef)
+			setOriginalFieldSet(fieldSet)
+			setEditedFieldSet(fieldSet)
 		}
 		else {
 			const result = await offerApi.getOfferDetails(offerId)
@@ -110,12 +116,16 @@ const OfferEditor = ({offerId, onClose = null}) => {
 	const asyncSaveOfferToDb = async () => {
 		setError(null)
 		if (offerId === -1) {
-			console.error('not implemented')
+			const result = await offerApi.createOffer(editedFieldSet)
+			if (! result.ok) {
+				setError(result.error)
+				return
+			}
+			setOriginalFieldSet(result.offer)
+			setEditedFieldSet(result.offer)
 		}
 		else {
-			console.log(editedFieldSet)
 			const result = await offerApi.editOffer(editedFieldSet)
-			console.log(result)
 			if (! result.ok) {
 				setError(result.error)
 				return

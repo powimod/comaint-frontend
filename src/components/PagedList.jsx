@@ -18,15 +18,15 @@ import { Link } from 'react-router-dom'
 
 const PagedList = ({list, label='name', onItemClick = null}) => {
 
-	if (list === undefined)
-		throw new Error('List property is not defined')
-
 	const onListItemClick = (ev) => {
 		ev.preventDefault()
 		const id = ev.target.dataset.id
 		if (isNaN(id)) return
 		if (onItemClick) onItemClick(id)
 	}
+
+	if (list === undefined)
+		return <></>
 
 	return (<>
 		{ list.length === 0 ?

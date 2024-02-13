@@ -106,13 +106,27 @@ const EditorToolbar = ({title=null, baseMode, setMode, setAction, canDelete=fals
 	const [ internalAction, setInternalAction ] = useState(ACTION_NONE)
 
 	useEffect( () => {
-		setMode(() => internalMode)
+		switch (baseMode) {
+			case MODE_CREATE:
+				setInternalMode(MODE_CREATE)
+				break
+			case MODE_EDIT:
+				setInternalMode(MODE_DISPLAY)
+				break
+			default:
+				throw new Error('Invalid base mode')
+		}
+	}, [baseMode])
+
+	useEffect( () => {
+		setMode(internalMode)
 	}, [internalMode])
 
 	useEffect( () => {
 		setAction(() => internalAction)
 		setInternalAction(() => ACTION_NONE)
 	}, [internalAction])
+
 
 	useEffect( () => {
 		setInternalMode(() => MODE_DISPLAY)
@@ -121,26 +135,18 @@ const EditorToolbar = ({title=null, baseMode, setMode, setAction, canDelete=fals
 
 	const onEditButtonClick = () => {
 		setInternalMode(MODE_EDIT)
-		//setInternalAction( ACTION_EDIT_START)
 	}
-	/*
-	const onCreateButtonClick = () => {
-		setInternalMode(MODE_CREATE)
-		setInternalAction( ACTION_CREATE_START)
-	}
-	*/
+
 	const onDeleteButtonClick = () => {
 		setInternalAction(ACTION_DELETE)
 	}
 
 	const onValidateButtonClick = () => {
-		//setInternalAction( internalMode === MODE_EDIT ? ACTION_EDIT_VALIDATE : ACTION_CREATE_VALIDATE)
 		setInternalAction(ACTION_VALIDATE)
 		setInternalMode(MODE_DISPLAY)
 	}
 
 	const onCancelButtonClick = () => {
-		//setInternalAction( internalMode === MODE_EDIT ? ACTION_EDIT_CANCEL: ACTION_CREATE_CANCEL)
 		setInternalAction(ACTION_CANCEL)
 		setInternalMode(MODE_DISPLAY)
 	}

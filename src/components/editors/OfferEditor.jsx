@@ -157,7 +157,6 @@ const OfferEditor = ({offerId, onClose = null}) => {
 		const field = ev.target
 		const propName = field.id
 		let propValue = field.value
-		console.log("dOm value=", propValue)
 		if (field.type === 'checkbox') // React's checkbox have always value=on 
 			propValue = ! editedFieldSet[propName]
 		if (field.type === 'number'){ // Input with type=number have always a string value
@@ -223,6 +222,40 @@ const OfferEditor = ({offerId, onClose = null}) => {
 						value={editedFieldSet.price} 
 						onChange={changeFieldValue}/>
 
+					<label htmlFor="userLimit">{t('form.offer.field_user_limit')}</label>
+					<input 
+						id="userLimit" 
+						type="number"
+						value={editedFieldSet.userLimit} 
+						onChange={changeFieldValue}/>
+
+					<label htmlFor="equipmentLimit">{t('form.offer.field_equipment_limit')}</label>
+					<input 
+						id="equipmentLimit" 
+						type="number"
+						value={editedFieldSet.equipmentLimit} 
+						onChange={changeFieldValue}/>
+
+					<label htmlFor="articleLimit">{t('form.offer.field_article_limit')}</label>
+					<input 
+						id="articleLimit" 
+						type="number"
+						value={editedFieldSet.articleLimit} 
+						onChange={changeFieldValue}/>
+
+					<label htmlFor="interventionLimit">{t('form.offer.field_intervention_limit')}</label>
+					<input 
+						id="interventionLimit" 
+						type="number"
+						value={editedFieldSet.interventionLimit} 
+						onChange={changeFieldValue}/>
+
+					<label htmlFor="storageLimit">{t('form.offer.field_storage_limit')}</label>
+					<input 
+						id="storageLimit" 
+						type="number"
+						value={editedFieldSet.storageLimit} 
+						onChange={changeFieldValue}/>
 
 				</form>
 		</>)

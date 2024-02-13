@@ -24,7 +24,7 @@ import { useTranslation } from 'react-i18next'
 import EditorToolbar, {EditorToolBarModes, EditorToolBarActions} from './EditorToolBar'
 import Dialog from '../dialog/Dialog'
 
-import { createObjectInstance, controlObjectProperty } from '../../api/objects/object-util.mjs'
+import { createObjectInstance, controlObjectProperty, controlObject } from '../../api/objects/object-util.mjs'
 import offerObjectDef from '../../api/objects/offer-object-def.mjs'
 import offerApi from '../../api/offer-api.js'
 
@@ -65,11 +65,15 @@ const OfferEditor = ({offerId, onClose = null}) => {
 	}, [ editorMode ])
 
 	useEffect( () => {
+		if (offerId === -1)
+			setEditorMode(EditorToolBarModes.create)
+		else
+			setEditorMode(EditorToolBarModes.display) // when mode is Edit, start in display mode waiting the Edit button to be pressed 
 		asyncLoadOfferFromDb()
 	}, [ offerId ])
 
 	useEffect( () => {
-		setError(null)
+		// do not reset error here (should erase control object error)
 		switch (editorAction){
 			case EditorToolBarActions.cancel:
 				// restore previous values
@@ -78,6 +82,12 @@ const OfferEditor = ({offerId, onClose = null}) => {
 					onClose()
 				break;
 			case EditorToolBarActions.validate:
+				console.log(editedFieldSet)
+				const error = controlObject(offerObjectDef, editedFieldSet, /*controlId=*/false, t)
+				if (error) {
+					setError(error)
+					return
+				}
 				asyncSaveOfferToDb()
 				if (offerId === -1 && onClose)
 					onClose()
@@ -145,10 +155,8 @@ const OfferEditor = ({offerId, onClose = null}) => {
 		const propName = ev.target.id
 		const propValue = ev.target.value
 		const error = controlObjectProperty(offerObjectDef, propName, propValue, t)
-		if (error) {
-			setError(error)
-			return
-		}
+		if (error) 
+			setError(error) // accept new value, it's only a warning
 		const newEditedFieldSet = {...editedFieldSet}
 		newEditedFieldSet[ev.target.id] = ev.target.value
 		setEditedFieldSet(newEditedFieldSet)

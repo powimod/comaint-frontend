@@ -24,6 +24,8 @@ import { useTranslation } from 'react-i18next'
 import EditorToolbar, {EditorToolBarModes, EditorToolBarActions} from './EditorToolBar'
 import Dialog from '../dialog/Dialog'
 
+import { controlObjectProperty } from '../../api/objects/object-util.mjs'
+import offerObjectDef from '../../api/objects/offer-object-def.mjs'
 import offerApi from '../../api/offer-api.js'
 
 /**
@@ -121,13 +123,20 @@ const OfferEditor = ({offerId, onClose = null}) => {
 			setOriginalFieldSet(result.offer)
 			setEditedFieldSet(result.offer)
 		}
-
 	}
 
 
 	const changeFieldValue = (ev) => {
+		setError(null)
 		if (editorMode === EditorToolBarModes.display) {
 			setError(t('error.form_locked'))
+			return
+		}
+		const propName = ev.target.id
+		const propValue = ev.target.value
+		const error = controlObjectProperty(offerObjectDef, propName, propValue, t)
+		if (error) {
+			setError(error)
 			return
 		}
 		const newEditedFieldSet = {...editedFieldSet}
@@ -148,9 +157,10 @@ const OfferEditor = ({offerId, onClose = null}) => {
 				<form className="editor-content">
 					<label htmlFor="title">{t('form.offer.field_title')}</label>
 					<input 
-						id="text" 
+						id="title" 
 						type="text"
 						value={editedFieldSet.title} 
+						maxLength={offerObjectDef.title.maximum}
 						onChange={changeFieldValue}/>
 					<label htmlFor="title">{t('form.offer.field_description')}</label>
 					<textarea
@@ -158,6 +168,7 @@ const OfferEditor = ({offerId, onClose = null}) => {
 						type="text"
 						rows={6} cols={40}
 						value={editedFieldSet.description}
+						maxLength={offerObjectDef.description.maximum}
 						onChange={changeFieldValue}/>
 				</form>
 			}

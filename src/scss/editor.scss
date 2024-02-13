@@ -4,8 +4,15 @@
 	background-color: var(--editor-toolbar-background-color); 
 	color: var(--editor-toolbar-color);
 }
+.editor-toolbar span {
+	align-self: center;
+	flex-grow: 1;
+	font-size: 1.9rem;
+	margin-left: 1rem;
+}
 .editor-toolbar img{
 	margin: 1rem;
+	filter: invert(1);
 }
 .editor-content {
 	display: flex;

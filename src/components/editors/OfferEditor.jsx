@@ -154,10 +154,16 @@ const OfferEditor = ({offerId, onClose = null}) => {
 			setError(t('error.form_locked'))
 			return
 		}
-		const propName = ev.target.id
-		let propValue = ev.target.value
-		if (offerObjectDef[propName].type === 'boolean')
+		const field = ev.target
+		const propName = field.id
+		let propValue = field.value
+		console.log("dOm value=", propValue)
+		if (field.type === 'checkbox') // React's checkbox have always value=on 
 			propValue = ! editedFieldSet[propName]
+		if (field.type === 'number'){ // Input with type=number have always a string value
+			if (isNaN(propValue) === false) 
+				propValue = parseFloat(propValue) // do not use parseInt ! (float values)
+		}
 		const error = controlObjectProperty(offerObjectDef, propName, propValue, t)
 		if (error) 
 			setError(error) // accept change, it's only a warning
@@ -177,6 +183,7 @@ const OfferEditor = ({offerId, onClose = null}) => {
 			/> 
 			{ error !== null && <div className='error-message'>{error}</div> }
 				<form className="editor-content">
+
 					<label htmlFor="title">{t('form.offer.field_title')}</label>
 					<input 
 						id="title" 
@@ -184,6 +191,7 @@ const OfferEditor = ({offerId, onClose = null}) => {
 						value={editedFieldSet.title} 
 						maxLength={offerObjectDef.title.maximum}
 						onChange={changeFieldValue}/>
+
 					<label htmlFor="title">{t('form.offer.field_description')}</label>
 					<textarea
 						id="description"
@@ -192,12 +200,30 @@ const OfferEditor = ({offerId, onClose = null}) => {
 						value={editedFieldSet.description}
 						maxLength={offerObjectDef.description.maximum}
 						onChange={changeFieldValue}/>
+
 					<input
 						id="active"
 						type="checkbox"
 						checked={editedFieldSet.active}
 						onChange={changeFieldValue}/>
 					<label htmlFor="active">{t('form.offer.active')}</label>
+
+					<label htmlFor="duration">{t('form.offer.field_duration')}</label>
+					<input 
+						id="duration" 
+						type="number"
+						value={editedFieldSet.duration} 
+						onChange={changeFieldValue}/>
+
+					<label htmlFor="price">{t('form.offer.field_price')}</label>
+					<input 
+						id="price" 
+						type="number"
+						step="0.01"
+						value={editedFieldSet.price} 
+						onChange={changeFieldValue}/>
+
+
 				</form>
 		</>)
 }

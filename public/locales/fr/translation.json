@@ -131,7 +131,18 @@
 			"edit_title": "Édition d'une offre",
 			"create_title": "Création d'une offre",
 			"field_title": "Titre",
-			"field_description": "Description"
+			"field_description": "Description",
+			"field_active": "Active",
+			"subscription_fieldset_legend": "Abonnement",
+			"field_duration": "Durée (en mois)",
+			"field_price": "Prix",
+			"limit_fieldset_legend": "Limites maximum",
+			"field_user_limit": "Utilisateurs",
+			"field_equipment_limit": "Équipements",
+			"field_article_limit": "Articles",
+			"field_intervention_limit": "Intervention / jour",
+			"field_storage_limit": "Stockage en Mo"
+
 		}
 	}
 }

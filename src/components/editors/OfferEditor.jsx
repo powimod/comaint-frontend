@@ -195,7 +195,6 @@ const OfferEditor = ({offerId, onClose = null}) => {
 					<textarea
 						id="description"
 						type="text"
-						rows={6} cols={40}
 						value={editedFieldSet.description}
 						maxLength={offerObjectDef.description.maximum}
 						onChange={changeFieldValue}/>
@@ -205,58 +204,66 @@ const OfferEditor = ({offerId, onClose = null}) => {
 						type="checkbox"
 						checked={editedFieldSet.active}
 						onChange={changeFieldValue}/>
-					<label htmlFor="active">{t('form.offer.active')}</label>
+					<label htmlFor="active">{t('form.offer.field_active')}</label>
 
-					<label htmlFor="duration">{t('form.offer.field_duration')}</label>
-					<input 
-						id="duration" 
-						type="number"
-						value={editedFieldSet.duration} 
-						onChange={changeFieldValue}/>
+					<fieldset className="subscription_limit_fieldset">
+						<legend>{t('form.offer.subscription_fieldset_legend')}</legend>
 
-					<label htmlFor="price">{t('form.offer.field_price')}</label>
-					<input 
-						id="price" 
-						type="number"
-						step="0.01"
-						value={editedFieldSet.price} 
-						onChange={changeFieldValue}/>
+						<label htmlFor="duration">{t('form.offer.field_duration')}</label>
+						<input 
+							id="duration" 
+							type="number"
+							value={editedFieldSet.duration} 
+							onChange={changeFieldValue}/>
 
-					<label htmlFor="userLimit">{t('form.offer.field_user_limit')}</label>
-					<input 
-						id="userLimit" 
-						type="number"
-						value={editedFieldSet.userLimit} 
-						onChange={changeFieldValue}/>
+						<label htmlFor="price">{t('form.offer.field_price')}</label>
+						<input 
+							id="price" 
+							type="number"
+							step="0.01"
+							value={editedFieldSet.price} 
+							onChange={changeFieldValue}/>
+					</fieldset>
 
-					<label htmlFor="equipmentLimit">{t('form.offer.field_equipment_limit')}</label>
-					<input 
-						id="equipmentLimit" 
-						type="number"
-						value={editedFieldSet.equipmentLimit} 
-						onChange={changeFieldValue}/>
+					<fieldset className="offer_limit_fieldset">
+						<legend>{t('form.offer.limit_fieldset_legend')}</legend>
 
-					<label htmlFor="articleLimit">{t('form.offer.field_article_limit')}</label>
-					<input 
-						id="articleLimit" 
-						type="number"
-						value={editedFieldSet.articleLimit} 
-						onChange={changeFieldValue}/>
+						<label htmlFor="userLimit">{t('form.offer.field_user_limit')}</label>
+						<input 
+							id="userLimit" 
+							type="number"
+							value={editedFieldSet.userLimit} 
+							onChange={changeFieldValue}/>
 
-					<label htmlFor="interventionLimit">{t('form.offer.field_intervention_limit')}</label>
-					<input 
-						id="interventionLimit" 
-						type="number"
-						value={editedFieldSet.interventionLimit} 
-						onChange={changeFieldValue}/>
+						<label htmlFor="equipmentLimit">{t('form.offer.field_equipment_limit')}</label>
+						<input 
+							id="equipmentLimit" 
+							type="number"
+							value={editedFieldSet.equipmentLimit} 
+							onChange={changeFieldValue}/>
 
-					<label htmlFor="storageLimit">{t('form.offer.field_storage_limit')}</label>
-					<input 
-						id="storageLimit" 
-						type="number"
-						value={editedFieldSet.storageLimit} 
-						onChange={changeFieldValue}/>
+						<label htmlFor="articleLimit">{t('form.offer.field_article_limit')}</label>
+						<input 
+							id="articleLimit" 
+							type="number"
+							value={editedFieldSet.articleLimit} 
+							onChange={changeFieldValue}/>
 
+						<label htmlFor="interventionLimit">{t('form.offer.field_intervention_limit')}</label>
+						<input 
+							id="interventionLimit" 
+							type="number"
+							value={editedFieldSet.interventionLimit} 
+							onChange={changeFieldValue}/>
+
+						<label htmlFor="storageLimit">{t('form.offer.field_storage_limit')}</label>
+						<input 
+							id="storageLimit" 
+							type="number"
+							value={editedFieldSet.storageLimit} 
+							onChange={changeFieldValue}/>
+
+					</fieldset>
 				</form>
 		</>)
 }

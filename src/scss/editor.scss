@@ -1,6 +1,17 @@
+$screen-width-limit-tiny: 480px !default;
+$screen-width-limit-small: 640px !default;
+
+.object-editor {
+	max-height: 90%;
+	/* do not use grid display : dialog box will appear at bottom !
+	display: grid;
+	grid-template-rows: auto 1fr;
+	*/
+}
+
 .editor-toolbar {
-	display: flex;
-	column-gap: 3rem;
+	display: grid;
+	grid-template-columns: 1fr auto auto auto; /* caption + 3 buttons */
 	background-color: var(--editor-toolbar-background-color); 
 	color: var(--editor-toolbar-color);
 	justify-items: start;
@@ -10,17 +21,92 @@
 	flex-grow: 1;
 	font-size: 1.9rem;
 	margin-left: 1rem;
-}
-.editor-toolbar img{
-	margin: 1rem;
-	filter: invert(1);
-}
-.editor-content {
-	display: grid;
-	grid-template-columns: 1fr 3fr;
-	margin: 1rem;
-}
-.editor-content > textarea {
 	grid-column: 1 / -1;
 }
+@media (min-width: $screen-width-limit-small)  {
+	.editor-toolbar span {
+		grid-column: 1 / 2;
+	}
+}
+
+.editor-toolbar > img{
+	margin: 1rem;
+	filter: invert(1);
+	justify-self: end;
+}
+
+.editor-content {
+	display: grid;
+	overflow: auto;
+	grid-template-columns: 1fr 4fr;
+	gap: 0.2rem;
+	margin: 1rem;
+}
+
+.editor-content > textarea {
+	grid-column: 1 / -1;
+	min-height: 10rem;
+}
+
+.editor-content  legend {
+	font-weight: bold;
+	font-size: 1.8rem;
+}
+
+
+
+.subscription_limit_fieldset {
+	grid-column: 1 / -1;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 0.5rem;
+	padding: 1rem;
+	max-width: 50rem;
+}
+@media (min-width: $screen-width-limit-tiny)  {
+	.subscription_limit_fieldset {
+		grid-template-columns: 1fr 1fr;
+	}
+	.subscription_limit_fieldset > label {
+		justify-self: end;
+		margin-right: 1rem;
+	}
+	.subscription_limit_fieldset > input {
+		max-width: 8rem;
+	}
+}
+@media (min-width: $screen-width-limit-small)  {
+	.subscription_limit_fieldset {
+		grid-template-columns: 2fr 1fr 1fr 1fr;
+	}
+}
+
+
+
+.offer_limit_fieldset {
+	grid-column: 1 / -1;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 0.5rem;
+	padding: 1rem;
+	max-width: 50rem;
+}
+@media (min-width: $screen-width-limit-tiny)  {
+	.offer_limit_fieldset {
+		grid-template-columns: 1fr 1fr;
+	}
+	.offer_limit_fieldset > label {
+		justify-self: end;
+		margin-right: 1rem;
+	}
+	.offer_limit_fieldset > input {
+		max-width: 8rem;
+	}
+}
+@media (min-width: $screen-width-limit-small)  {
+	.offer_limit_fieldset {
+		grid-template-columns: 2fr 1fr 2fr 1fr ;
+	}
+}
+
 

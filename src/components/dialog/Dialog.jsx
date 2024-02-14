@@ -14,9 +14,58 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+/**
+ * @module Dialog
+ */
+
 import { useState, useRef, useEffect } from 'react'
 
+/**
+ * Display a custom dialog box (with no buttons). Content must be passed as React children.
+ * @param {Array} props - the props array
+ * @param {boolean} props.isOpen - a boolean which indicates if the dialog box is shown or hidden.
+ * @param {function} props.onClose- function called when Escape key is pressed.
+ * @param {string} props.className : CSS style to apply.
+ * @param {Array.<JSX.Element} props.children - children to insert as content in the dialog box.
+ * @returns {JSX.Element} - A React element representing the dialog box.
+ *
+ * * @example
+ * import Dialog from './dialog/Dialog'
+ * 
+ * const MyComponent = (props) => {
+ * 	const [isMyDialogOpen, setMyDialogOpen] = useState(false)
+ * 
+ * 	const openMyDialog = () => {
+ * 		setMyDialogOpen(true)
+ * 	}
+ * 
+ * 	const onMyDialogClose = () => {
+ * 		// called when Escape key is pressed (since there is not button in dialog box)
+ * 		setMyDialogOpen(false)
+ * 	}
+ * 
+ * 	return (<>
+ * 		<button onClick={openMyDialog}>Display dialog</button>
+ * 		<Dialog isOpen={isMyDialogOpen} onClose={onMyDialogClose}>
+ * 			<div>The custom content of dialog box here</div>
+ * 		</Dialog> 
+ * 	</>)
+ * }
+
+ */ 
 const Dialog = ({isOpen, onClose, className = '',  children}) => {
+
+	if (isOpen === undefined)
+		throw new Error('Argument [isOpen] is missing')
+	if (typeof(isOpen) !== 'boolean')
+		throw new Error('Argument [isOpen] is not a boolean')
+	if (onClose === undefined)
+		throw new Error('Argument [onClose] is missing')
+	if (typeof(onClose) !== 'function')
+		throw new Error('Argument [onClose] is not a function')
+	if (children === undefined)
+		throw new Error('Argument [children] is missing')
+
 	const [ isDialogOpen, setDialogOpen ] = useState(isOpen);
 	const dialogRef = useRef(null);
 

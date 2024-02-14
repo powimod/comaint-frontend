@@ -66,6 +66,8 @@ const MessageDialog = ({isOpen, onClose, className = '', children}) => {
 
 	const { t } = useTranslation();
 
+	className = [ 'confirm-dialog', className ].join(' ').trim()
+
 	return (<Dialog isOpen={isOpen} onClose={onClose} className={className}>
 		<div>{children}</div>
 		<div>

@@ -128,6 +128,7 @@
 	},
 	"form" : {
 		"offer" : {
+			"delete_question": "Do you want to delete this offer?",
 			"edit_title": "Edit an offer",
 			"create_title": "Create a new offer",
 			"field_title": "Title",

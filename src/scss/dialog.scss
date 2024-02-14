@@ -39,6 +39,18 @@ dialog div:last-child button { /* button bar */
 	margin-right: 1rem;
 }
 
+.message-dialog, .confirm-dialog {
+	padding: 1.5rem;
+}
+.message-dialog div:last-of-type,
+.confirm-dialog div:last-of-type {
+	margin-top: 1rem;
+	padding-top: 1rem;
+	border-top: solid black 1px;
+	display: flex;
+	justify-content: center;
+}
+
 /* TODO cleanup */
 div.popup-not-used {
 	padding: 1rem;

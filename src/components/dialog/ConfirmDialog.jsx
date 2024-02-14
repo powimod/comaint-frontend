@@ -50,6 +50,7 @@ import Dialog from './Dialog';
  * 		<ConfirmDialog isOpen={isMyDialogOpen} onResponse={onMyDialogResponse}>My question here</ConfirmDialog> 
  * 	</>)
  * }
+ *
  */
 const ConfirmDialog = ({isOpen, onResponse, className = '', children}) => {
 	if (isOpen === undefined)
@@ -76,6 +77,8 @@ const ConfirmDialog = ({isOpen, onResponse, className = '', children}) => {
 	const onDialogClosed = () => {
 		onResponse(false); // when escape key is pressed
 	}
+
+	className = [ 'confirm-dialog', className ].join(' ').trim()
 
 	return (<Dialog isOpen={isOpen} onClose={onDialogClosed} className={className}>
 		<div>{children}</div>

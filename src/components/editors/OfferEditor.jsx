@@ -23,6 +23,8 @@ import { useTranslation } from 'react-i18next'
 
 import EditorToolbar, {EditorToolBarModes, EditorToolBarActions} from './EditorToolBar'
 import Dialog from '../dialog/Dialog'
+import MessageDialog from '../dialog/MessageDialog'
+import ConfirmDialog from '../dialog/ConfirmDialog'
 
 import { createObjectInstance, controlObjectProperty, controlObject, diffObjects } from '../../api/objects/object-util.mjs'
 import offerObjectDef from '../../api/objects/offer-object-def.mjs'
@@ -55,6 +57,8 @@ const OfferEditor = ({offerId, onClose = null}) => {
 
 	const [ editedFieldSet, setEditedFieldSet ] = useState(initialFieldSet)
 	const [ originalFieldSet, setOriginalFieldSet ] = useState(initialFieldSet)
+
+	const [ isConfirmDeleteDialogOpen, setIsConfirmDeleteDialogOpen ] = useState(false)
 
 	useEffect( () => {
 		setError(null) // reset the "form is locked" error
@@ -89,9 +93,7 @@ const OfferEditor = ({offerId, onClose = null}) => {
 				 */
 				break;
 			case EditorToolBarActions.delete:
-				console.error("delete action not implemented")
-				if (onClose)
-					onClose()
+				setIsConfirmDeleteDialogOpen(true)
 				break;
 			case EditorToolBarActions.close:
 				if (onClose)
@@ -169,6 +171,14 @@ const OfferEditor = ({offerId, onClose = null}) => {
 		const newEditedFieldSet = {...editedFieldSet}
 		newEditedFieldSet[propName] = propValue
 		setEditedFieldSet(newEditedFieldSet)
+	}
+
+	const onConfirmDeleteDialogClose = (confirmation) => {
+		console.log("dOm confirmation", confirmation)
+		if (confirmation) {
+			console.error("Not yet implemented")
+		}
+		setIsConfirmDeleteDialogOpen(false)
 	}
 
 	return (<>
@@ -265,6 +275,9 @@ const OfferEditor = ({offerId, onClose = null}) => {
 
 					</fieldset>
 				</form>
+				<ConfirmDialog isOpen={isConfirmDeleteDialogOpen} onResponse={onConfirmDeleteDialogClose}>
+					{t('form.offer.delete_question')}
+				</ConfirmDialog>
 		</>)
 }
 

@@ -128,6 +128,7 @@
 	},
 	"form" : {
 		"offer" : {
+			"delete_question": "Voulez-vous supprimer cette offre ?",
 			"edit_title": "Édition d'une offre",
 			"create_title": "Création d'une offre",
 			"field_title": "Titre",

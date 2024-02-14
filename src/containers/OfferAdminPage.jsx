@@ -78,14 +78,13 @@ const OfferAdminPage = (props) => {
 		setIsEditorDialogOpen(false)
 	}
 
-
 	if (! account || ! account.administrator) 
 		return <ErrorDisplay message={t('error.not_administrator')}/>
 
 	return (
 		<main>
 			<div className="editor-page-header">
-				<h1>Offer admin page</h1>
+				<h1>{t('admin.offers.title')}</h1>
 				<PaletteIcon element="create" button="true" onClick={onCreateButtonClick}/>
 			</div>
 			{ error !== null && <div className='error-message'>{error}</div> }

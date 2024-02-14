@@ -27,6 +27,7 @@ import Dialog from './Dialog';
  * @param {Array} props - the props array
  * @param {boolean} props.isOpen - a boolean which indicates if the dialog box is shown or hidden.
  * @param {function} props.onResponse - function called when buttons is pressed. The response is passed a boolean argument.
+ * @param {string} props.className : CSS style to apply.
  * @param {Array.<JSX.Element} props.children - children to insert as content in the dialog box.
  * @returns {JSX.Element} - A React element representing the dialog box.
  *
@@ -40,29 +41,43 @@ import Dialog from './Dialog';
  * 		setMyDialogOpen(true)
  * 	}
  * 
- * 	const onMyDialogClose = () => {
+ * 	const onMyDialogResponse = () => {
  * 		setMyDialogOpen(false)
  * 	}
  * 
  * 	return (<>
  * 		<button onClick={openMyDialog}>Display dialog</button>
- * 		<ConfirmDialog isOpen={isMyDialogOpen} onResponse={onMyDialogClose}>My question here</ConfirmDialog> 
+ * 		<ConfirmDialog isOpen={isMyDialogOpen} onResponse={onMyDialogResponse}>My question here</ConfirmDialog> 
  * 	</>)
  * }
  */
-const ConfirmDialog = ({isOpen, onResponse, children}) => {
+const ConfirmDialog = ({isOpen, onResponse, className = '', children}) => {
+	if (isOpen === undefined)
+		throw new Error('Argument [isOpen] is missing')
+	if (typeof(isOpen) !== 'boolean')
+		throw new Error('Argument [isOpen] is not a boolean')
+	if (onResponse === undefined)
+		throw new Error('Argument [onResponse] is missing')
+	if (typeof(onResponse) !== 'function')
+		throw new Error('Argument [onResponse] is not a function')
+	if (children === undefined)
+		throw new Error('Argument [children] is missing')
+
 	const { t } = useTranslation();
 
 	const onConfirm = () => {
 		onResponse(true);
 	}
+
 	const onCancel = () => {
 		onResponse(false);
 	}
+
 	const onDialogClosed = () => {
 		onResponse(false); // when escape key is pressed
 	}
-	return (<Dialog isOpen={isOpen} onClose={onDialogClosed}>
+
+	return (<Dialog isOpen={isOpen} onClose={onDialogClosed} className={className}>
 		<div>{children}</div>
 		<div>
 			<button onClick={onConfirm}>{t('yes')}</button>

@@ -25,13 +25,14 @@ import EditorToolbar, {EditorToolBarModes, EditorToolBarActions} from './EditorT
 import Dialog from '../dialog/Dialog'
 import MessageDialog from '../dialog/MessageDialog'
 import ConfirmDialog from '../dialog/ConfirmDialog'
+import { DialogContext } from '../dialog/DialogContext'
 
 import { createObjectInstance, controlObjectProperty, controlObject, diffObjects } from '../../api/objects/object-util.mjs'
 import offerObjectDef from '../../api/objects/offer-object-def.mjs'
 import offerApi from '../../api/offer-api.js'
 
 /**
- * Represent a offer editor.
+ * Represent an Offer editor.
  * @component
  * @param {Object} props - the props object.
  * @param {integer} props.offerId - ID of object to edit or -1 to create a new offer
@@ -46,8 +47,12 @@ import offerApi from '../../api/offer-api.js'
 const OfferEditor = ({offerId, onClose = null}) => {
 	if (offerId === undefined)
 		throw new Error('Offer ID is not defined')
+	if (isNaN(offerId) )
+		throw new Error('Offer ID is not number')
+	offerId = parseInt(offerId)
 
 	const { t } = useTranslation();
+	const [ dialogRequestList, pushDialogRequest ] = useContext(DialogContext)
 
 	const initialFieldSet = createObjectInstance(offerObjectDef) // important !
 
@@ -149,6 +154,23 @@ const OfferEditor = ({offerId, onClose = null}) => {
 		}
 	}
 
+	const asyncDeleteOfferToDb = async () => {
+		setError(null)
+		if (offerId === -1) {
+			console.error('Should not try to delete a newly offer')
+			return
+		}
+		console.log("dOm delete", typeof(offerId))
+		const result = await offerApi.deleteOffer(offerId)
+		if (! result.ok) {
+			setError(result.error)
+			return
+		}
+
+		if (onClose)
+			onClose()
+		pushDialogRequest({type:'flash', message: t('form.offer.delete_success', { offerId }), duration:3000})
+	}
 
 	const changeFieldValue = (ev) => {
 		setError(null)
@@ -174,9 +196,8 @@ const OfferEditor = ({offerId, onClose = null}) => {
 	}
 
 	const onConfirmDeleteDialogClose = (confirmation) => {
-		console.log("dOm confirmation", confirmation)
 		if (confirmation) {
-			console.error("Not yet implemented")
+			asyncDeleteOfferToDb ()
 		}
 		setIsConfirmDeleteDialogOpen(false)
 	}
@@ -276,7 +297,7 @@ const OfferEditor = ({offerId, onClose = null}) => {
 					</fieldset>
 				</form>
 				<ConfirmDialog isOpen={isConfirmDeleteDialogOpen} onResponse={onConfirmDeleteDialogClose}>
-					{t('form.offer.delete_question')}
+					{t('form.offer.delete_question', { offerId })}
 				</ConfirmDialog>
 		</>)
 }

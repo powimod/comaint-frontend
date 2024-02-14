@@ -128,7 +128,8 @@
 	},
 	"form" : {
 		"offer" : {
-			"delete_question": "Voulez-vous supprimer cette offre ?",
+			"delete_question": "Voulez-vous supprimer l'offre n°{{offerId}} ?",
+			"delete_success": "L'offre n°{{offerId}} a été supprimée avec succès",
 			"edit_title": "Édition d'une offre",
 			"create_title": "Création d'une offre",
 			"field_title": "Titre",

@@ -129,6 +129,7 @@
 	"form" : {
 		"offer" : {
 			"delete_question": "Do you want to delete the offer n°{{offerId}} ?",
+			"can_not_delete": "Offre n°{{offerId}} can not be delete because it's linked with {{useCount}} client(s). Instead, disable it.",
 			"delete_success": "Offer n°{{offerId}} was successfully deleted",
 			"edit_title": "Edit an offer",
 			"create_title": "Create a new offer",

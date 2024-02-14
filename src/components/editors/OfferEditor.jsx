@@ -98,7 +98,7 @@ const OfferEditor = ({offerId, onClose = null}) => {
 				 */
 				break;
 			case EditorToolBarActions.delete:
-				setIsConfirmDeleteDialogOpen(true)
+				asyncConfirmDialogOpen()
 				break;
 			case EditorToolBarActions.close:
 				if (onClose)
@@ -160,16 +160,33 @@ const OfferEditor = ({offerId, onClose = null}) => {
 			console.error('Should not try to delete a newly offer')
 			return
 		}
-		console.log("dOm delete", typeof(offerId))
 		const result = await offerApi.deleteOffer(offerId)
 		if (! result.ok) {
 			setError(result.error)
 			return
 		}
-
 		if (onClose)
 			onClose()
 		pushDialogRequest({type:'flash', message: t('form.offer.delete_success', { offerId }), duration:3000})
+	}
+
+	const asyncConfirmDialogOpen = async () => {
+		setError(null)
+		if (offerId === -1) {
+			console.error('Should not try to delete a newly offer')
+			return
+		}
+		const result = await offerApi.getChildrenCountList(offerId)
+		if (! result.ok) {
+			setError(result.error)
+			return
+		}
+		const useCount = result.childrenCountList.companies
+		if ( useCount > 0) {
+			setError(t('form.offer.can_not_delete', {offerId, useCount} ))
+			return
+		}
+		setIsConfirmDeleteDialogOpen(true)
 	}
 
 	const changeFieldValue = (ev) => {

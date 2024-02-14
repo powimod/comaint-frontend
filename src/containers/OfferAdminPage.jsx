@@ -84,10 +84,11 @@ const OfferAdminPage = (props) => {
 
 	return (
 		<main>
-			<h1>Offer admin page</h1>
+			<div className="editor-page-header">
+				<h1>Offer admin page</h1>
+				<PaletteIcon element="create" button="true" onClick={onCreateButtonClick}/>
+			</div>
 			{ error !== null && <div className='error-message'>{error}</div> }
-			<PaletteIcon element="create" button="true" onClick={onCreateButtonClick}/>
-
 			<PagedList list={offerList} label='title' onItemClick={onOfferClick}/>
 			<OfferEditorDialog offerId={editedId} isDialogOpen={isEditorDialogOpen} onDialogClose={onEditorDialogClose}/>
 		</main>

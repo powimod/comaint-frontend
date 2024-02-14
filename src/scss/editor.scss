@@ -53,6 +53,13 @@ $screen-width-limit-small: 640px !default;
 	font-size: 1.8rem;
 }
 
+.editor-page-header {
+	display: flex;
+}
+.editor-page-header > h1 {
+	display: inline;
+	flex-grow: 1;
+}
 
 
 /************************* Offer Editor ***********************/

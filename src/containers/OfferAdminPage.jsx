@@ -64,11 +64,14 @@ const OfferAdminPage = (props) => {
 			setOfferList( offerList.filter( offer => offer.id !== editedId) )
 		}
 		else {
-			if (editedId === -1) {
-				setOfferList( [...offerList, editedOffer ]  )
-			}
-			else {
-				setOfferList( offerList.map( offer => offer.id == editedId ? editedOffer : offer) )
+			// edited offer ID is null when creation was canceled
+			if (editedOffer.id !== null) {
+				if (editedId === -1) {
+					setOfferList( [...offerList, editedOffer ]  )
+				}
+				else {
+					setOfferList( offerList.map( offer => offer.id == editedId ? editedOffer : offer) )
+				}
 			}
 		}
 		setEditedId(-1)

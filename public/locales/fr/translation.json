@@ -104,11 +104,11 @@
 			"is_not_defined": "La propriété {{property}} n'est pas définie",
 			"is_null": "La propriété {{property}} est vide",
 			"is_not_an_integer": "La propriété {{property}} n'est pas définie",
-			"is_too_small": "La propriété {{property}} est trop petite",
-			"is_too_large": "La propriété {{property}} est trop grande",
+			"is_too_small": "La propriété {{property}} est trop petite (minimum:{{size}})",
+			"is_too_large": "La propriété {{property}} est trop grande (maximum:{{size}})",
 			"is_not_a_string": "La propriété {{property}} n'est pas une chaîne",
-			"is_too_short": "La propriété {{property}} est trop courte",
-			"is_too_long": "La propriété {{property}} est trop longue",
+			"is_too_short": "La propriété {{property}} est trop courte (minimum:{{size}})",
+			"is_too_long": "La propriété {{property}} est trop longue (maximum:{{size}})",
 			"is_not_a_boolean": "La propriété {{property}} n'est pas un booléen",
 			"is_not_a_date": "La propriété {{property}} n'est pas une date",
 			"is_not_a_pure_date": "La propriété {{property}} n'est pas une date",
@@ -116,14 +116,36 @@
 			"is_malformed_email": "La propriété {{property}} n'est pas une adresse mail valide",
 			"is_malformed_uuid": "La propriété {{property}} n'est pas un UUID valide",
 			"is_malformed": "La propriété {{property}} est mal formatée",
-			"password_to_small": "Le mot de passe est trop petit",
+			"password_to_small": "Le mot de passe est trop petit (minimum:{{size}}",
 			"password_no_lowercase_letter": "Le mot de passe ne contient pas de lettre minuscule",
 			"password_no_uppercase_letter": "Le mot de passe ne contient pas de lettre majsucule",
 			"password_no_digit_character": "Le mot de passe ne contient pas de caractère numérique",
-			"password_no_special_character": "Le mot de passe ne contient pas de caractère spécial"
+			"password_no_special_character": "Le mot de passe ne contient pas de caractère spécial",
+			"string_contains_line_feeds" : "La propriété {{property}} contient des sauts de ligne"
+		},
+		"not_administrator" : "Vous n'êtes pas administrateur !",
+		"form_locked": "Le formulaire est verrouillé, appuyez sur le bouton d'édition pour le déverrouiller"
+	},
+	"form" : {
+		"offer" : {
+			"delete_question": "Voulez-vous supprimer l'offre n°{{offerId}} ?",
+			"can_not_delete": "L'offre n°{{offerId}} ne peut pas être supprimée car elle est liée à {{useCount}} client(s). À la place, désactivez-la.",
+			"delete_success": "L'offre n°{{offerId}} a été supprimée avec succès",
+			"edit_title": "Édition d'une offre",
+			"create_title": "Création d'une offre",
+			"field_title": "Titre",
+			"field_description": "Description",
+			"field_active": "Active",
+			"subscription_fieldset_legend": "Abonnement",
+			"field_duration": "Durée (en mois)",
+			"field_price": "Prix",
+			"limit_fieldset_legend": "Limites maximum",
+			"field_user_limit": "Utilisateurs",
+			"field_equipment_limit": "Équipements",
+			"field_article_limit": "Articles",
+			"field_intervention_limit": "Intervention / jour",
+			"field_storage_limit": "Stockage en Mo"
+
 		}
-
-
 	}
-
 }

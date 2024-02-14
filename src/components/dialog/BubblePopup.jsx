@@ -14,11 +14,31 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {useState, useRef} from 'react'
+import { useState, useRef, useContext, useEffect } from 'react'
+import { DialogContext } from './DialogContext';
 
 const BubblePopup = ({popup}) => {
+	const [ dialogState, dialogDispatch ] = useContext(DialogContext)
+
+	useEffect( () => {
+		for (const dialogRequest of dialogState) {
+
+			if (dialogRequest.type === 'bubble.show') {
+				showBubblePopup(popup, dialogRequest.message, dialogRequest.duration) 
+				dialogDispatch({type:'acquit', id: dialogRequest.id})
+			}
+
+			if (dialogRequest.type === 'bubble.hide') {
+				hideBubblePopup(popup)
+				dialogDispatch({type:'acquit', id: dialogRequest.id})
+			}
+
+		}
+	}, [dialogState])
+
+
 	return (<>
-		{ popup.message !== null && ( <div className='popup'>{popup.message}</div> ) }
+		{ popup.message !== null && ( <div className='bubble-popup'>{popup.message}</div> ) }
 		<div>{popup.timeoutId}</div>
 	</>);
 }

@@ -1,7 +1,7 @@
 /* Comaint Single Page Application frontend (Single page application frontend of Comaint project)
  * Copyright (C) 2023-2024 Dominique Parisot
  *
- * components/PublicHomePageContent.jsx
+ * components/PagedList.jsx
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the 
  * GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or
@@ -14,27 +14,33 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom'
-import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom'
 
-import { AccountContext } from '../AccountContext'
-import ErrorDisplay from '../components/ErrorDisplay'
+const PagedList = ({list, label='name', onItemClick = null}) => {
 
-const AdminHomePageContent = () => {
-	const { t } = useTranslation();
+	const onListItemClick = (ev) => {
+		ev.preventDefault()
+		const id = ev.target.dataset.id
+		if (isNaN(id)) return
+		if (onItemClick) onItemClick(id)
+	}
 
-	const { account } = useContext(AccountContext);
-	if (! account.administrator) 
-		return <ErrorDisplay message={'You are not administrator'}/>
+	if (list === undefined)
+		return <></>
 
 	return (<>
-		<h1>Administration</h1>
-		<ul>
-			<li> <Link to="/admin/offers">{t('admin.offers.title')}</Link> </li>
-			<li> <Link to="/admin/account">{t('admin.accounts.title')}</Link> </li>
-		</ul>
+		{ list.length === 0 ?
+			<div>List is empty</div>
+		:
+			<ul>
+				{ list.map( (element) => 
+					<li key={element.id}>
+						<Link onClick={onListItemClick} data-id={element.id}>{element[label]}</Link> 
+					</li>)
+				}
+			</ul>
+		}
 	</>)
 }
 
-export default AdminHomePageContent
+export default PagedList

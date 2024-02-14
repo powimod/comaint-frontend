@@ -14,14 +14,61 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+/**
+ * @module MessageDialog
+ */
+
 import { useTranslation } from 'react-i18next';
 import { useState, useRef, useEffect } from 'react'
 import Dialog from './Dialog';
 
-const MessageDialog = ({isOpen, onClose, children}) => {
+/**
+ * Display a message dialog box with an OK button
+ * @param {Array} props - the props array
+ * @param {boolean} props.isOpen - a boolean which indicates if the dialog box is shown or hidden.
+ * @param {function} props.onClose - function called when OK button is pressed.
+ * @param {string} props.className : CSS style to apply.
+ * @param {Array.<JSX.Element} props.children - children to insert as content in the dialog box.
+ * @returns {JSX.Element} - A React element representing the dialog box.
+ *
+ * @example
+ * import MessageDialog from './dialog/MessageDialog'
+ * 
+ * const MyComponent = (props) => {
+ * 	const [isMyDialogOpen, setMyDialogOpen] = useState(false)
+ * 
+ * 	const openMyDialog = () => {
+ * 		setMyDialogOpen(true)
+ * 	}
+ * 
+ * 	const onMyDialogClose = () => {
+ * 		setMyDialogOpen(false)
+ * 	}
+ * 
+ * 	return (<>
+ * 		<button onClick={openMyDialog}>Display dialog</button>
+ * 		<MessageDialog isOpen={isMyDialogOpen} onClose={onMyDialogClose}>My message here</MessageDialog> 
+ * 	</>)
+ * }
+ */
+const MessageDialog = ({isOpen, onClose, className = '', children}) => {
+
+	if (isOpen === undefined)
+		throw new Error('Argument [isOpen] is missing')
+	if (typeof(isOpen) !== 'boolean')
+		throw new Error('Argument [isOpen] is not a boolean')
+	if (onClose === undefined)
+		throw new Error('Argument [onClose] is missing')
+	if (typeof(onClose) !== 'function')
+		throw new Error('Argument [onClose] is not a function')
+	if (children === undefined)
+		throw new Error('Argument [children] is missing')
+
 	const { t } = useTranslation();
 
-	return (<Dialog isOpen={isOpen} onClose={onClose}>
+	className = [ 'confirm-dialog', className ].join(' ').trim()
+
+	return (<Dialog isOpen={isOpen} onClose={onClose} className={className}>
 		<div>{children}</div>
 		<div>
 			<button onClick={onClose}>{t('OK')}</button>

@@ -19,24 +19,14 @@ import { useTranslation } from 'react-i18next';
 
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import ErrorDisplay from '../components/ErrorDisplay'
 
 export default function ErrorPage() {
-
-	const { t } = useTranslation();
 	const error = useRouteError()
-
+	const message = error ? error.statusText || error.message : null
 	return (<>
 		<Header/>
-		<main>
-			<h1>{t('error-page-title')}</h1>
-			<p>{t('error-page-message')}</p>
-			<p>
-				<i>{error.statusText || error.message}</i>
-			</p>
-			<div>
-				<Link to="/">{t('error-page-home-link')}</Link>
-			</div>
-		</main>
+		<ErrorDisplay message={message}/> 
 		<Footer/>
 	</>);
 }

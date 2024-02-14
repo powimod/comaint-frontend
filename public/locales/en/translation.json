@@ -104,11 +104,11 @@
 			"is_not_defined": "Property {{property}} is not defined",
 			"is_null": "Property {{property}} is null",
 			"is_not_an_integer": "Property {{property}} is not an integer",
-			"is_too_small": "Property {{property}} is too small",
-			"is_too_large": "Property {{property}} is too large",
+			"is_too_small": "Property {{property}} is too small (minimum:{{size}})",
+			"is_too_large": "Property {{property}} is too large (maximum:{{size}})",
 			"is_not_a_string": "Property {{property}} is not a string",
-			"is_too_short": "Property {{property}} is too short",
-			"is_too_long": "Property {{property}} is too long",
+			"is_too_short": "Property {{property}} is too short (minimum:{{size}})",
+			"is_too_long": "Property {{property}} is too long (maximum:{{size}})",
 			"is_not_a_boolean": "Property {{property}} is not a boolean",
 			"is_not_a_date": "Property {{property}} is not a date",
 			"is_not_a_pure_date": "Property {{property}} is not a (pure) date",
@@ -116,13 +116,35 @@
 			"is_malformed_email": "Property {{property}} is not a valid email",
 			"is_malformed_uuid": "Property {{property}} is not a valid uuid",
 			"is_malformed": "Property {{property}} is malformed",
-			"password_to_small": "Password is too small",
+			"password_to_small": "Password is too small (maximum:{{size}})",
 			"password_no_lowercase_letter": "Password does not contain lowercase letter",
 			"password_no_uppercase_letter": "Password does not contain uppercase letter",
 			"password_no_digit_character": "Password does not contain digit character",
-			"password_no_special_character": "Password does not contain special character"
+			"password_no_special_character": "Password does not contain special character",
+			"string_contains_line_feeds" : "Property {{property}} contains line feeds"
+		},
+		"not_administrator" : "You are not an administrator!",
+		"form_locked": "Form is lock, press the edit button to unlock it"
+	},
+	"form" : {
+		"offer" : {
+			"delete_question": "Do you want to delete the offer n°{{offerId}} ?",
+			"can_not_delete": "Offre n°{{offerId}} can not be delete because it's linked with {{useCount}} client(s). Instead, disable it.",
+			"delete_success": "Offer n°{{offerId}} was successfully deleted",
+			"edit_title": "Edit an offer",
+			"create_title": "Create a new offer",
+			"field_title": "Title",
+			"field_description": "Description",
+			"field_active": "Enabled",
+			"subscription_fieldset_legend": "Subscription",
+			"field_duration": "Duration (in months)",
+			"field_price": "Price",
+			"limit_fieldset_legend": "Maximum limits",
+			"field_user_limit": "User",
+			"field_equipment_limit": "Equipment",
+			"field_article_limit": "Article",
+			"field_intervention_limit": "Intervention / day",
+			"field_storage_limit": "Storage en MB"
 		}
-
-
 	}
 }

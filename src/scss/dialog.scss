@@ -17,8 +17,7 @@
 dialog {
 	position: relative;
 	margin: auto; /* horizontal and vertical center */
-	max-width: 40rem;
-	padding: 2rem;
+	padding: 0;
 	border: 0;
 	border-radius: 0.5rem;
 	box-shadow: 0 0 0.5rem 0.25rem hsl(0 0% 0% / 10%);
@@ -40,12 +39,41 @@ dialog div:last-child button { /* button bar */
 	margin-right: 1rem;
 }
 
-div.popup {
+.message-dialog, .confirm-dialog {
+	padding: 1.5rem;
+}
+.message-dialog div:last-of-type,
+.confirm-dialog div:last-of-type {
+	margin-top: 1rem;
+	padding-top: 1rem;
+	border-top: solid black 1px;
+	display: flex;
+	justify-content: center;
+}
+
+/* TODO cleanup */
+div.popup-not-used {
 	padding: 1rem;
 	position: absolute;
 	max-width: 70%;
 	top:20%;
 	left:20%;
+	border-radius: 0.5rem;
+	box-shadow: 0 0 0.5rem 0.25rem hsl(0 0% 0% / 60%);
+	color: white;
+	background-color: black;
+}
+
+div.bubble-popup {
+	padding: 1rem;
+	position: absolute;
+	max-width: 40%;
+	bottom:15rem;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
 	border-radius: 0.5rem;
 	box-shadow: 0 0 0.5rem 0.25rem hsl(0 0% 0% / 60%);
 	color: white;

@@ -62,6 +62,9 @@ body {
 	--footer-background-color: var(--global-color-1);
 
 	--bottom-color: var(--global-color-5); /* fond en arrière de la page */
+
+	--editor-toolbar-background-color: var(--global-color-6);
+	--editor-toolbar-color: var(--global-color-2);
 }
 
 body.dark-theme {
@@ -130,4 +133,5 @@ a:link, a:visited {
 	color: red;
 	padding: 0.2rem;
 }
+
 

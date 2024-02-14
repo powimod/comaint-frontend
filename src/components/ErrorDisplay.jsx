@@ -1,7 +1,7 @@
 /* Comaint Single Page Application frontend (Single page application frontend of Comaint project)
  * Copyright (C) 2023-2024 Dominique Parisot
  *
- * components/PublicHomePageContent.jsx
+ * components/ErrorDisplay.jsx
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the 
  * GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or
@@ -14,27 +14,25 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom'
+import { useRouteError, Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next';
 
-import { AccountContext } from '../AccountContext'
-import ErrorDisplay from '../components/ErrorDisplay'
+const ErrorDisplay = ({message = null}) => {
 
-const AdminHomePageContent = () => {
+	if (typeof(message) !== 'string') 
+		throw new Error('Message property must be a string !')
+
 	const { t } = useTranslation();
-
-	const { account } = useContext(AccountContext);
-	if (! account.administrator) 
-		return <ErrorDisplay message={'You are not administrator'}/>
-
-	return (<>
-		<h1>Administration</h1>
-		<ul>
-			<li> <Link to="/admin/offers">{t('admin.offers.title')}</Link> </li>
-			<li> <Link to="/admin/account">{t('admin.accounts.title')}</Link> </li>
-		</ul>
-	</>)
+	return (
+		<main>
+			<h1>{t('error-page-title')}</h1>
+			<p>{t('error-page-message')}</p>
+			{ message != null && <p> <i>{message}</i> </p> }
+			<div>
+				<Link to="/">{t('error-page-home-link')}</Link>
+			</div>
+		</main>
+	)
 }
 
-export default AdminHomePageContent
+export default ErrorDisplay

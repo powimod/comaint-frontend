@@ -49,7 +49,7 @@ const About = (props) => {
 	return (
 		<main className="about">
 			<h1>About</h1>
-			<img src="logo.svg"/>
+			<img src="/logo.svg"/>
 			<h2>{t('header_title')}</h2>
 			<h3>{t('header_subtitle')}</h3>
 			<ul>

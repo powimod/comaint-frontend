@@ -14,23 +14,73 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+/**
+ * @module ConfirmDialog
+ */
+
 import { useTranslation } from 'react-i18next';
 import { useState, useRef, useEffect } from 'react'
 import Dialog from './Dialog';
 
-const ConfirmDialog = ({isOpen, onResponse, children}) => {
+/**
+ * Display a confirmation dialog box with Yes/No buttons
+ * @param {Array} props - the props array
+ * @param {boolean} props.isOpen - a boolean which indicates if the dialog box is shown or hidden.
+ * @param {function} props.onResponse - function called when buttons is pressed. The response is passed a boolean argument.
+ * @param {string} props.className : CSS style to apply.
+ * @param {Array.<JSX.Element} props.children - children to insert as content in the dialog box.
+ * @returns {JSX.Element} - A React element representing the dialog box.
+ *
+ * @example
+ * import ConfirmDialog from './dialog/ConfirmDialog'
+ * 
+ * const MyComponent = (props) => {
+ * 	const [isMyDialogOpen, setMyDialogOpen] = useState(false)
+ * 
+ * 	const openMyDialog = () => {
+ * 		setMyDialogOpen(true)
+ * 	}
+ * 
+ * 	const onMyDialogResponse = () => {
+ * 		setMyDialogOpen(false)
+ * 	}
+ * 
+ * 	return (<>
+ * 		<button onClick={openMyDialog}>Display dialog</button>
+ * 		<ConfirmDialog isOpen={isMyDialogOpen} onResponse={onMyDialogResponse}>My question here</ConfirmDialog> 
+ * 	</>)
+ * }
+ *
+ */
+const ConfirmDialog = ({isOpen, onResponse, className = '', children}) => {
+	if (isOpen === undefined)
+		throw new Error('Argument [isOpen] is missing')
+	if (typeof(isOpen) !== 'boolean')
+		throw new Error('Argument [isOpen] is not a boolean')
+	if (onResponse === undefined)
+		throw new Error('Argument [onResponse] is missing')
+	if (typeof(onResponse) !== 'function')
+		throw new Error('Argument [onResponse] is not a function')
+	if (children === undefined)
+		throw new Error('Argument [children] is missing')
+
 	const { t } = useTranslation();
 
 	const onConfirm = () => {
 		onResponse(true);
 	}
+
 	const onCancel = () => {
 		onResponse(false);
 	}
+
 	const onDialogClosed = () => {
 		onResponse(false); // when escape key is pressed
 	}
-	return (<Dialog isOpen={isOpen} onClose={onDialogClosed}>
+
+	className = [ 'confirm-dialog', className ].join(' ').trim()
+
+	return (<Dialog isOpen={isOpen} onClose={onDialogClosed} className={className}>
 		<div>{children}</div>
 		<div>
 			<button onClick={onConfirm}>{t('yes')}</button>

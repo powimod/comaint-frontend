@@ -139,6 +139,7 @@ const OfferEditor = ({offerId, onClose = null}) => {
 			}
 			setOriginalFieldSet(result.offer)
 			setEditedFieldSet(result.offer)
+			setEditorMode(EditorToolBarModes.display) 
 		}
 		else {
 			const result = await offerApi.editOffer(deltaFieldSet)
@@ -216,10 +217,11 @@ const OfferEditor = ({offerId, onClose = null}) => {
 		setIsConfirmDeleteDialogOpen(false)
 	}
 
+		/* TODO cleanup: baseMode={offerId === -1 ? EditorToolBarModes.create : EditorToolBarModes.edit} */
 	return (<>
 			<EditorToolbar 
 				title={ t( offerId === -1 ? 'form.offer.create_title' : 'form.offer.edit_title' ) }
-				baseMode={offerId === -1 ? EditorToolBarModes.create : EditorToolBarModes.edit}
+				mode={editorMode}
 				setMode={setEditorMode}
 				setAction={setEditorAction}
 				canDelete={true}

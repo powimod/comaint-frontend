@@ -2,3 +2,4 @@ node_modules/
 package-lock.json
 config.json
 public/jsdoc/
+public/api-doc

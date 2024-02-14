@@ -55,6 +55,8 @@ $screen-width-limit-small: 640px !default;
 
 
 
+/************************* Offer Editor ***********************/
+
 .subscription_limit_fieldset {
 	grid-column: 1 / -1;
 	display: grid;
@@ -62,6 +64,7 @@ $screen-width-limit-small: 640px !default;
 	gap: 0.5rem;
 	padding: 1rem;
 	max-width: 50rem;
+	justify-self: center;
 }
 @media (min-width: $screen-width-limit-tiny)  {
 	.subscription_limit_fieldset {
@@ -82,8 +85,8 @@ $screen-width-limit-small: 640px !default;
 }
 
 
-
 .offer_limit_fieldset {
+	justify-self: center;
 	grid-column: 1 / -1;
 	display: grid;
 	grid-template-columns: 1fr;

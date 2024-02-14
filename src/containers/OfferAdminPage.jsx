@@ -48,7 +48,7 @@ const OfferAdminPage = (props) => {
 	}, [ account ])
 
 	const onOfferClick = (id) => {
-		setEditedId(id)
+		setEditedId(parseInt(id))
 		setIsEditorDialogOpen(true)
 	}
 
@@ -57,7 +57,20 @@ const OfferAdminPage = (props) => {
 		setIsEditorDialogOpen(true)
 	}
 
-	const onEditorDialogClose = () => {
+	const onEditorDialogClose = (editedOffer) => {
+		if (editedOffer === undefined)
+			return;
+		if (editedOffer === null) {
+			setOfferList( offerList.filter( offer => offer.id !== editedId) )
+		}
+		else {
+			if (editedId === -1) {
+				setOfferList( [...offerList, editedOffer ]  )
+			}
+			else {
+				setOfferList( offerList.map( offer => offer.id == editedId ? editedOffer : offer) )
+			}
+		}
 		setEditedId(-1)
 		setIsEditorDialogOpen(false)
 	}

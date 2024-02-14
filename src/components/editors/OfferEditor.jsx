@@ -84,7 +84,7 @@ const OfferEditor = ({offerId, onClose = null}) => {
 				// restore previous values
 				setEditedFieldSet({...originalFieldSet})
 				if (offerId === -1 && onClose)
-					onClose()
+					onClose(editedFieldSet)
 				break;
 			case EditorToolBarActions.validate:
 				const error = controlObject(offerObjectDef, editedFieldSet, /*controlId=*/false, t)
@@ -93,16 +93,13 @@ const OfferEditor = ({offerId, onClose = null}) => {
 					return
 				}
 				asyncSaveOfferToDb()
-				/* FIXME if dialog is closed before asynchronous save, it hides save errors
-				 * if (offerId === -1 && onClose) onClose()
-				 */
 				break;
 			case EditorToolBarActions.delete:
 				asyncConfirmDialogOpen()
 				break;
 			case EditorToolBarActions.close:
 				if (onClose)
-					onClose()
+					onClose(editedFieldSet)
 				break;
 		}
 	}, [ editorAction ])
@@ -166,7 +163,7 @@ const OfferEditor = ({offerId, onClose = null}) => {
 			return
 		}
 		if (onClose)
-			onClose()
+			onClose(null)
 		pushDialogRequest({type:'flash', message: t('form.offer.delete_success', { offerId }), duration:3000})
 	}
 

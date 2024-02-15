@@ -25,7 +25,6 @@ import LoginDialog from './LoginDialog';
 import LogoutDialog from './LogoutDialog';
 import CreateAccountDialog from './CreateAccountDialog';
 import AccessibilityDialog from './AccessibilityDialog';
-import ConfirmDialog from './dialog/ConfirmDialog';
 import PopupMenu from './PopupMenu';
 import { AccountContext } from '../AccountContext'
 

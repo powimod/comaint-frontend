@@ -18,7 +18,7 @@ import { useState, useContext, useEffect } from 'react'
 import { DialogContext} from '../components/dialog/DialogContext'
 import MessageDialog from '../components/dialog/MessageDialog'
 import QuestionDialog from '../components/dialog/QuestionDialog'
-import ConfirmDialog from '../components/dialog/ConfirmDialog'
+import ConfirmationDialog from '../components/dialog/ConfirmationDialog'
 
 const DialogDemo = (props) => {
 
@@ -102,9 +102,9 @@ const DialogDemo = (props) => {
 			<MessageDialog isOpen={isHealthResponseDialogOpen} onClose={onHealthResponseDialogClose}>
 				{message}
 			</MessageDialog>
-			<ConfirmDialog isOpen={isConfirmationDialogOpen} onResponse={onConfirmationDialogResponse}>
+			<ConfirmationDialog isOpen={isConfirmationDialogOpen} onResponse={onConfirmationDialogResponse}>
 				A popup message will be displayed...
-			</ConfirmDialog> 
+			</ConfirmationDialog> 
 		</main>
 	)
 }

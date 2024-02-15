@@ -1,7 +1,7 @@
 /* Comaint Single Page Application frontend (Single page application frontend of Comaint project)
  * Copyright (C) 2023-2024 Dominique Parisot
  *
- * ConfirmDialog.js
+ * ConfirmationDialog.js
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the 
  * GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or
@@ -15,7 +15,7 @@
  */
 
 /**
- * @module ConfirmDialog
+ * @module ConfirmationDialog
  */
 
 import { useTranslation } from 'react-i18next';
@@ -33,7 +33,7 @@ import Dialog from './Dialog';
  * @returns {JSX.Element} - A React element representing the dialog box.
  *
  * @example
- * import ConfirmDialog from './dialog/ConfirmDialog'
+ * import ConfirmationDialog from './dialog/ConfirmationDialog'
  * 
  * const MyComponent = (props) => {
  * 	const [isMyDialogOpen, setMyDialogOpen] = useState(false)
@@ -48,12 +48,12 @@ import Dialog from './Dialog';
  * 
  * 	return (<>
  * 		<button onClick={openMyDialog}>Display dialog</button>
- * 		<ConfirmDialog isOpen={isMyDialogOpen} onResponse={onMyDialogResponse}>My question here</ConfirmDialog> 
+ * 		<ConfirmationDialog isOpen={isMyDialogOpen} onResponse={onMyDialogResponse}>My question here</ConfirmationDialog> 
  * 	</>)
  * }
  *
  */
-const ConfirmDialog = ({isOpen, onResponse, className = '', children}) => {
+const ConfirmationDialog = ({isOpen, onResponse, className = '', children}) => {
 	if (isOpen === undefined)
 		throw new Error('Argument [isOpen] is missing')
 	if (typeof(isOpen) !== 'boolean')
@@ -101,4 +101,4 @@ const ConfirmDialog = ({isOpen, onResponse, className = '', children}) => {
 		</Dialog>)
 }
 
-export default ConfirmDialog;
+export default ConfirmationDialog;

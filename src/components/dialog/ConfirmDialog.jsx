@@ -23,10 +23,11 @@ import { useState, useRef, useEffect } from 'react'
 import Dialog from './Dialog';
 
 /**
- * Display a confirmation dialog box with Yes/No buttons
+ * Display a confirmation dialog box with OK/Cancel buttons
  * @param {Array} props - the props array
  * @param {boolean} props.isOpen - a boolean which indicates if the dialog box is shown or hidden.
  * @param {function} props.onResponse - function called when buttons is pressed. The response is passed a boolean argument.
+ * 	Its value is true if OK button was pressed and false if Cancel button was pressed or if popup was closed by pressing Escape key.
  * @param {string} props.className : CSS style to apply.
  * @param {Array.<JSX.Element} props.children - children to insert as content in the dialog box.
  * @returns {JSX.Element} - A React element representing the dialog box.
@@ -68,15 +69,9 @@ const ConfirmDialog = ({isOpen, onResponse, className = '', children}) => {
 
 	const dialogResponseRef = useRef(null)
 
-	/*
-	useEffect( () => {
-		dialogResponseRef.current = null
-	}, [])
-	*/
-
 	useEffect( () => {
 		if (isOpen) {
-			dialogResponseRef.current = null
+			dialogResponseRef.current = false  // default response is false when dialog closed by pressing Escape key
 		}
 	}, [isOpen])
 
@@ -100,8 +95,8 @@ const ConfirmDialog = ({isOpen, onResponse, className = '', children}) => {
 	return (<Dialog isOpen={isOpen} onClose={onDialogClosed} className={className}>
 			<div>{children}</div>
 			<div>
-				<button onClick={onConfirm}>{t('button.yes')}</button>
-				<button onClick={onCancel}>{t('button.no')}</button>
+				<button onClick={onConfirm}>{t('button.ok')}</button>
+				<button onClick={onCancel}>{t('button.cancel')}</button>
 			</div>
 		</Dialog>)
 }

@@ -144,7 +144,7 @@ const ForgottenPassword = (props) => {
 			<p>{t('forgotten_password.password_input_message')}</p>
 			<div><input ref={newPasswordInputRef} type="password" placeholder={t('forgotten_password.new_password_field')}/></div>
 			<div><input ref={confirmPasswordInputRef} type="password" placeholder={t('forgotten_password.confirm_password_field')}></input></div>
-			<div><button onClick={onValidateCodeButtonClick}>{t('validate')}</button></div>
+			<div><button onClick={onValidateCodeButtonClick}>{t('button.validate')}</button></div>
 		</main>
 	)
 }

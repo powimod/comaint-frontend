@@ -16,10 +16,15 @@
 
 import { useState, useContext, useEffect } from 'react'
 import { DialogContext} from '../components/dialog/DialogContext'
+import MessageDialog from '../components/dialog/MessageDialog'
+import ConfirmDialog from '../components/dialog/ConfirmDialog'
 
 const DialogDemo = (props) => {
 
 	const [ dialogRequestList, pushDialogRequest ] = useContext(DialogContext)
+ 	const [isHealthQuestionDialogOpen, setHealthQuestionDialogOpen] = useState(false)
+ 	const [isHealthResponseDialogOpen, setHealthResponseDialogOpen] = useState(false)
+	const [message, setMessage] = useState("")
 
 	const showPopup = () => {
 		const duration = parseInt(500 + Math.random() * 3000)
@@ -39,6 +44,32 @@ const DialogDemo = (props) => {
 		pushDialogRequest({type:'bubble.hide'})
 	}
 
+
+	const showHealthQuestionDialog = () => {
+ 		setHealthQuestionDialogOpen(true)
+	}
+
+ 	const onHealthQuestionDialogResponse = (response) => {
+ 		setHealthQuestionDialogOpen(false)
+		if (response === null)
+			return
+		if (response === true)
+			setMessage("Fine! it's a good news!")
+		else
+			setMessage("Oh bad news! it makes me sad...")
+ 		setHealthResponseDialogOpen(true)
+ 	}
+
+
+	const showHealthResponseDialog = () => {
+ 		setHealthResponseDialogOpen(true)
+	}
+
+ 	const onHealthResponseDialogClose = () => {
+ 		setHealthResponseDialogOpen(false)
+ 	}
+
+
 	return (
 		<main>
 			<h1>Dialog demo</h1>
@@ -46,6 +77,9 @@ const DialogDemo = (props) => {
 			<div><button onClick={showBlockingPopup}>Blocking popup</button></div>
 			<div><button onClick={showBubbleMessage}>Show bubble popup</button></div>
 			<div><button onClick={hideBubbleMessage}>Hide bubble popup</button></div>
+			<div><button onClick={showHealthQuestionDialog}>Show confirmation dialog</button></div>
+			<ConfirmDialog isOpen={isHealthQuestionDialogOpen} onResponse={onHealthQuestionDialogResponse}>Are you happy ?</ConfirmDialog> 
+			<MessageDialog isOpen={isHealthResponseDialogOpen} onClose={onHealthResponseDialogClose}>{message}</MessageDialog>
 		</main>
 	)
 }

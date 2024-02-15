@@ -85,7 +85,7 @@ const UnlockAccount = (props) => {
 			<div><button onClick={onSendCodeButtonClick}>{t('unlock_account.send_code_button')}</button></div>
 			<p>{t('unlock_account.validate_code_message')}</p>
 			<div><input ref={codeInput} placeholder={t('unlock_account.code')} pattern="[0-9]{5}"></input></div>
-			<div><button onClick={onValidateCodeButtonClick}>{t('validate')}</button></div>
+			<div><button onClick={onValidateCodeButtonClick}>{t('button.validate')}</button></div>
 
 		</main>
 	)

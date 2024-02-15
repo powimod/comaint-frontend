@@ -66,27 +66,44 @@ const ConfirmDialog = ({isOpen, onResponse, className = '', children}) => {
 
 	const { t } = useTranslation();
 
+	const dialogResponseRef = useRef(null)
+
+	/*
+	useEffect( () => {
+		dialogResponseRef.current = null
+	}, [])
+	*/
+
+	useEffect( () => {
+		if (isOpen) {
+			dialogResponseRef.current = null
+		}
+	}, [isOpen])
+
 	const onConfirm = () => {
-		onResponse(true);
+		dialogResponseRef.current = true
+		onDialogClosed()
 	}
 
 	const onCancel = () => {
-		onResponse(false);
+		dialogResponseRef.current = false 
+		onDialogClosed()
 	}
 
 	const onDialogClosed = () => {
-		onResponse(false); // when escape key is pressed
+		// called by Dialog when Escape key is pressed or when dialog.close is called
+		onResponse(dialogResponseRef.current)
 	}
 
 	className = [ 'confirm-dialog', className ].join(' ').trim()
 
 	return (<Dialog isOpen={isOpen} onClose={onDialogClosed} className={className}>
-		<div>{children}</div>
-		<div>
-			<button onClick={onConfirm}>{t('yes')}</button>
-			<button onClick={onCancel}>{t('no')}</button>
-		</div>
-	</Dialog>);
+			<div>{children}</div>
+			<div>
+				<button onClick={onConfirm}>{t('button.yes')}</button>
+				<button onClick={onCancel}>{t('button.no')}</button>
+			</div>
+		</Dialog>)
 }
 
 export default ConfirmDialog;

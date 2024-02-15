@@ -150,8 +150,8 @@ const CreateAccountDialog = ({isOpen, onClose, onCreateAccount}) => {
 					</div>
 
 					<div className='button-bar-right'>
-						<button onClick={onClose}>{t('cancel')}</button>
-						<button onClick={onFirstStepValidateButtonClick}>{t('validate')}</button>
+						<button onClick={onClose}>{t('button.cancel')}</button>
+						<button onClick={onFirstStepValidateButtonClick}>{t('button.validate')}</button>
 					</div>
 				</section>
 			</>}
@@ -169,8 +169,8 @@ const CreateAccountDialog = ({isOpen, onClose, onCreateAccount}) => {
 					</div>
 					<div className='button-bar'>
 						<button onClick={onPreviousButtonClick}>{t('previous')}</button>
-						<button onClick={onClose}>{t('cancel')}</button>
-						<button onClick={onSecondStepValidateButtonClick}>{t('validate')}</button>
+						<button onClick={onClose}>{t('button.cancel')}</button>
+						<button onClick={onSecondStepValidateButtonClick}>{t('button.validate')}</button>
 					</div>
 				</section>
 			</>}

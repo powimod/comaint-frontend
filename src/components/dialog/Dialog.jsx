@@ -66,30 +66,45 @@ const Dialog = ({isOpen, onClose, className = '',  children}) => {
 	if (children === undefined)
 		throw new Error('Argument [children] is missing')
 
-	const [ isDialogOpen, setDialogOpen ] = useState(isOpen);
+	const [ dialogId, setDialogId ] = useState(parseInt(Math.random() * 1000))
+	const [ isDialogOpen, setDialogOpen ] = useState(false);
 	const dialogRef = useRef(null);
 
 	useEffect(() => {
-		console.assert(dialogRef !== null);
-		if (isDialogOpen)
-		{
-			dialogRef.current.addEventListener('close', () => {
-				onClose()
-			});
-			dialogRef.current.showModal();
+		const modalDialog = dialogRef.current
+		if (modalDialog === null) 
+			return
+		modalDialog.addEventListener('close', onDialogClose)
+		return () => {
+			modalDialog.removeEventListener('close', onDialogClose)
 		}
-		else {
-			dialogRef.current.close();
-		}
-	}, [isDialogOpen]);
+	}, []);
 
 	useEffect(() => {
 		setDialogOpen(isOpen);
 	}, [isOpen]);
 
-	return (<dialog ref={dialogRef} className={className}>
-		{children}
-	</dialog>);
+	useEffect(() => {
+		const modalDialog = dialogRef.current
+		if (modalDialog === null) 
+			return
+		if (isDialogOpen)
+			modalDialog.showModal()
+		else 
+			modalDialog.close()
+	}, [isDialogOpen]);
+
+
+	// onDialogClose is closed when Escape key is pressed or when dialog.close is called
+	const onDialogClose = (ev) => {
+		onClose()
+	}
+
+	return (
+		<dialog ref={dialogRef} className={className}>
+			{children}
+		</dialog>
+		);
 }
 
 export default Dialog;

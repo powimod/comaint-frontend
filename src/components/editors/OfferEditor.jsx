@@ -24,7 +24,7 @@ import { useTranslation } from 'react-i18next'
 import EditorToolbar, {EditorToolBarModes, EditorToolBarActions} from './EditorToolBar'
 import Dialog from '../dialog/Dialog'
 import MessageDialog from '../dialog/MessageDialog'
-import ConfirmDialog from '../dialog/ConfirmDialog'
+import ConfirmationDialog from '../dialog/ConfirmationDialog'
 import { DialogContext } from '../dialog/DialogContext'
 
 import { createObjectInstance, controlObjectProperty, controlObject, diffObjects } from '../../api/objects/object-util.mjs'
@@ -95,7 +95,7 @@ const OfferEditor = ({offerId, onClose = null}) => {
 				asyncSaveOfferToDb()
 				break;
 			case EditorToolBarActions.delete:
-				asyncConfirmDialogOpen()
+				asyncConfirmationDialogOpen()
 				break;
 			case EditorToolBarActions.close:
 				if (onClose)
@@ -168,7 +168,7 @@ const OfferEditor = ({offerId, onClose = null}) => {
 		pushDialogRequest({type:'flash', message: t('form.offer.delete_success', { offerId }), duration:3000})
 	}
 
-	const asyncConfirmDialogOpen = async () => {
+	const asyncConfirmationDialogOpen = async () => {
 		setError(null)
 		if (offerId === -1) {
 			console.error('Should not try to delete a newly offer')
@@ -312,9 +312,9 @@ const OfferEditor = ({offerId, onClose = null}) => {
 
 					</fieldset>
 				</form>
-				<ConfirmDialog isOpen={isConfirmDeleteDialogOpen} onResponse={onConfirmDeleteDialogClose}>
+				<ConfirmationDialog isOpen={isConfirmDeleteDialogOpen} onResponse={onConfirmDeleteDialogClose}>
 					{t('form.offer.delete_question', { offerId })}
-				</ConfirmDialog>
+				</ConfirmationDialog>
 		</>)
 }
 

@@ -1,9 +1,11 @@
 {
-	"yes" : "Yes",
-	"no" : "No",
-	"ok" : "OK",
-	"cancel": "Cancel",
-	"validate": "Validate",
+	"button": {
+		"yes" : "Yes",
+		"no" : "No",
+		"ok" : "OK",
+		"cancel": "Cancel",
+		"validate": "Validate"
+	},
 	"previous": "Previous",
 	"home": "Accueil",
 

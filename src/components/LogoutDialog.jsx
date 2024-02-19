@@ -19,14 +19,11 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom'
 
 import authApi from '../api/auth-api.js'
-import { AccountContext } from '../AccountContext'
-import ConfirmationDialog from './dialog/ConfirmationDialog';
 
 const LogoutDialog = ({isOpen, onResponse}) => {
 	const { t } = useTranslation();
 
 	const [ error, setError ] = useState(null);
-	const { account } = useContext(AccountContext);
 
 	const onDialogResponse = async (confirmation) => {
 		if (confirmation)  {

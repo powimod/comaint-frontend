@@ -19,7 +19,6 @@ import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next';
 
 import { DialogContext} from '../components/dialog/DialogContext'
-import { AccountContext } from '../AccountContext'
 import authApi from '../api/auth-api.js'
 
 const ForgottenPassword = (props) => {

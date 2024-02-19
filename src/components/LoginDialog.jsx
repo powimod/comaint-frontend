@@ -23,12 +23,10 @@ import authApi from '../api/auth-api.js'
 import PaletteIcon from './PaletteIcon';
 import Dialog from './dialog/Dialog';
 import Config from '../components/Config';
-import { AccountContext } from '../AccountContext'
 
 const LoginDialog = ({isOpen, onClose, onCreateAccount}) => {
 	const { t } = useTranslation();
 
-	const { account } = useContext(AccountContext);
 	const [ error, setError ] = useState(null);
 	const [ email, setEmail] = useState('');
 	const [ password, setPassword] = useState('');

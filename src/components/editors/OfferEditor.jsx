@@ -87,7 +87,7 @@ const OfferEditor = ({offerId, onClose = null}) => {
 					onClose(editedFieldSet)
 				break;
 			case EditorToolBarActions.validate:
-				const error = controlObject(offerObjectDef, editedFieldSet, /*controlId=*/false, t)
+				const error = controlObject(offerObjectDef, editedFieldSet, /*fullCheck=*/false, /*controlId=*/false, t)
 				if (error) {
 					setError(error)
 					return
@@ -179,7 +179,7 @@ const OfferEditor = ({offerId, onClose = null}) => {
 			setError(result.error)
 			return
 		}
-		const useCount = result.childrenCountList.companies
+		const useCount = result.childrenCountList.Company
 		if ( useCount > 0) {
 			setError(t('form.offer.can_not_delete', {offerId, useCount} ))
 			return

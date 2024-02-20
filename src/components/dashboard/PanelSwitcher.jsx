@@ -18,7 +18,7 @@
 import { useRef, useState, useEffect } from 'react'
 
 const Panel = ({isVisible, children}) => {
-	return ( <div className='panel' style={{ display : isVisible ? '' : 'none' }}>
+	return ( <div className='panel' style={{ visibility : isVisible ? '' : 'hidden' }}>
 			{children}
 		</div>
 	)
@@ -44,7 +44,9 @@ const PanelSwitcher = ({children}) => {
 					</span>) }
 			<span className="panel-filler"/>
 		</div>
-		{ children.map( (child, index) => <Panel key={index} isVisible={index === panelIndex}>{child}</Panel> ) }
+		<div className="panel-container">
+			{ children.map( (child, index) => <Panel key={index} isVisible={index === panelIndex}>{child}</Panel> ) }
+		</div>
 	</div>)
 }
 

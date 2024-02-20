@@ -14,7 +14,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React, {createContext, useState, useEffect} from 'react'
+import React, {createContext, useState, useEffect, useRef} from 'react'
 
 import ApiToolsSingleton from './api/api-tools'
 import authApi from './api/auth-api.js'
@@ -44,42 +44,9 @@ const AccountContext = createContext(null);
 
 
 const AccountProvider = ( ({children}) => {
-	const [accountId, setAccountId] = useState(null)
+	const accountIdRef = useRef(null)
         const [account, setAccount] = useState(null)
 	const [apiInitError, setApiInitError] = useState(false);
-
-	/**
-	 * Fonction qui recharge le contexte à chaque fois que l'ID du compte connecté change.
-	 * Elle appelle la route auth/get-context si l'ID du compte n'est pas nul.
-	 * Elle met ensuite à jour le context 'account' avec les informations récupérées 
-	 * ou le met à null si il n'y pas de compte connecté.
-	 */
-	const asyncLoadContext = async () => {
-		let account = null;
-		if (accountId === null) {
-			console.log(`AccountContext - reset context  ...`)
-		}
-		else {
-			console.log(`AccountContext - loading context accountId = ${accountId} ...`)
-			const result = await authApi.getContext()
-			if (! result.ok) {
-				console.error(`Can not get account from backend : ${result.error}`);
-			}
-			else {
-				console.log("OK account", result)
-				account = result.context
-			}
-		}
-		console.log('AccountContext - account', account)
-		setAccount(account)
-	}
-
-	useEffect( () => {
-		if (accountId === undefined)
-			return;
-		asyncLoadContext()
-	}, [accountId]);
-
 
 	useEffect( () => {
 		// initialize API backend url from config
@@ -92,21 +59,42 @@ const AccountProvider = ( ({children}) => {
 		}
 	}, []);
 
-        return(
-		// AccountContext does not export a function to change account value 
-		// because it's changed internaly
-		<AccountContext.Provider value={ { account } }>
-                        { apiInitError ? <div>Loading error</div> : children}
-                </AccountContext.Provider>
-        );
+	/**
+	 * Fonction qui recharge le contexte à chaque fois que l'ID du compte connecté change.
+	 * Elle appelle la route auth/get-context si l'ID du compte n'est pas nul.
+	 * Elle met ensuite à jour le context 'account' avec les informations récupérées 
+	 * ou le met à null si il n'y pas de compte connecté.
+	 */
+	const asyncReloadAccountContext = async () => {
+		let newAccount = null;
+		if (accountIdRef.current !== null) {
+			const result = await authApi.getContext()
+			if (! result.ok) 
+				console.error(`Can not get account from backend : ${result.error}`);
+			else
+				newAccount = result.context
+		}
+		setAccount(newAccount)
+	}
+
+	const reloadAccountContext = async () => {
+		asyncReloadAccountContext() 
+	}
 
 	/**
 	 * Fonction rappelée par l'API pour sérialiser le compte.
 	 * Le mode peut valoir 'save', 'load' ou 'clear'.
 	 * En fonction du mode, l'ID du compte et les tokens (refresh et access) sont sauvés, chargés ou effacés sur localStorage.
 	 * Le state associé à l'identifiant du compte est alors mis à jour : cela provoquera un rechargement du context par appel
-	 * à la fonction asyncLoadContext.
+	 * à la fonction reloadAccountContext.
 	 * Enfin, l'ID du compte et les tokens sont renvoyés à l'API.
+	 *
+	 * @function
+	 * @param {string} mode : mode de sérialisation qui vaut 'save', 'load' ou 'clear'.
+	 * @param {number} accountId : identifiant du compte connecté ou null si aucun compte connecté (avec mode='save').
+	 * @param {string} refreshToken : token de rafraîchissement à sauvegarder ou null si aucun compte connecté (avec mode='save').
+	 * @param {string} accesToken : token d'accès à sauvegarder ou null si aucun compte connecté (avec mode='save').
+	 * returns { Array.<accountId , refreshToken, accessToken> } : valeur de l'identifiant du compte et des tokens en mode='load'.
 	 */
 	function accountSerializeFunction(mode, accountId, refreshToken, accessToken) {
 		if (mode === undefined)
@@ -115,11 +103,9 @@ const AccountProvider = ( ({children}) => {
 			throw new Error('Missing parameters in accountSerializeFunction');
 		if (accountId !== undefined && accountId !== null && isNaN(accountId)) 
 			throw new Error('Invalid accountId parameter')
-		console.log("Account serialize - mode", mode)
 
 		switch (mode) {
 			case 'save':
-				console.log("Account serialize - accountId", accountId)
 				if (accountId)
 					localStorage.setItem(accountIdStorageKey, accountId);
 				else
@@ -140,7 +126,6 @@ const AccountProvider = ( ({children}) => {
 				accountId = localStorage.getItem(accountIdStorageKey);
 				if (accountId != null)
 					accountId = parseInt(accountId)
-				console.log("Account serialize - loaded userID =", accountId)
 				refreshToken = localStorage.getItem(refreshTokenKey);
 				accessToken = localStorage.getItem(accessTokenKey);
 				break;
@@ -151,9 +136,19 @@ const AccountProvider = ( ({children}) => {
 				localStorage.removeItem(accessTokenKey);
 				break;
 		}
-                setAccountId(accountId)
+		accountIdRef.current = accountId
+		// use setTimeout because accessToken is not yet returned to ApiTools
+		setTimeout( asyncReloadAccountContext, 0)
 		return [ accountId , refreshToken, accessToken ]
 	}
+
+        return(
+		// AccountContext does not export a function to change account value 
+		// because it's changed internaly
+		<AccountContext.Provider value={ { account, reloadAccountContext} }>
+                        { apiInitError ? <div>Loading error</div> : children}
+                </AccountContext.Provider>
+        );
 });
 
 export {AccountContext}

@@ -14,7 +14,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { useState, useContext, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -37,6 +37,7 @@ const LoginDialog = ({isOpen, onClose, onCreateAccount}) => {
 	const EMAIL_STORAGE_KEY = 'login-email';
 
 	useEffect( () => {
+		setError(null)
 		const email = localStorage.getItem(EMAIL_STORAGE_KEY);
 		if (email !== null)
 			setEmail(email)
@@ -50,6 +51,7 @@ const LoginDialog = ({isOpen, onClose, onCreateAccount}) => {
 	}, [email]);
 
 	useEffect( () => {
+		setError(null)
 		if (! isOpen)
 			return
 		let focusedField = (emailRef.current.value.length > 0) ?  passwordRef : emailRef

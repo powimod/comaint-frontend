@@ -24,15 +24,13 @@ import StockPanel from './dashboard/StockPanel'
 const PrivateHomePageContent = () => {
 	const { account } = useContext(AccountContext);
 
-
 	return (<>
 		<div>User connected ID:{ (account) ? account.userId : '???'}</div>
-		{/* <MainDashboard label="dashboard"/> */}
 		 <PanelSwitcher>
 			<ParcPanel label="Parc"/>
 			<StockPanel label="Stock"/>
-			<MainDashboard label="dashboard"/>
 		</PanelSwitcher>
+		<MainDashboard label="dashboard"/>
 	</>)
 }
 

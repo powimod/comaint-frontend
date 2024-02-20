@@ -24,6 +24,21 @@ const accountIdStorageKey = 'accountId';
 const refreshTokenKey = 'refresh-token';
 const accessTokenKey = 'access-token';
 
+/**
+ * @module AccountContext
+ * Ce module se charge de tenir à jour le context AccountContext pour mettre à disposition les informations sur le compte actuellement
+ * connecté.
+ *
+ * Il initialise ApiTool en lui passant la fonction accountSerializeFunction qui sera rappelée par l'API pour la sérialisation du contexte.
+ * Cette fonction reçoit un argument mode qui peut prendre les valeurs 'save', 'load' ou 'clear'.
+ * Si le mode vaut 'save', l'identifiant accountId, le token de rafraîchissement et le token d'accès seront sauvegardés dans le localStorage.
+ * Si le mode vaut 'load', l'identifiant et le tokens seront chargés à partir du localStorage.
+ * Si le mode vaut 'clear', l'identifiant et le tokens seront supprimés du localStorage.
+ *
+ * Dans ces trois cas, si l'identifiant du compte change alors la route auth/get-context est appelée pour recharger le context de la session.
+ * Le contexte account est alors mis à jour et tous les modules qui se sont mis en écoute avec 'useContext' sur ce context sont prévenus.
+ *
+ */
 
 const AccountContext = createContext(null);
 
@@ -33,7 +48,12 @@ const AccountProvider = ( ({children}) => {
         const [account, setAccount] = useState(null)
 	const [apiInitError, setApiInitError] = useState(false);
 
-
+	/**
+	 * Fonction qui recharge le contexte à chaque fois que l'ID du compte connecté change.
+	 * Elle appelle la route auth/get-context si l'ID du compte n'est pas nul.
+	 * Elle met ensuite à jour le context 'account' avec les informations récupérées 
+	 * ou le met à null si il n'y pas de compte connecté.
+	 */
 	const asyncLoadContext = async () => {
 		let account = null;
 		if (accountId === null) {
@@ -80,18 +100,26 @@ const AccountProvider = ( ({children}) => {
                 </AccountContext.Provider>
         );
 
+	/**
+	 * Fonction rappelée par l'API pour sérialiser le compte.
+	 * Le mode peut valoir 'save', 'load' ou 'clear'.
+	 * En fonction du mode, l'ID du compte et les tokens (refresh et access) sont sauvés, chargés ou effacés sur localStorage.
+	 * Le state associé à l'identifiant du compte est alors mis à jour : cela provoquera un rechargement du context par appel
+	 * à la fonction asyncLoadContext.
+	 * Enfin, l'ID du compte et les tokens sont renvoyés à l'API.
+	 */
 	function accountSerializeFunction(mode, accountId, refreshToken, accessToken) {
 		if (mode === undefined)
 			throw new Error('Missing mode parameter in accountSerializeFunction');
 		if (mode === 'save' && ( accountId === undefined || refreshToken === undefined || accessToken === undefined) )
 			throw new Error('Missing parameters in accountSerializeFunction');
-		console.log("Account serialize - accountId", accountId)
 		if (accountId !== undefined && accountId !== null && isNaN(accountId)) 
 			throw new Error('Invalid accountId parameter')
 		console.log("Account serialize - mode", mode)
 
 		switch (mode) {
 			case 'save':
+				console.log("Account serialize - accountId", accountId)
 				if (accountId)
 					localStorage.setItem(accountIdStorageKey, accountId);
 				else

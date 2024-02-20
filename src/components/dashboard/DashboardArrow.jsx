@@ -15,12 +15,14 @@
  */
 
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 const DashboardArrow = ({ type, className, id }) => {
 
+	const svgRef = useRef(null)
+
 	const drawArrow = () => {
-		const svg = document.getElementById(id);
+		const svg = svgRef.current; 
 		svg.setAttribute('fill', 'gray');
 		svg.setAttribute('stroke', 'black');
 		console.assert(svg !== null); 
@@ -161,7 +163,7 @@ const DashboardArrow = ({ type, className, id }) => {
 	}
 
 	useEffect( ()=> {
-		const svg = document.getElementById(id);
+		const svg = svgRef.current; 
 		drawArrow();
 		window.addEventListener('resize', drawArrow);
 		return () => {
@@ -170,6 +172,6 @@ const DashboardArrow = ({ type, className, id }) => {
 	}, [])
 
 	className=`dashboard-arrow ${className}`
-	return (<svg id={id} className={className}/>)
+	return (<svg ref={svgRef} className={className}/>)
 }
 export default DashboardArrow

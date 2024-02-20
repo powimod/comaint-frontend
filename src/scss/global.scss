@@ -40,6 +40,8 @@ html {
 	--global-color-6: #102a4c; /* very dark blue*/
 	--global-color-7: #b4b3c6; /* light gray */
 	--global-color-8: #0d0e0f; /* very dark gray */
+	--global-color-9: #32b564; /* light green */
+	--global-color-10: #07652b; /* dark green */
 }
 
 body {
@@ -65,6 +67,8 @@ body {
 
 	--editor-toolbar-background-color: var(--global-color-6);
 	--editor-toolbar-color: var(--global-color-2);
+
+	--dashboard-bloc-background-color: var(--global-color-9);
 }
 
 body.dark-theme {
@@ -79,6 +83,8 @@ body.dark-theme {
 	--main-link-hover-color: var(--global-color-6);
 
 	--bottom-color: var(--global-color-8);
+
+	--dashboard-bloc-background-color: var(--global-color-10);
 }
 
 body.line-spacing-theme {

@@ -24,7 +24,7 @@ $dashboard-width-limit: 480px !default;
 .dashboard-bloc {
 	border: solid green 1px;
 	padding: 0.3rem;
-	background: lightGreen;
+	background: var(--dashboard-bloc-background-color);
 }
 
 /* grid-area : lineStart / columnStart / lineEnd / columnEnd */

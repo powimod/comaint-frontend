@@ -7,10 +7,9 @@
 .panel-label {
 	padding: 0.5rem;
 	cursor: pointer;
-	background-color: white;
-	color: black;
 	border: solid black 1px;
 	font-size: 2rem;
+	padding: 0.5rem 2rem;
 }
 .panel-label:hover{
 	background-color: black;
@@ -21,7 +20,7 @@
 	flex-grow: 1;
 }
 .panel-label-selected {
-	font-weight: bold;
+	font-weight: bolder;
 	border-bottom: none;
 }
 

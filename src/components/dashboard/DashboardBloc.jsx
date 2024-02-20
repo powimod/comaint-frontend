@@ -1,7 +1,7 @@
 /* Comaint Single Page Application frontend (Single page application frontend of Comaint project)
  * Copyright (C) 2023-2024 Dominique Parisot
  *
- * components/PublicHomePageContent.jsx
+ * DashboardBloc.jsx
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the 
  * GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or
@@ -14,19 +14,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { useContext } from 'react';
-import { AccountContext } from '../AccountContext'
-import MainDashboard from './dashboard/MainDashboard' 
+import { useTranslation } from 'react-i18next';
 
+const DashboardBloc = ({label, className}) => {
+	const { t } = useTranslation();
 
-const PrivateHomePageContent = () => {
-	const { account } = useContext(AccountContext);
-
-
+	if (label === undefined) label = "dashboard.bloc.unknown"
+	className=`dashboard-bloc ${className}`
 	return (<>
-		<div>User connected ID:{ (account) ? account.userId : '???'}</div>
-		<MainDashboard label="dashboard"/>
+		<span className={className}>{t(label)}</span>	
 	</>)
 }
-
-export default PrivateHomePageContent
+export default DashboardBloc

@@ -37,6 +37,7 @@ const LoginDialog = ({isOpen, onClose, onCreateAccount}) => {
 	const EMAIL_STORAGE_KEY = 'login-email';
 
 	useEffect( () => {
+		setError(null)
 		const email = localStorage.getItem(EMAIL_STORAGE_KEY);
 		if (email !== null)
 			setEmail(email)

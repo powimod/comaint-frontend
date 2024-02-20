@@ -14,11 +14,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import ParcDashboard from './ParcDashboard'
 
 const ParcPanel = () => {
-	return (<div>
-		Parc Panel
-	</div>)
+	return (
+		<ParcDashboard/>
+	)
 }
 
 export default ParcPanel;

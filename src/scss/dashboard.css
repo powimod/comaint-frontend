@@ -1,9 +1,24 @@
-.main-dashboard {
+.dashboard {
 	display: grid;
 	grid-template-columns: repeat(20, 1fr);
 	grid-template-rows: repeat(21, 30px);
 	margin:1rem;
 }
+
+.main-dashboard {
+}
+
+.parc-dashboard {
+	/* hide unused columns on the right (article blocs not present)*/
+	grid-template-columns: repeat(12,1fr) repeat(8, 0);
+}
+
+.stock-dashboard {
+	/* hide unused columns on the left (stock blocs not present)*/
+	grid-template-columns: repeat(8,0) repeat(12, 1fr);
+
+}
+
 .dashboard-bloc {
 	border: solid green 1px;
 	padding: 0.3rem;

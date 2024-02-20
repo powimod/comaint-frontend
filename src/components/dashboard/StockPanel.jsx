@@ -14,11 +14,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import StockDashboard from './StockDashboard'
 
 const StockPanel = () => {
-	return (<div>
-		Stock Panel
-	</div>)
+	return (
+		<StockDashboard/>
+	)
 }
 
 export default StockPanel;

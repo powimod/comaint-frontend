@@ -19,6 +19,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom'
 
 import authApi from '../api/auth-api.js'
+import QuestionDialog from './dialog/QuestionDialog'
 
 const LogoutDialog = ({isOpen, onResponse}) => {
 	const { t } = useTranslation();
@@ -42,10 +43,10 @@ const LogoutDialog = ({isOpen, onResponse}) => {
 	}
 
 	return (<>
-		<ConfirmationDialog isOpen={isOpen} onResponse={onDialogResponse}>
+		<QuestionDialog isOpen={isOpen} onResponse={onDialogResponse}>
 			{error !== null && <div className='error-message'>{error}</div>}
 			<div>{t('logout-question')}</div>
-		</ConfirmationDialog>
+		</QuestionDialog>
 	</>)
 }
 

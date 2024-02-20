@@ -1,3 +1,5 @@
+$dashboard-width-limit: 480px !default;
+
 .dashboard {
 	display: grid;
 	grid-template-columns: repeat(20, 1fr);
@@ -97,12 +99,12 @@
 
 
 /* switch Main dashboard / panel switcher visibility */
-@media (min-width: 640px) {
+@media (min-width: $dashboard-width-limit) {
 	.panel-switcher{
 		display: none;
 	}
 }
-@media (max-width: 640px) {
+@media (max-width: $dashboard-width-limit) {
 	.main-dashboard {
 		display: none;
 	}

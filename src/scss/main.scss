@@ -40,7 +40,10 @@ $screen-size-large : 1024px;
 	$screen-width-limit-small: $screen-size-small
 );
 @use 'panel-switcher';
-@use 'dashboard';
+@use 'dashboard' with (
+	$dashboard-width-limit: $screen-size-medium
+);
+
 
 main {
 	padding : 1rem;

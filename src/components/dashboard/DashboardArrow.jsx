@@ -163,10 +163,10 @@ const DashboardArrow = ({ type, className, id }) => {
 	useEffect( ()=> {
 		const svg = document.getElementById(id);
 		drawArrow();
-		window.addEventListener('resize', () => {
-			drawArrow();
-		});
-
+		window.addEventListener('resize', drawArrow);
+		return () => {
+			window.removeEventListener('resize', drawArrow);
+		}
 	}, [])
 
 	className=`dashboard-arrow ${className}`

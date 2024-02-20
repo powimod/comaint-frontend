@@ -86,12 +86,12 @@ const QuestionDialog = ({isOpen, onResponse, className = '', children}) => {
 		}
 	}, [isOpen])
 
-	const onQuestion = () => {
+	const onYesResponse = () => {
 		dialogResponseRef.current = true
 		onDialogClosed()
 	}
 
-	const onCancel = () => {
+	const onNoResponse = () => {
 		dialogResponseRef.current = false 
 		onDialogClosed()
 	}
@@ -99,6 +99,7 @@ const QuestionDialog = ({isOpen, onResponse, className = '', children}) => {
 	const onDialogClosed = () => {
 		// called by Dialog when Escape key is pressed or when dialog.close is called
 		onResponse(dialogResponseRef.current)
+		dialogResponseRef.current = null
 	}
 
 	className = [ 'confirm-dialog', className ].join(' ').trim()
@@ -106,8 +107,8 @@ const QuestionDialog = ({isOpen, onResponse, className = '', children}) => {
 	return (<Dialog isOpen={isOpen} onClose={onDialogClosed} className={className}>
 			<div>{children}</div>
 			<div>
-				<button onClick={onQuestion}>{t('button.yes')}</button>
-				<button onClick={onCancel}>{t('button.no')}</button>
+				<button onClick={onYesResponse}>{t('button.yes')}</button>
+				<button onClick={onNoResponse}>{t('button.no')}</button>
 			</div>
 		</Dialog>)
 }

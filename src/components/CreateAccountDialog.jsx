@@ -14,13 +14,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom'
 
 import PaletteIcon from './PaletteIcon';
 import Dialog from './dialog/Dialog';
 import authApi from '../api/auth-api.js'
+import { AccountContext } from '../AccountContext'
 
 const CreateAccountDialog = ({isOpen, onClose, onCreateAccount}) => {
 	const { t } = useTranslation();
@@ -32,9 +33,11 @@ const CreateAccountDialog = ({isOpen, onClose, onCreateAccount}) => {
 	const [ firstname, setFirstname] = useState('');
 	const [ lastname, setLastname] = useState('');
 	const [ validationCode, setValidationCode ] = useState('');
+	const { account, reloadAccountContext } = useContext(AccountContext)
 
 	useEffect(() => {
 		setStep(1)
+		setValidationCode('')
 		setError(null)
 	}, [isOpen])
 
@@ -81,6 +84,7 @@ const CreateAccountDialog = ({isOpen, onClose, onCreateAccount}) => {
 				setError(result.error);
 				return;
 			}
+			reloadAccountContext()	
 			onClose();
 		} catch (error) {
 			setError(error);

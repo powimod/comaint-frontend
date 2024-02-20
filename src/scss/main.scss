@@ -39,6 +39,7 @@ $screen-size-large : 1024px;
 	$screen-width-limit-tiny: $screen-size-tiny,
 	$screen-width-limit-small: $screen-size-small
 );
+@use 'panel-switcher';
 @use 'dashboard';
 
 main {

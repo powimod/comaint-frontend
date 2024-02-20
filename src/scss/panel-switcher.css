@@ -1,0 +1,30 @@
+.panel-switcher {
+	margin:0.2rem;
+}
+.panel-switcher > div:first-child{
+	display: flex;
+}
+.panel-label {
+	padding: 0.5rem;
+	cursor: pointer;
+	background-color: white;
+	color: black;
+	border: solid black 1px;
+}
+.panel-label:hover{
+	background-color: black;
+	color: white;
+}
+.panel-filler {
+	border-bottom: solid black 1px;
+	flex-grow: 1;
+}
+.panel-label-selected {
+	font-weight: bold;
+	border-bottom: none;
+}
+.panel {
+	padding: 1rem;
+	border: solid black 1px;
+	border-top: none;
+}

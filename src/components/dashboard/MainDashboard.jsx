@@ -17,18 +17,21 @@
 
 import DashboardBloc from './DashboardBloc'
 import DashboardArrow from './DashboardArrow'
+import { useTranslation } from 'react-i18next';
 
 const MainDashboard = () => {
+	const { t } = useTranslation();
 
 	return (<>
 		<div className="dashboard main-dashboard">
-		{/* <DashboardBloc className="bloc-company"      label="dashboard.bloc.company"/> */}
+			<span className="dashboard-label dashboard-label-parc">{t('dashboard.label.parc')}</span>
 			<DashboardBloc className="bloc-equipment-unit"      label="dashboard.bloc.unit"/>
 			<DashboardBloc className="bloc-equipment-section"   label="dashboard.bloc.section"/>
 			<DashboardBloc className="bloc-equipment-family"    label="dashboard.bloc.family"/>
 			<DashboardBloc className="bloc-equipment-type"      label="dashboard.bloc.type"/>
 			<DashboardBloc className="bloc-equipment"           label="dashboard.bloc.equipment"/>
 
+			<span className="dashboard-label dashboard-label-stock">{t('dashboard.label.stock')}</span>
 			<DashboardBloc className="bloc-article-unit"        label="dashboard.bloc.unit"/>
 			<DashboardBloc className="bloc-article-section"     label="dashboard.bloc.section"/>
 			<DashboardBloc className="bloc-article-category"    label="dashboard.bloc.category"/>
@@ -37,7 +40,6 @@ const MainDashboard = () => {
 
 			<DashboardBloc className="bloc-nomenclature" label="dashboard.bloc.nomenclature"/>
 
-		{/* <DashboardArrow className="arrow-company-unit"           id="arrow-company-unit"           type="ns"/> */}
 			<DashboardArrow className="arrow-equipment-unit-section"       id="arrow-unit-section"         type="ns"/>
 			<DashboardArrow className="arrow-equipment-section-equipment"  id="arrow-section-equipment"    type="neso"/>
 			<DashboardArrow className="arrow-equipment-family-type"        id="arrow-family-type"          type="ns"/>

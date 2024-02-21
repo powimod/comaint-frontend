@@ -3,7 +3,7 @@ $dashboard-width-limit: 480px !default;
 .dashboard {
 	display: grid;
 	grid-template-columns: repeat(22, 1fr);
-	grid-template-rows: repeat(16, 2.5rem);
+	grid-template-rows: 4rem repeat(16, 2.5rem);
 	margin:1rem;
 }
 
@@ -13,12 +13,13 @@ $dashboard-width-limit: 480px !default;
 .parc-dashboard {
 	/* hide unused columns on the right (article blocs not present)*/
 	grid-template-columns: repeat(13,1fr) repeat(9, 0);
+	grid-template-rows: 0 repeat(16, 2.5rem);
 }
 
 .stock-dashboard {
 	/* hide unused columns on the left (stock blocs not present)*/
 	grid-template-columns: repeat(9,0) repeat(13, 1fr);
-
+	grid-template-rows: 0 repeat(16, 2.5rem);
 }
 
 .dashboard-bloc {
@@ -31,11 +32,18 @@ $dashboard-width-limit: 480px !default;
 
 /* grid-area : lineStart / columnStart / lineEnd / columnEnd */
 
-/* TODO not used
-.bloc-company {
-	grid-area : 1/9 / 4/13; 
+.dashboard-label {
+	text-align: center;
+	border-bottom: solid black 1px;
+	margin-bottom: 1rem;
+	font-size: 2.5rem;
 }
-*/
+.dashboard-label-parc {
+	grid-area : 1/1 / 2/11; 
+}
+.dashboard-label-stock{
+	grid-area : 1/13 / 2/23; 
+}
 
 .bloc-equipment-unit{
 	grid-area : 2/7 / 5/11; 
@@ -82,11 +90,6 @@ $dashboard-width-limit: 480px !default;
 	justify-self: stretch;
 }
 
-/* TODO not used
-.arrow-equipment-company-unit {
-	grid-area : 4/10 / 6/12; 
-}
-*/
 .arrow-equipment-unit-section {
 	grid-area : 5/8 / 7/10; 
 }

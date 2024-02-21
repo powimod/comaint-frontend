@@ -19,10 +19,14 @@ import { useTranslation } from 'react-i18next';
 const DashboardBloc = ({label, className}) => {
 	const { t } = useTranslation();
 
+	const onBlocClick = () => {
+		console.log("Bloc clicked")
+	}
+
 	if (label === undefined) label = "dashboard.bloc.unknown"
 	className=`dashboard-bloc ${className}`
 	return (<>
-		<span className={className}>{t(label)}</span>	
+		<button className={className} onClick={onBlocClick}>{t(label)}</button>	
 	</>)
 }
 export default DashboardBloc

@@ -22,8 +22,10 @@ $dashboard-width-limit: 480px !default;
 }
 
 .dashboard-bloc {
-	border: solid green 1px;
+	/* border: solid green 1px; */
 	padding: 0.3rem;
+	margin: 0.2rem;
+	border-radius: 8px;
 	background: var(--dashboard-bloc-background-color);
 }
 

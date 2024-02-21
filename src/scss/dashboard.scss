@@ -2,8 +2,8 @@ $dashboard-width-limit: 480px !default;
 
 .dashboard {
 	display: grid;
-	grid-template-columns: repeat(20, 1fr);
-	grid-template-rows: repeat(20, 2.5rem);
+	grid-template-columns: repeat(22, 1fr);
+	grid-template-rows: 4rem repeat(16, 2.5rem);
 	margin:1rem;
 }
 
@@ -12,13 +12,14 @@ $dashboard-width-limit: 480px !default;
 
 .parc-dashboard {
 	/* hide unused columns on the right (article blocs not present)*/
-	grid-template-columns: repeat(12,1fr) repeat(8, 0);
+	grid-template-columns: repeat(13,1fr) repeat(9, 0);
+	grid-template-rows: 0 repeat(16, 2.5rem);
 }
 
 .stock-dashboard {
 	/* hide unused columns on the left (stock blocs not present)*/
-	grid-template-columns: repeat(8,0) repeat(12, 1fr);
-
+	grid-template-columns: repeat(9,0) repeat(13, 1fr);
+	grid-template-rows: 0 repeat(16, 2.5rem);
 }
 
 .dashboard-bloc {
@@ -31,36 +32,58 @@ $dashboard-width-limit: 480px !default;
 
 /* grid-area : lineStart / columnStart / lineEnd / columnEnd */
 
-.bloc-company {
-	grid-area : 1/9 / 4/13; 
+.dashboard-label {
+	text-align: center;
+	letter-spacing: 0.5rem;
+	border-bottom: solid black 1px;
+	margin-bottom: 1rem;
+	font-size: 2.5rem;
 }
-.bloc-family{
-	grid-area : 6/1 / 9/5; 
+.dashboard-label-parc {
+	grid-area : 1/1 / 2/11; 
 }
-.bloc-type{
-	grid-area : 11/1 / 14/5; 
+.dashboard-label-stock{
+	grid-area : 1/13 / 2/23; 
 }
 
-.bloc-unit{
-	grid-area : 6/9 / 9/13; 
+.bloc-equipment-unit{
+	grid-area : 2/7 / 5/11; 
 }
-.bloc-section{
-	grid-area : 11/9 / 14/13; 
+.bloc-equipment-section{
+	grid-area : 7/7 / 10/11; 
 }
+.bloc-equipment-family{
+	grid-area : 2/1 / 5/5; 
+}
+.bloc-equipment-type{
+	grid-area : 7/1 / 10/5; 
+}
+
 .bloc-equipment{
-	grid-area : 16/3 / 19/7; 
+	grid-area : 12/4 / 15/8; 
 }
-.bloc-nomenclature{
-	grid-area : 17/9 / 20/13; 
+
+
+
+.bloc-article-unit{
+	grid-area : 2/19 / 5/23; 
+}
+.bloc-article-section{
+	grid-area : 7/19 / 10/23; 
+}
+.bloc-article-category{
+	grid-area : 2/13 / 5/17; 
+}
+.bloc-article-subcategory{
+	grid-area : 7/13 / 10/17; 
 }
 .bloc-article{
-	grid-area : 16/15 / 19/19; 
+	grid-area : 12/16 / 15/20; 
 }
-.bloc-category{
-	grid-area : 6/17 / 9/21; 
-}
-.bloc-subcategory{
-	grid-area : 11/17 / 14/21; 
+
+
+.bloc-nomenclature{
+	grid-area : 14/10 / 17/14; 
 }
 
 .dashboard-arrow {
@@ -68,35 +91,43 @@ $dashboard-width-limit: 480px !default;
 	justify-self: stretch;
 }
 
-.arrow-company-unit {
-	grid-area : 4/10 / 6/12; 
+.arrow-equipment-unit-section {
+	grid-area : 5/8 / 7/10; 
 }
-.arrow-family-type {
-	grid-area : 9/2 / 11/4; 
+
+.arrow-equipment-family-type {
+	grid-area : 5/2 / 7/4; 
 }
-.arrow-unit-section {
-	grid-area : 9/10 / 11/12; 
+
+.arrow-equipment-section-equipment {
+	grid-area : 10/7 / 12/9; 
 }
-.arrow-category-subcategory {
-	grid-area : 9/18 / 11/20; 
+
+.arrow-equipment-type-equipment {
+	grid-area : 10/3 / 12/5; 
 }
-.arrow-type-equipment {
-	grid-area : 14/3 / 16/5; 
+
+
+.arrow-article-unit-section {
+	grid-area : 5/20 / 7/22; 
 }
-.arrow-section-equipment {
-	grid-area : 13/6 / 16/9; 
+.arrow-article-section-article {
+	grid-area : 10/19 / 12/21; 
 }
-.arrow-section-article {
-	grid-area : 13/13 / 16/16; 
+.arrow-article-category-subcategory {
+	grid-area : 5/14 / 7/16; 
 }
-.arrow-subcategory-article {
-	grid-area : 14/17 / 16/19; 
+.arrow-article-subcategory-article {
+	grid-area : 10/15 / 12/17; 
 }
+
+
+
 .arrow-nomenclature-equipment {
-	grid-area : 17/7 / 19/9; 
+	grid-area : 14/8 / 16/10; 
 }
 .arrow-nomenclature-article {
-	grid-area : 17/13 / 19/15; 
+	grid-area : 14/14 / 16/16; 
 }
 
 

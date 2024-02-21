@@ -129,6 +129,10 @@
 		"form_locked": "Form is lock, press the edit button to unlock it"
 	},
 	"dashboard": {
+		"label": {
+			"parc": "Parc",
+			"stock": "Stock"
+		},
 		"bloc": {
 			"company": "Company",
 			"family": "Family",

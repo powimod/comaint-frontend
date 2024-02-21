@@ -129,6 +129,10 @@
 		"form_locked": "Le formulaire est verrouillé, appuyez sur le bouton d'édition pour le déverrouiller"
 	},
 	"dashboard": {
+		"label": {
+			"parc": "Parc",
+			"stock": "Stock"
+		},
 		"bloc": {
 			"company": "Compagnie",
 			"family": "Famille",

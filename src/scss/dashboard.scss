@@ -3,7 +3,7 @@ $dashboard-width-limit: 480px !default;
 .dashboard {
 	display: grid;
 	grid-template-columns: repeat(22, 1fr);
-	grid-template-rows: repeat(22, 2.5rem);
+	grid-template-rows: repeat(16, 2.5rem);
 	margin:1rem;
 }
 
@@ -12,12 +12,12 @@ $dashboard-width-limit: 480px !default;
 
 .parc-dashboard {
 	/* hide unused columns on the right (article blocs not present)*/
-	grid-template-columns: repeat(12,1fr) repeat(8, 0);
+	grid-template-columns: repeat(13,1fr) repeat(9, 0);
 }
 
 .stock-dashboard {
 	/* hide unused columns on the left (stock blocs not present)*/
-	grid-template-columns: repeat(8,0) repeat(12, 1fr);
+	grid-template-columns: repeat(9,0) repeat(13, 1fr);
 
 }
 

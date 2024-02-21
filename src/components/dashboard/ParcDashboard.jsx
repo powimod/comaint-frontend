@@ -22,18 +22,19 @@ const MainDashboard = () => {
 
 	return (<>
 		<div className="dashboard parc-dashboard">
-			<DashboardBloc className="bloc-company"      label="dashboard.bloc.company"/>
-			<DashboardBloc className="bloc-family"       label="dashboard.bloc.family"/>
-			<DashboardBloc className="bloc-type"         label="dashboard.bloc.type"/>
-			<DashboardBloc className="bloc-unit"         label="dashboard.bloc.unit"/>
-			<DashboardBloc className="bloc-section"      label="dashboard.bloc.section"/>
-			<DashboardBloc className="bloc-equipment"    label="dashboard.bloc.equipment"/>
-			<DashboardBloc className="bloc-nomenclature" label="dashboard.bloc.nomenclature"/>
-			<DashboardArrow className="arrow-company-unit"           id="arrow-company-unit"           type="ns"/>
-			<DashboardArrow className="arrow-family-type"            id="arrow-family-type"            type="ns"/>
-			<DashboardArrow className="arrow-unit-section"           id="arrow-unit-section"           type="ns"/>
-			<DashboardArrow className="arrow-type-equipment"         id="arrow-type-equipment"         type="nose"/>
-			<DashboardArrow className="arrow-section-equipment"      id="arrow-section-equipment"      type="neso"/>
+		{/* <DashboardBloc className="bloc-equipment-company"      label="dashboard.bloc.company"/> */}
+			<DashboardBloc className="bloc-equipment-family"       label="dashboard.bloc.family"/>
+			<DashboardBloc className="bloc-equipment-type"         label="dashboard.bloc.type"/>
+			<DashboardBloc className="bloc-equipment-unit"         label="dashboard.bloc.unit"/>
+			<DashboardBloc className="bloc-equipment-section"      label="dashboard.bloc.section"/>
+			<DashboardBloc className="bloc-equipment"              label="dashboard.bloc.equipment"/>
+			<DashboardBloc className="bloc-nomenclature"           label="dashboard.bloc.nomenclature"/>
+		{/* <DashboardArrow className="arrow-equipment-company-unit"           id="arrow-company-unit"           type="ns"/> */}
+			<DashboardArrow className="arrow-equipment-family-type"            id="arrow-family-type"            type="ns"/>
+			<DashboardArrow className="arrow-equipment-unit-section"           id="arrow-unit-section"           type="ns"/>
+			<DashboardArrow className="arrow-equipment-type-equipment"         id="arrow-type-equipment"         type="nose"/>
+			<DashboardArrow className="arrow-equipment-section-equipment"      id="arrow-section-equipment"      type="neso"/>
+
 			<DashboardArrow className="arrow-nomenclature-equipment" id="arrow-nomenclature-equipment" type="nose"/>
 		</div>
 	</>)

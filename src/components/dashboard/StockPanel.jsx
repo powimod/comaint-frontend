@@ -1,7 +1,7 @@
 /* Comaint Single Page Application frontend (Single page application frontend of Comaint project)
  * Copyright (C) 2023-2024 Dominique Parisot
  *
- * components/PublicHomePageContent.jsx
+ * StockPanel.jsx
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the 
  * GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or
@@ -14,24 +14,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { useContext } from 'react';
-import { AccountContext } from '../AccountContext'
-import MainDashboard from './dashboard/MainDashboard' 
-import PanelSwitcher from './dashboard/PanelSwitcher'
-import ParcPanel from './dashboard/ParcPanel'
-import StockPanel from './dashboard/StockPanel'
+import StockDashboard from './StockDashboard'
 
-const PrivateHomePageContent = () => {
-	const { account } = useContext(AccountContext);
-
-	return (<>
-		<div>User connected ID:{ (account) ? account.userId : '???'}</div>
-		 <PanelSwitcher>
-			<ParcPanel label="Parc"/>
-			<StockPanel label="Stock"/>
-		</PanelSwitcher>
-		<MainDashboard label="dashboard"/>
-	</>)
+const StockPanel = () => {
+	return (
+		<StockDashboard/>
+	)
 }
 
-export default PrivateHomePageContent
+export default StockPanel;

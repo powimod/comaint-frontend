@@ -128,6 +128,21 @@
 		"not_administrator" : "Vous n'êtes pas administrateur !",
 		"form_locked": "Le formulaire est verrouillé, appuyez sur le bouton d'édition pour le déverrouiller"
 	},
+	"dashboard": {
+		"bloc": {
+			"company": "Compagnie",
+			"family": "Famille",
+			"type": "Type",
+			"unit": "Unité",
+			"section": "Section",
+			"category": "Catégorie",
+			"subcategory": "Sous-catégorie",
+			"equipment": "Équipement",
+			"nomenclature": "Nomenclature",
+			"article": "Article"
+
+		}
+	},
 	"form" : {
 		"offer" : {
 			"delete_question": "Voulez-vous supprimer l'offre n°{{offerId}} ?",

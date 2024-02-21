@@ -1,0 +1,38 @@
+.panel-switcher {
+	margin:0.2rem;
+}
+.panel-switcher > div:first-child{
+	display: flex;
+}
+.panel-label {
+	padding: 0.5rem;
+	cursor: pointer;
+	border: solid black 1px;
+	font-size: 2rem;
+	padding: 0.5rem 2rem;
+}
+.panel-label:hover{
+	background-color: black;
+	color: white;
+}
+.panel-filler {
+	border-bottom: solid black 1px;
+	flex-grow: 1;
+}
+.panel-label-selected {
+	font-weight: bolder;
+	border-bottom: none;
+}
+
+.panel-container {
+	display:grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr;
+}
+.panel {
+	/* force panel to cover all the container surface */
+	grid-area: 1/1 / -1/-1;
+	padding: 1rem;
+	border: solid black 1px;
+	border-top: none;
+}

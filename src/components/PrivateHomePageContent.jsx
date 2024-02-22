@@ -25,7 +25,6 @@ const PrivateHomePageContent = () => {
 	const { account } = useContext(AccountContext);
 
 	return (<>
-		<div>User connected ID:{ (account) ? account.userId : '???'}</div>
 		 <PanelSwitcher>
 			<ParcPanel label="Parc"/>
 			<StockPanel label="Stock"/>

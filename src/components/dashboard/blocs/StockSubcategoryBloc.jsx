@@ -1,7 +1,7 @@
 /* Comaint Single Page Application frontend (Single page application frontend of Comaint project)
  * Copyright (C) 2023-2024 Dominique Parisot
  *
- * DashboardBloc.jsx
+ * StockSubcategoryBloc.jsx
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the 
  * GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or
@@ -18,27 +18,31 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next';
 
-import PaletteIcon from '../PaletteIcon'
+import DashboardBloc from '../DashboardBloc'
+import { selectStock } from '../../../slices/dashboardSlice.js'
 
-
-const DashboardBloc = ({label, value = '', icon = '', onClick = null, className}) => {
+const StockSubcategoryBloc = () => {
 	const { t } = useTranslation();
+	const parcState = useSelector(selectStock)
+	const [ blocValue, setBlocValue ] = useState(null)
 
 	const onBlocClick = () => {
-		if (onClick) onClick()
+		console.log("Stock subcategory bloc clicked")
 	}
 
-	if (label === undefined) label = "dashboard.bloc.unknown"
-	className=`dashboard-bloc ${className}`
+	useEffect( () => {
+		const data = parcState.subcategory
+		let value = ''
+		if (data) value = data
+		setBlocValue(value)
+	}, [ parcState ])
 
-	return (<>
-		<span className={className} onClick={onBlocClick}>
-			<PaletteIcon element={icon} size="xxs"/>
-			<span>{t(label)}</span>
-			<div >{value}</div>
-			<button>X</button>
-		</span>
-	</>)
+	return <DashboardBloc 
+		className="bloc-article-subcategory" 
+		label="dashboard.bloc.subcategory"
+		icon="subcategory" 
+		value={blocValue} 
+		onClick={onBlocClick} /> 
 }
 
-export default DashboardBloc
+export default StockSubcategoryBloc

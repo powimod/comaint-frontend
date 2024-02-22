@@ -16,7 +16,9 @@ const initialState = {
 		subcategory: null,
 		article: null,
 	},
-	nomenclature: null
+	common: {
+		nomenclature: null
+	}
 };
 
 export const dashboardSlice = createSlice({
@@ -24,7 +26,6 @@ export const dashboardSlice = createSlice({
 	initialState,
 	reducers: {
 		updateDashboard: (state, action) => {
-			console.log(action)
 			state.parc.unit         = action.payload.parc.unit
 			state.parc.section      = action.payload.parc.section
 			state.parc.family       = action.payload.parc.family
@@ -35,7 +36,7 @@ export const dashboardSlice = createSlice({
 			state.stock.category    = action.payload.stock.category
 			state.stock.subcategory = action.payload.stock.subcategory
 			state.stock.article     = action.payload.stock.article
-			state.nomenclature      = action.payload.nomenclature
+			state.common.nomenclature = action.payload.nomenclature
 		}
 	}
 });
@@ -44,6 +45,6 @@ export const { updateDashboard } = dashboardSlice.actions;
 
 export const selectParc = state => state.dashboard.parc
 export const selectStock = state => state.dashboard.stock
-export const selectNomenclature = state => state.nomenclature
+export const selectCommon = state => state.dashboard.common
 
 export default dashboardSlice.reducer;

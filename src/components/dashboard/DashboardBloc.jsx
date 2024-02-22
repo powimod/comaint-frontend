@@ -16,17 +16,23 @@
 
 import { useTranslation } from 'react-i18next';
 
-const DashboardBloc = ({label, className}) => {
+import PaletteIcon from '../PaletteIcon'
+
+const DashboardBloc = ({label, value = '', icon = '', onClick = null, className}) => {
 	const { t } = useTranslation();
 
 	const onBlocClick = () => {
-		console.log("Bloc clicked")
+		if (onClick) onClick()
 	}
-
 	if (label === undefined) label = "dashboard.bloc.unknown"
 	className=`dashboard-bloc ${className}`
 	return (<>
-		<button className={className} onClick={onBlocClick}>{t(label)}</button>	
+		<span className={className} onClick={onBlocClick}>
+			<PaletteIcon element={icon} size="xxs"/>
+			<span>{t(label)}</span>
+			<div>{value}</div>
+			<button>X</button>
+		</span>
 	</>)
 }
 export default DashboardBloc

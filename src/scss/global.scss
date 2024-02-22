@@ -42,6 +42,7 @@ html {
 	--global-color-8: #0d0e0f; /* very dark gray */
 	--global-color-9: #32b564; /* light green */
 	--global-color-10: #07652b; /* dark green */
+	--global-color-11: #dedede; /* very light gray */
 }
 
 body {
@@ -69,6 +70,7 @@ body {
 	--editor-toolbar-color: var(--global-color-2);
 
 	--dashboard-bloc-background-color: var(--global-color-9);
+	--dashboard-value-background-color: var(--global-color-11);
 }
 
 body.dark-theme {
@@ -85,6 +87,7 @@ body.dark-theme {
 	--bottom-color: var(--global-color-8);
 
 	--dashboard-bloc-background-color: var(--global-color-10);
+	--dashboard-value-background-color: var(--global-color-5);
 }
 
 body.line-spacing-theme {

@@ -78,6 +78,7 @@ const Header = (props) => {
 		setIsLogoutDialogOpen(false)
 	}
 
+	const accountLabel = account ? `${account.firstname} ${account.lastname}` : ''
 	return (<>
 		<header>
 			<Link className="logo" to="/"> <img src="/logo.svg"/> </Link>
@@ -85,7 +86,7 @@ const Header = (props) => {
 			<span className="subtitle">{t('header_subtitle')}</span>
 			<FontAwesomeIcon className="accessibility-button palette-icon-size-xs" icon={faWheelchair} onClick={onAccessibilityButtonClick} size="1x" inverse/>
 			<PaletteIcon className="account-button" element="user" button="true" size="m" onClick={onAccountButtonClick} />
-			{account && <span className="userid">{account.email}</span>}
+			{account && <span className="userid">{accountLabel}</span>}
 		</header>
 		<PopupMenu isVisible={isAccountMenuVisible} setVisible={setAccountMenuVisible}>
 			<div onClick={onLogoutClick}>{t('logout-button')}</div>

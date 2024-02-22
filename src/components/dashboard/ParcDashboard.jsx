@@ -22,14 +22,13 @@ const MainDashboard = () => {
 
 	return (<>
 		<div className="dashboard parc-dashboard">
-		{/* <DashboardBloc className="bloc-equipment-company"      label="dashboard.bloc.company"/> */}
-			<DashboardBloc className="bloc-equipment-family"       label="dashboard.bloc.family"/>
-			<DashboardBloc className="bloc-equipment-type"         label="dashboard.bloc.type"/>
-			<DashboardBloc className="bloc-equipment-unit"         label="dashboard.bloc.unit"/>
-			<DashboardBloc className="bloc-equipment-section"      label="dashboard.bloc.section"/>
-			<DashboardBloc className="bloc-equipment"              label="dashboard.bloc.equipment"/>
-			<DashboardBloc className="bloc-nomenclature"           label="dashboard.bloc.nomenclature"/>
-		{/* <DashboardArrow className="arrow-equipment-company-unit"           id="arrow-company-unit"           type="ns"/> */}
+			<DashboardBloc className="bloc-equipment-family"  icon="family"       label="dashboard.bloc.family"/>
+			<DashboardBloc className="bloc-equipment-type"    icon="type"         label="dashboard.bloc.type"/>
+			<DashboardBloc className="bloc-equipment-unit"    icon="unit"         label="dashboard.bloc.unit"/>
+			<DashboardBloc className="bloc-equipment-section" icon="section"      label="dashboard.bloc.section"/>
+			<DashboardBloc className="bloc-equipment"         icon="equipment"    label="dashboard.bloc.equipment"/>
+			<DashboardBloc className="bloc-nomenclature"      icon="nomenclature" label="dashboard.bloc.nomenclature"/>
+
 			<DashboardArrow className="arrow-equipment-family-type"            id="arrow-family-type"            type="ns"/>
 			<DashboardArrow className="arrow-equipment-unit-section"           id="arrow-unit-section"           type="ns"/>
 			<DashboardArrow className="arrow-equipment-type-equipment"         id="arrow-type-equipment"         type="nose"/>

@@ -25,18 +25,18 @@ const MainDashboard = () => {
 	return (<>
 		<div className="dashboard main-dashboard">
 			<span className="dashboard-label dashboard-label-parc">{t('dashboard.label.parc')}</span>
-			<DashboardBloc className="bloc-equipment-unit"      label="dashboard.bloc.unit"/>
-			<DashboardBloc className="bloc-equipment-section"   label="dashboard.bloc.section"/>
-			<DashboardBloc className="bloc-equipment-family"    label="dashboard.bloc.family"/>
-			<DashboardBloc className="bloc-equipment-type"      label="dashboard.bloc.type"/>
-			<DashboardBloc className="bloc-equipment"           label="dashboard.bloc.equipment"/>
+			<DashboardBloc className="bloc-equipment-unit"    icon="unit"      label="dashboard.bloc.unit"/>
+			<DashboardBloc className="bloc-equipment-section" icon="section"   label="dashboard.bloc.section"/>
+			<DashboardBloc className="bloc-equipment-family"  icon="family"    label="dashboard.bloc.family"/>
+			<DashboardBloc className="bloc-equipment-type"    icon="type"      label="dashboard.bloc.type"/>
+			<DashboardBloc className="bloc-equipment"         icon="equipment" label="dashboard.bloc.equipment"/>
 
 			<span className="dashboard-label dashboard-label-stock">{t('dashboard.label.stock')}</span>
-			<DashboardBloc className="bloc-article-unit"        label="dashboard.bloc.unit"/>
-			<DashboardBloc className="bloc-article-section"     label="dashboard.bloc.section"/>
-			<DashboardBloc className="bloc-article-category"    label="dashboard.bloc.category"/>
-			<DashboardBloc className="bloc-article-subcategory" label="dashboard.bloc.subcategory"/>
-			<DashboardBloc className="bloc-article"             label="dashboard.bloc.article"/>
+			<DashboardBloc className="bloc-article-unit"        icon="unit"        label="dashboard.bloc.unit"/>
+			<DashboardBloc className="bloc-article-section"     icon="section"     label="dashboard.bloc.section"/>
+			<DashboardBloc className="bloc-article-category"    icon="category"    label="dashboard.bloc.category"/>
+			<DashboardBloc className="bloc-article-subcategory" icon="subcategory" label="dashboard.bloc.subcategory"/>
+			<DashboardBloc className="bloc-article"             icon="article"     label="dashboard.bloc.article"/>
 
 			<DashboardBloc className="bloc-nomenclature" label="dashboard.bloc.nomenclature"/>
 

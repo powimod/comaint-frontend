@@ -45,8 +45,12 @@
  * @property {string} erase - display the erase action icon
  */
 const iconList = [ 
-	'user', 'company', 'unit', 'section', 'equipment', 'article', 'intervention', 'workorder', 'supply' , 'order', 'supplier',
-	'category', 'subcategory', 'create', 'delete', 'add', 'remove', 'validate', 'cancel', 'display', 'edit', 'erase'
+	'user', 'company', 'unit', 'section', 'equipment', 
+	'supplier', 'category', 'subcategory', 'create', 'delete', 
+	'article', 'intervention', 'supply' , 'workorder', 'order', 
+	'add', 'remove', 'validate', 'cancel', 'display', 
+	'edit', 'erase',
+	'family', 'type' 
 ];
 
 /**
@@ -78,9 +82,9 @@ const PaletteIcon = ({element, className = null, size = 'm', border = null, butt
 	className = classNameTab.join(' ')
 	const imgClassName = 'palette-icon-' + ( iconList.includes(element) ? element : 'unknown')
 	return (
-		<div className={className}>
+		<span className={className} onClick={onClick}>
 			<img className={imgClassName} src="/palette-icons.svg" />
-		</div>
+		</span>
 	)
 }
 

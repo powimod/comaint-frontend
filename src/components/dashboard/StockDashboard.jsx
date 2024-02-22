@@ -23,12 +23,12 @@ const StockDashboard = () => {
 	return (<>
 		<div className="dashboard stock-dashboard">
 		{/* <DashboardBloc className="bloc-article-company"      label="dashboard.bloc.company"/> */}
-			<DashboardBloc className="bloc-article-unit"         label="dashboard.bloc.unit"/>
-			<DashboardBloc className="bloc-article-section"      label="dashboard.bloc.section"/>
-			<DashboardBloc className="bloc-article-category"     label="dashboard.bloc.category"/>
-			<DashboardBloc className="bloc-article-subcategory"  label="dashboard.bloc.subcategory"/>
-			<DashboardBloc className="bloc-article"      label="dashboard.bloc.article"/>
-			<DashboardBloc className="bloc-nomenclature" label="dashboard.bloc.nomenclature"/>
+			<DashboardBloc className="bloc-article-unit"        icon="unit"         label="dashboard.bloc.unit"/>
+			<DashboardBloc className="bloc-article-section"     icon="section"      label="dashboard.bloc.section"/>
+			<DashboardBloc className="bloc-article-category"    icon="category"     label="dashboard.bloc.category"/>
+			<DashboardBloc className="bloc-article-subcategory" icon="subcategory"  label="dashboard.bloc.subcategory"/>
+			<DashboardBloc className="bloc-article"             icon="article"      label="dashboard.bloc.article"/>
+			<DashboardBloc className="bloc-nomenclature"        icon="nomenclature" label="dashboard.bloc.nomenclature"/>
 		{/* <DashboardArrow className="arrow-article-company-unit"           id="arrow-company-unit"           type="ns"/> */}
 			<DashboardArrow className="arrow-article-unit-section"           id="arrow-unit-section"           type="ns"/>
 			<DashboardArrow className="arrow-article-category-subcategory"   id="arrow-category-subcategory"   type="ns"/>

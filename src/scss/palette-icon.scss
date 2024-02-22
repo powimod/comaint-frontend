@@ -15,10 +15,9 @@
 //
 
 .palette-icon {
+	display: inline-block;
 	overflow: hidden;
 	padding: 0px;
-	border: solid black 1px;
-	padding: 0.1rem;
 }
 
 .palette-icon > img {
@@ -155,4 +154,10 @@
 	transform: translate(-20%, -80%);
 }
 
-
+/*========================== missing icons */
+.palette-icon-family{
+	transform: translate(-20%, -20%);
+}
+.palette-icon-type{
+	transform: translate(-40%, -20%);
+}

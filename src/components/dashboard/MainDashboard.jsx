@@ -14,11 +14,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useSelector, useDispatch} from 'react-redux'
 import { useTranslation } from 'react-i18next'
-
-import DashboardBloc from './DashboardBloc'
 
 import ParcUnitBloc from './blocs/ParcUnitBloc'
 import ParcSectionBloc from './blocs/ParcSectionBloc'
@@ -31,7 +29,6 @@ import StockSectionBloc from './blocs/StockSectionBloc'
 import StockCategoryBloc from './blocs/StockCategoryBloc'
 import StockSubcategoryBloc from './blocs/StockSubcategoryBloc'
 import StockArticleBloc from './blocs/StockArticleBloc'
-
 import NomenclatureBloc from './blocs/NomenclatureBloc'
 
 import DashboardArrow from './DashboardArrow'

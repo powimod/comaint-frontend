@@ -15,15 +15,17 @@
 //
 
 .palette-icon {
-	width: 84px;
-	height: 84px;
-	object-fit: none;
-	padding: 10px;
+	overflow: hidden;
+	padding: 0px;
+	border: solid black 1px;
+	padding: 0.1rem;
 }
 
-.palette-icon-unknown {
-	object-position: 64px 0px;
+.palette-icon > img {
+	width: 500%;
+	height: 500%;
 }
+
 .palette-icon-border {
 	border: solid black 1px;
 	border-radius: 5px;
@@ -37,74 +39,120 @@
 	border: solid black 2px;
 }
 
-/* first line */
+
+/*========================== icon size */
+
+.palette-icon-size-xxs {
+	width: 3rem; 
+	height: 3rem;
+}
+.palette-icon-size-xs {
+	width: 4rem; 
+	height: 4rem;
+}
+.palette-icon-size-s {
+	width: 5rem;
+	height: 5rem;
+}
+.palette-icon-size-m {
+	width: 6rem;
+	height: 6rem;
+}
+.palette-icon-size-l {
+	width: 7rem;
+	height: 7rem;
+}
+.palette-icon-size-xl {
+	width: 8rem;
+	height: 8rem;
+}
+.palette-icon-size-xxl {
+	width: 9rem;
+	height: 9rem;
+}
+.palette-icon-unknown {
+	transform: translate(-60%, -60%);
+}
+
+/*========================== line n°1 */
 .palette-icon-user {
-	object-position: 0px 0px;
+	transform: translate(0, 0);
 }
 .palette-icon-company {
-	object-position: -64px 0px;
+	transform: translate(-20%, 0);
 }
 .palette-icon-unit{
-	object-position: -128px 0px;
+	transform: translate(-40%, 0);
 }
 .palette-icon-section{
-	object-position: -192px 0px;
+	transform: translate(-60%, 0);
 }
 .palette-icon-equipment{
-	object-position: -256px 0px;
+	transform: translate(-80%, 0);
 }
-.palette-icon-article{
-	object-position: -320px 0px;
-}
-.palette-icon-intervention{
-	object-position: -384px 0px;
-}
-.palette-icon-workorder{
-	object-position: -448px 0px;
-}
-.palette-icon-supply{
-	object-position: -512px 0px;
-}
-.palette-icon-order{
-	object-position: -576px 0px;
-}
+
+/*========================== line n°2 */
 .palette-icon-supplier{
-	object-position: -640px 0px;
+	transform: translate(0, -20%);
 }
-
-
-
-/* second line */
 .palette-icon-category{
-	object-position: 0px -64px;
+	transform: translate(-20%, -20%);
 }
 .palette-icon-subcategory {
-	object-position: -64px -64px;
+	transform: translate(-40%, -20%);
 }
 .palette-icon-create{
-	object-position: -128px -64px;
+	transform: translate(-60%, -20%);
 }
 .palette-icon-delete{
-	object-position: -192px -64px;
+	transform: translate(-80%, -20%);
 }
+
+
+/*========================== line n°3 */
+.palette-icon-article{
+	transform: translate(0, -40%);
+}
+.palette-icon-intervention{
+	transform: translate(-20%, -40%);
+}
+.palette-icon-supply{
+	transform: translate(-40%, -40%);
+}
+.palette-icon-workorder{
+	transform: translate(-60%, -40%);
+}
+.palette-icon-order{
+	transform: translate(-80%, -40%);
+}
+
+
+/*========================== line n°4 */
+
 .palette-icon-add{
-	object-position: -256px -64px;
+	transform: translate(0, -60%);
 }
 .palette-icon-remove{
-	object-position: -320px -64px;
+	transform: translate(-20%, -60%);
 }
 .palette-icon-validate{
-	object-position: -384px -64px;
+	transform: translate(-40%, -60%);
 }
 .palette-icon-cancel{
-	object-position: -448px -64px;
+	transform: translate(-60%, -60%);
 }
 .palette-icon-display{
-	object-position: -512px -64px;
+	transform: translate(-80%, -60%);
 }
+
+
+/*========================== line n°5 */
+
 .palette-icon-edit{
-	object-position: -576px -64px;
+	transform: translate(0, -80%);
 }
 .palette-icon-erase{
-	object-position: -640px -64px;
+	transform: translate(-20%, -80%);
 }
+
+

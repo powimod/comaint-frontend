@@ -66,17 +66,22 @@ const iconList = [
  *   <PaletteIcon className="my-button-style" element="user" button="true" onClick={()=>console.log('Button clicked')} />
  *
  */
-const PaletteIcon = ({element, className = null, border = null, button = null, onClick = null}) => {
-	const classNameTab = [ 'palette-icon' ];
-	classNameTab.push( 'palette-icon-' + ( iconList.includes(element) ? element : 'unknown' ) );
+
+const PaletteIcon = ({element, className = null, size = 'm', border = null, button = null, onClick = null}) => {
+	const classNameTab = [ 'palette-icon' , `palette-icon-size-${size}`]
 	if (className != null)
-		classNameTab.push( className );
+		classNameTab.push( className )
 	if (border && border.trim().toLowerCase() === 'true')
-		classNameTab.push( 'palette-icon-border' );
+		classNameTab.push( 'palette-icon-border' )
 	if (button && button.trim().toLowerCase() === 'true')
-		classNameTab.push( 'palette-icon-button' );
-	className = classNameTab.join(' ');
-	return ( <img className={className} src="/icons.png" onClick={onClick}/> )
+		classNameTab.push( 'palette-icon-button' )
+	className = classNameTab.join(' ')
+	const imgClassName = 'palette-icon-' + ( iconList.includes(element) ? element : 'unknown')
+	return (
+		<div className={className}>
+			<img className={imgClassName} src="/palette-icons.svg" />
+		</div>
+	)
 }
 
 export default PaletteIcon;

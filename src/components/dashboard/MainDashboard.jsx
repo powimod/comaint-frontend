@@ -14,15 +14,44 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch} from 'react-redux'
+import { useTranslation } from 'react-i18next'
 
 import DashboardBloc from './DashboardBloc'
 import DashboardArrow from './DashboardArrow'
-import { useTranslation } from 'react-i18next';
+import { selectParc, updateDashboard} from '../../slices/dashboardSlice.js'
 
 const MainDashboard = () => {
 	const { t } = useTranslation();
 
+	const dispatch = useDispatch();
+	const parcState = useSelector(selectParc)
+
+	useEffect( () => {
+		var newDashboardState = {
+			parc : {
+				unit: 123,
+				section: 456,
+				family: null,
+				type: null,
+				equipment: null
+
+			},
+			stock: {
+				unit: null,
+				section: null,
+				category: null,
+				subcategory: null,
+				article: null,
+			},
+			nomenclature: null
+		};
+		dispatch(updateDashboard(newDashboardState))
+	}, [])
+
 	return (<>
+		<div>dOm unit : {parcState.unit} </div> 
 		<div className="dashboard main-dashboard">
 			<span className="dashboard-label dashboard-label-parc">{t('dashboard.label.parc')}</span>
 			<DashboardBloc className="bloc-equipment-unit"    icon="unit"      label="dashboard.bloc.unit"/>

@@ -1,7 +1,7 @@
 /* Comaint Single Page Application frontend (Single page application frontend of Comaint project)
  * Copyright (C) 2023-2024 Dominique Parisot
  *
- * slices/store.jsx
+ * slices/dashboardMiddleware.jsx
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the 
  * GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or
@@ -15,16 +15,13 @@
  */
 
 
-import { configureStore } from '@reduxjs/toolkit'
-
-import dashboardReducer from "./dashboardSlice"
-import dashboardMiddleware from './dashboardMiddleware'
-
-const store = configureStore({
-	reducer: {
-		dashboard: dashboardReducer
-	},
-	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(dashboardMiddleware)
-})
-
-export default store
+const dashboardMiddleware = storeAPI => next => action => {
+	if (action.type === 'dashboard/updateDashboard') {
+		setTimeout(() => {
+			next(action)
+		}, 1000)
+		return
+	}
+	return next(action)
+}
+export default dashboardMiddleware 

@@ -14,14 +14,25 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import selectorApi from '../api/selector-api.js'
 
 const dashboardMiddleware = storeAPI => next => action => {
 	if (action.type === 'dashboard/updateDashboard') {
-		setTimeout(() => {
+		console.log('dOm Calling selector route...')
+		selectorApi.query({})
+		.then( (result) => {
+			console.log('dOm selector route response', result)
+			if (! result.ok)
+				throw result.error
 			next(action)
-		}, 1000)
-		return
+		})
+		.catch( (error) => {
+			console.error('Selector.query route error', error.message ? error.message : error)
+			next(action)
+		})
+		return // return without calling the 'next' function
 	}
 	return next(action)
 }
+
 export default dashboardMiddleware 

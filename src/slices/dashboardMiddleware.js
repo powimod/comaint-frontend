@@ -18,8 +18,9 @@ import selectorApi from '../api/selector-api.js'
 
 const dashboardMiddleware = storeAPI => next => action => {
 	if (action.type === 'dashboard/updateDashboardData') {
+		// TODO issue-34 get current selectors from store
 		const selectors = {
-
+			'parc-type': 5
 		}
 		selectorApi.query(selectors)
 		.then( (result) => {

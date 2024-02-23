@@ -31,9 +31,22 @@ const DashboardBloc = ({label, data = null, icon = '', onClick = null, className
 	if (label === undefined) label = "dashboard.bloc.unknown"
 	className=`dashboard-bloc ${className}`
 
-	const value = (data) ? (data.type === 'counter' ? data.count : data.id) : '?'
-
-	const valueClass = 'dashboard-bloc-counter' 
+	let value = '?'
+	let valueClass = '' 
+	if (data) {
+		switch (data.type) {
+			case 'counter':
+				value = data.count
+				valueClass = 'dashboard-bloc-counter' 
+				break;
+			case 'selector':
+			case 'element':
+				value = data.label
+				break;
+			default:
+				console.error(`Invalid data type [${data.type}]`);
+		}
+	}
 
 	return (<span className={className} onClick={onBlocClick}>
 			<PaletteIcon element={icon} size="xxs"/>

@@ -23,7 +23,6 @@ const initialState = {
 		family: null,
 		type: null,
 		equipment: null
-
 	},
 	stock: {
 		unit: null,

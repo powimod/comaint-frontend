@@ -18,10 +18,41 @@ import selectorApi from '../api/selector-api.js'
 
 const dashboardMiddleware = storeAPI => next => action => {
 	if (action.type === 'dashboard/updateDashboardData') {
-		// TODO issue-34 get current selectors from store
-		const selectors = {
-			'parc-type': 5
-		}
+		const state = storeAPI.getState()
+		const dashboardState = state.dashboard
+
+		const selectors = {}
+
+		if (dashboardState.parc.unit && dashboardState.parc.unit.id)
+			selectors['parc-unit'] = dashboardState.parc.unit.id
+
+		if (dashboardState.parc.section && dashboardState.parc.section.id)
+			selectors['parc-section'] = dashboardState.parc.section.id
+
+		if (dashboardState.parc.family && dashboardState.parc.family.id)
+			selectors['parc-family'] = dashboardState.parc.family.id
+
+		if (dashboardState.parc.type && dashboardState.parc.type.id)
+			selectors['parc-type'] = dashboardState.parc.type.id
+
+		if (dashboardState.parc.equipment && dashboardState.parc.equipment.id)
+			selectors['parc-equipment'] = dashboardState.parc.equipment.id
+
+		if (dashboardState.stock.unit && dashboardState.stock.unit.id)
+			selectors['stock-unit'] = dashboardState.stock.unit.id
+
+		if (dashboardState.stock.section && dashboardState.stock.section.id)
+			selectors['stock-section'] = dashboardState.stock.section.id
+
+		if (dashboardState.stock.catetory && dashboardState.stock.category.id)
+			selectors['stock-catetory'] = dashboardState.stock.category.id
+
+		if (dashboardState.stock.subcatetory && dashboardState.stock.subcategory.id)
+			selectors['stock-subcatetory'] = dashboardState.stock.subcategory.id
+
+		if (dashboardState.stock.article && dashboardState.stock.article.id)
+			selectors['stock-article'] = dashboardState.stock.article.id
+
 		selectorApi.query(selectors)
 		.then( (result) => {
 			if (! result.ok)
@@ -29,6 +60,13 @@ const dashboardMiddleware = storeAPI => next => action => {
 
 			const newDashboardState = {
 				parc : {
+					unit: null,
+					section: null,
+					family: null,
+					type: null,
+					equipment: null,
+				},
+				stock: {
 					unit: null,
 					section: null,
 					family: null,

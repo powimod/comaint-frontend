@@ -1,7 +1,7 @@
 /* Comaint Single Page Application frontend (Single page application frontend of Comaint project)
  * Copyright (C) 2023-2024 Dominique Parisot
  *
- * DashboardBloc.jsx
+ * StockSectionBloc.jsx
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the 
  * GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or
@@ -18,42 +18,29 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next';
 
-import PaletteIcon from '../PaletteIcon'
+import DashboardBloc from '../DashboardBloc'
+import { selectStock } from '../../../slices/dashboardSlice.js'
 
-
-const DashboardBloc = ({label, data = null, icon = '', onClick = null, className}) => {
+const StockSectionBloc = () => {
 	const { t } = useTranslation();
+	const parcState = useSelector(selectStock)
+	const [ blocData, setBlocData ] = useState(null)
 
 	const onBlocClick = () => {
-		if (onClick) onClick()
+		console.log("Stock section bloc clicked")
 	}
 
-	if (label === undefined) label = "dashboard.bloc.unknown"
-	className=`dashboard-bloc ${className}`
+	useEffect( () => {
+		const data = parcState.section
+		setBlocData(data)
+	}, [ parcState ])
 
-	let value = '?'
-	let valueClass = '' 
-	if (data) {
-		switch (data.type) {
-			case 'counter':
-				value = data.count
-				valueClass = 'dashboard-bloc-counter' 
-				break;
-			case 'selector':
-			case 'element':
-				value = data.label
-				break;
-			default:
-				console.error(`Invalid data type [${data.type}]`);
-		}
-	}
-
-	return (<span className={className} onClick={onBlocClick}>
-			<PaletteIcon element={icon} size="xxs"/>
-			<span>{t(label)}</span>
-			<div className={valueClass}>{value}</div>
-			<button>☰</button>
-		</span>)
+	return <DashboardBloc 
+		className="bloc-article-section" 
+		label="dashboard.bloc.section"
+		icon="section" 
+		data={blocData} 
+		onClick={onBlocClick} /> 
 }
 
-export default DashboardBloc
+export default StockSectionBloc

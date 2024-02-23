@@ -17,6 +17,8 @@
 import React, { Suspense } from "react"
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider, useLoaderData, useParams } from "react-router-dom";
+import { Provider } from 'react-redux'
+import store from './slices/store'
 
 import createRouter from './router'
 import AccountContext from './AccountContext'
@@ -25,17 +27,18 @@ import DialogProvider from './components/dialog/DialogContext';
 import './i18n'
 import './scss/main.scss'
 
-
 function main() {
 	ReactDOM.createRoot(document.getElementById('root')).render(
 		<React.StrictMode>
-			<Suspense fallback={<div>Loading...</div>}>
-				<AccountContext>
-				<DialogProvider>
-					<RouterProvider router={createRouter()} />
-				</DialogProvider>
-				</AccountContext>
-			</Suspense>
+			<Provider store={store}>
+				<Suspense fallback={<div>Loading...</div>}>
+					<AccountContext>
+					<DialogProvider>
+						<RouterProvider router={createRouter()} />
+					</DialogProvider>
+					</AccountContext>
+				</Suspense>
+			</Provider>
 		</React.StrictMode>
 	)
 }

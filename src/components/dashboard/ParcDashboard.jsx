@@ -15,19 +15,26 @@
  */
 
 
-import DashboardBloc from './DashboardBloc'
+import ParcUnitBloc from './blocs/ParcUnitBloc'
+import ParcSectionBloc from './blocs/ParcSectionBloc'
+import ParcEquipmentBloc from './blocs/ParcEquipmentBloc'
+import ParcFamilyBloc from './blocs/ParcFamilyBloc'
+import ParcTypeBloc from './blocs/ParcTypeBloc'
+import NomenclatureBloc from './blocs/NomenclatureBloc'
+
 import DashboardArrow from './DashboardArrow'
 
 const MainDashboard = () => {
 
 	return (<>
 		<div className="dashboard parc-dashboard">
-			<DashboardBloc className="bloc-equipment-family"  icon="family"       label="dashboard.bloc.family"/>
-			<DashboardBloc className="bloc-equipment-type"    icon="type"         label="dashboard.bloc.type"/>
-			<DashboardBloc className="bloc-equipment-unit"    icon="unit"         label="dashboard.bloc.unit"/>
-			<DashboardBloc className="bloc-equipment-section" icon="section"      label="dashboard.bloc.section"/>
-			<DashboardBloc className="bloc-equipment"         icon="equipment"    label="dashboard.bloc.equipment"/>
-			<DashboardBloc className="bloc-nomenclature"      icon="nomenclature" label="dashboard.bloc.nomenclature"/>
+			<ParcUnitBloc/>
+			<ParcSectionBloc/>
+			<ParcEquipmentBloc/>
+			<ParcFamilyBloc/>
+			<ParcTypeBloc/>
+
+			<NomenclatureBloc/>
 
 			<DashboardArrow className="arrow-equipment-family-type"            id="arrow-family-type"            type="ns"/>
 			<DashboardArrow className="arrow-equipment-unit-section"           id="arrow-unit-section"           type="ns"/>

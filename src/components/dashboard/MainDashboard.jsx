@@ -14,31 +14,53 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import { useEffect } from 'react'
+import { useSelector, useDispatch} from 'react-redux'
+import { useTranslation } from 'react-i18next'
 
-import DashboardBloc from './DashboardBloc'
+import ParcUnitBloc from './blocs/ParcUnitBloc'
+import ParcSectionBloc from './blocs/ParcSectionBloc'
+import ParcEquipmentBloc from './blocs/ParcEquipmentBloc'
+import ParcFamilyBloc from './blocs/ParcFamilyBloc'
+import ParcTypeBloc from './blocs/ParcTypeBloc'
+
+import StockUnitBloc from './blocs/StockUnitBloc'
+import StockSectionBloc from './blocs/StockSectionBloc'
+import StockCategoryBloc from './blocs/StockCategoryBloc'
+import StockSubcategoryBloc from './blocs/StockSubcategoryBloc'
+import StockArticleBloc from './blocs/StockArticleBloc'
+import NomenclatureBloc from './blocs/NomenclatureBloc'
+
 import DashboardArrow from './DashboardArrow'
-import { useTranslation } from 'react-i18next';
+import { selectParc, updateDashboardData} from '../../slices/dashboardSlice.js'
 
 const MainDashboard = () => {
 	const { t } = useTranslation();
 
+	const dispatch = useDispatch();
+
+	useEffect( () => {
+		dispatch(updateDashboardData())
+	}, [])
+
 	return (<>
 		<div className="dashboard main-dashboard">
 			<span className="dashboard-label dashboard-label-parc">{t('dashboard.label.parc')}</span>
-			<DashboardBloc className="bloc-equipment-unit"    icon="unit"      label="dashboard.bloc.unit"/>
-			<DashboardBloc className="bloc-equipment-section" icon="section"   label="dashboard.bloc.section"/>
-			<DashboardBloc className="bloc-equipment-family"  icon="family"    label="dashboard.bloc.family"/>
-			<DashboardBloc className="bloc-equipment-type"    icon="type"      label="dashboard.bloc.type"/>
-			<DashboardBloc className="bloc-equipment"         icon="equipment" label="dashboard.bloc.equipment"/>
+			<ParcUnitBloc/>
+			<ParcSectionBloc/>
+			<ParcEquipmentBloc/>
+			<ParcFamilyBloc/>
+			<ParcTypeBloc/>
 
 			<span className="dashboard-label dashboard-label-stock">{t('dashboard.label.stock')}</span>
-			<DashboardBloc className="bloc-article-unit"        icon="unit"        label="dashboard.bloc.unit"/>
-			<DashboardBloc className="bloc-article-section"     icon="section"     label="dashboard.bloc.section"/>
-			<DashboardBloc className="bloc-article-category"    icon="category"    label="dashboard.bloc.category"/>
-			<DashboardBloc className="bloc-article-subcategory" icon="subcategory" label="dashboard.bloc.subcategory"/>
-			<DashboardBloc className="bloc-article"             icon="article"     label="dashboard.bloc.article"/>
 
-			<DashboardBloc className="bloc-nomenclature" label="dashboard.bloc.nomenclature"/>
+			<StockUnitBloc/>
+			<StockSectionBloc/>
+			<StockArticleBloc/>
+			<StockCategoryBloc/>
+			<StockSubcategoryBloc/>
+
+			<NomenclatureBloc/>
 
 			<DashboardArrow className="arrow-equipment-unit-section"       id="arrow-unit-section"         type="ns"/>
 			<DashboardArrow className="arrow-equipment-section-equipment"  id="arrow-section-equipment"    type="neso"/>

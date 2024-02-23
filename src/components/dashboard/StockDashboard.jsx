@@ -14,22 +14,27 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import StockUnitBloc from './blocs/StockUnitBloc'
+import StockSectionBloc from './blocs/StockSectionBloc'
+import StockCategoryBloc from './blocs/StockCategoryBloc'
+import StockSubcategoryBloc from './blocs/StockSubcategoryBloc'
+import StockArticleBloc from './blocs/StockArticleBloc'
+import NomenclatureBloc from './blocs/NomenclatureBloc'
 
-import DashboardBloc from './DashboardBloc'
 import DashboardArrow from './DashboardArrow'
 
 const StockDashboard = () => {
 
 	return (<>
 		<div className="dashboard stock-dashboard">
-		{/* <DashboardBloc className="bloc-article-company"      label="dashboard.bloc.company"/> */}
-			<DashboardBloc className="bloc-article-unit"        icon="unit"         label="dashboard.bloc.unit"/>
-			<DashboardBloc className="bloc-article-section"     icon="section"      label="dashboard.bloc.section"/>
-			<DashboardBloc className="bloc-article-category"    icon="category"     label="dashboard.bloc.category"/>
-			<DashboardBloc className="bloc-article-subcategory" icon="subcategory"  label="dashboard.bloc.subcategory"/>
-			<DashboardBloc className="bloc-article"             icon="article"      label="dashboard.bloc.article"/>
-			<DashboardBloc className="bloc-nomenclature"        icon="nomenclature" label="dashboard.bloc.nomenclature"/>
-		{/* <DashboardArrow className="arrow-article-company-unit"           id="arrow-company-unit"           type="ns"/> */}
+			<StockUnitBloc/>
+			<StockSectionBloc/>
+			<StockArticleBloc/>
+			<StockCategoryBloc/>
+			<StockSubcategoryBloc/>
+
+			<NomenclatureBloc/>
+
 			<DashboardArrow className="arrow-article-unit-section"           id="arrow-unit-section"           type="ns"/>
 			<DashboardArrow className="arrow-article-category-subcategory"   id="arrow-category-subcategory"   type="ns"/>
 			<DashboardArrow className="arrow-article-section-article"        id="arrow-section-article"        type="neso"/>

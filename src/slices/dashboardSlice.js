@@ -14,8 +14,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit'
 
 const initialState = {
 	parc : {
@@ -42,26 +41,30 @@ export const dashboardSlice = createSlice({
 	name: 'dashboard',
 	initialState,
 	reducers: {
-		updateDashboard: (state, action) => {
-			state.parc.unit         = action.payload.parc.unit
-			state.parc.section      = action.payload.parc.section
-			state.parc.family       = action.payload.parc.family
-			state.parc.type         = action.payload.parc.type
-			state.parc.equipment    = action.payload.parc.equipment
-			state.stock.unit        = action.payload.stock.unit
-			state.stock.section     = action.payload.stock.section
-			state.stock.category    = action.payload.stock.category
-			state.stock.subcategory = action.payload.stock.subcategory
-			state.stock.article     = action.payload.stock.article
-			state.common.nomenclature = action.payload.nomenclature
+		updateDashboardData: (state, action) => {
+			// see slices/dashboardMiddleware.js
+		},
+		dashboardDataUpdated: (state, action) => {
+			const payload = action.payload
+			state.parc.unit           = payload.parc.unit
+			state.parc.section        = payload.parc.section
+			state.parc.family         = payload.parc.family
+			state.parc.type           = payload.parc.type
+			state.parc.equipment      = payload.parc.equipment
+			state.stock.unit          = payload.stock.unit
+			state.stock.section       = payload.stock.section
+			state.stock.category      = payload.stock.category
+			state.stock.subcategory   = payload.stock.subcategory
+			state.stock.article       = payload.stock.article
+			state.common.nomenclature = payload.common.nomenclature
 		}
 	}
-});
+})
 
-export const { updateDashboard } = dashboardSlice.actions;
+export const { updateDashboardData, dashboardDataUpdated } = dashboardSlice.actions
 
 export const selectParc = state => state.dashboard.parc
 export const selectStock = state => state.dashboard.stock
 export const selectCommon = state => state.dashboard.common
 
-export default dashboardSlice.reducer;
+export default dashboardSlice.reducer

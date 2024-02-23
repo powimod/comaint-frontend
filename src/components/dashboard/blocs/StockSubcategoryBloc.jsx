@@ -33,7 +33,7 @@ const StockSubcategoryBloc = () => {
 	useEffect( () => {
 		const data = parcState.subcategory
 		let value = ''
-		if (data) value = data
+		if (data && data.value) value = data.value
 		setBlocValue(value)
 	}, [ parcState ])
 

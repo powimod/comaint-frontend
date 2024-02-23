@@ -33,7 +33,7 @@ const ParcTypeBloc = () => {
 	useEffect( () => {
 		const data = parcState.type
 		let value = ''
-		if (data) value = data
+		if (data && data.value) value = data.value
 		setBlocValue(value)
 	}, [ parcState ])
 

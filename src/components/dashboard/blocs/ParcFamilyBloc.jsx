@@ -33,7 +33,7 @@ const ParcFamilyBloc = () => {
 	useEffect( () => {
 		const data = parcState.family
 		let value = ''
-		if (data) value = data
+		if (data && data.value) value = data.value
 		setBlocValue(value)
 	}, [ parcState ])
 

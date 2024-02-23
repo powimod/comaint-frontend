@@ -17,17 +17,78 @@
 import selectorApi from '../api/selector-api.js'
 
 const dashboardMiddleware = storeAPI => next => action => {
-	if (action.type === 'dashboard/updateDashboard') {
-		console.log('dOm Calling selector route...')
-		selectorApi.query({})
+	if (action.type === 'dashboard/updateDashboardData') {
+		const selectors = {
+
+		}
+		selectorApi.query(selectors)
 		.then( (result) => {
-			console.log('dOm selector route response', result)
 			if (! result.ok)
 				throw result.error
+
+			const newDashboardState = {
+				parc : {
+					unit: null,
+					section: null,
+					family: null,
+					type: null,
+					equipment: null,
+				},
+				stock: {
+					unit: null,
+					section: null,
+					category: null,
+					subcategory: null,
+					article: null,
+				},
+				common: {
+					nomenclature: null
+				}
+			}
+
+			for (var entry of result.results) {
+				switch (entry.name) {
+					case 'parc-section':
+						newDashboardState.parc.section = entry
+						break;
+					case 'parc-unit':
+						newDashboardState.parc.unit = entry
+						break;
+					case 'parc-family':
+						newDashboardState.parc.family = entry
+						break;
+					case 'parc-type':
+						newDashboardState.parc.type = entry
+						break;
+					case 'parc-equipment':
+						newDashboardState.parc.equipment = entry
+						break;
+					case 'stock-section':
+						newDashboardState.stock.section = entry
+						break;
+					case 'stock-unit':
+						newDashboardState.stock.unit = entry
+						break;
+					case 'stock-category':
+						newDashboardState.stock.category = entry
+						break;
+					case 'stock-subcategory':
+						newDashboardState.stock.subcategory = entry
+						break;
+					case 'stock-article':
+						newDashboardState.stock.article = entry
+						break;
+					case 'nomenclature':
+						newDashboardState.common.nomenclature = entry
+						break;
+				}
+			}
+			storeAPI.dispatch({ type: 'dashboard/dashboardDataUpdated', payload: newDashboardState })
 			next(action)
 		})
 		.catch( (error) => {
 			console.error('Selector.query route error', error.message ? error.message : error)
+			// TODO issue-34 : calling dispatch with empty results ?
 			next(action)
 		})
 		return // return without calling the 'next' function

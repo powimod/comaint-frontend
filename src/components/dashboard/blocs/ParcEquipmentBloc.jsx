@@ -33,7 +33,7 @@ const ParcEquipmentBloc = () => {
 	useEffect( () => {
 		const data = parcState.equipment
 		let value = ''
-		if (data) value = data
+		if (data && data.value) value = data.value
 		setBlocValue(value)
 	}, [ parcState ])
 

@@ -33,7 +33,7 @@ const StockSectionBloc = () => {
 	useEffect( () => {
 		const data = parcState.section
 		let value = ''
-		if (data) value = data
+		if (data && data.value) value = data.value
 		setBlocValue(value)
 	}, [ parcState ])
 

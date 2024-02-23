@@ -32,7 +32,7 @@ import StockArticleBloc from './blocs/StockArticleBloc'
 import NomenclatureBloc from './blocs/NomenclatureBloc'
 
 import DashboardArrow from './DashboardArrow'
-import { selectParc, updateDashboard} from '../../slices/dashboardSlice.js'
+import { selectParc, updateDashboardData} from '../../slices/dashboardSlice.js'
 
 const MainDashboard = () => {
 	const { t } = useTranslation();
@@ -40,24 +40,7 @@ const MainDashboard = () => {
 	const dispatch = useDispatch();
 
 	useEffect( () => {
-		var newDashboardState = {
-			parc : {
-				unit: "Garage",
-				section: "Garage n°1",
-				family: "Voiture",
-				type: "Kangoo",
-				equipment: "125-XZ-54"
-			},
-			stock: {
-				unit: "Stock",
-				section: "Salle B",
-				category: "Moteur",
-				subcategory: "Joints",
-				article: "Joint culasse BRK32",
-			},
-			nomenclature: 12
-		};
-		dispatch(updateDashboard(newDashboardState))
+		dispatch(updateDashboardData())
 	}, [])
 
 	return (<>

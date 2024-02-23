@@ -24,7 +24,7 @@ import { selectParc } from '../../../slices/dashboardSlice.js'
 const ParcTypeBloc = () => {
 	const { t } = useTranslation();
 	const parcState = useSelector(selectParc)
-	const [ blocValue, setBlocValue ] = useState(null)
+	const [ blocData, setBlocData ] = useState(null)
 
 	const onBlocClick = () => {
 		console.log("Parc type bloc clicked")
@@ -32,16 +32,14 @@ const ParcTypeBloc = () => {
 
 	useEffect( () => {
 		const data = parcState.type
-		let value = ''
-		if (data && data.value) value = data.value
-		setBlocValue(value)
+		setBlocData(data)
 	}, [ parcState ])
 
 	return <DashboardBloc 
 		className="bloc-equipment-type" 
 		label="dashboard.bloc.type"
 		icon="type" 
-		value={blocValue} 
+		data={blocData} 
 		onClick={onBlocClick} /> 
 }
 

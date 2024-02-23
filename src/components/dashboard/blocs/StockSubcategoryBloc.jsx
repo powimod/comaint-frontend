@@ -24,7 +24,7 @@ import { selectStock } from '../../../slices/dashboardSlice.js'
 const StockSubcategoryBloc = () => {
 	const { t } = useTranslation();
 	const parcState = useSelector(selectStock)
-	const [ blocValue, setBlocValue ] = useState(null)
+	const [ blocData, setBlocData ] = useState(null)
 
 	const onBlocClick = () => {
 		console.log("Stock subcategory bloc clicked")
@@ -32,16 +32,14 @@ const StockSubcategoryBloc = () => {
 
 	useEffect( () => {
 		const data = parcState.subcategory
-		let value = ''
-		if (data && data.value) value = data.value
-		setBlocValue(value)
+		setBlocData(data)
 	}, [ parcState ])
 
 	return <DashboardBloc 
 		className="bloc-article-subcategory" 
 		label="dashboard.bloc.subcategory"
 		icon="subcategory" 
-		value={blocValue} 
+		data={blocData} 
 		onClick={onBlocClick} /> 
 }
 

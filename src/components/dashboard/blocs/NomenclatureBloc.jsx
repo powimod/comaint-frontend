@@ -24,7 +24,7 @@ import { selectCommon } from '../../../slices/dashboardSlice.js'
 const NomenclatureBloc = () => {
 	const { t } = useTranslation();
 	const commonState = useSelector(selectCommon)
-	const [ blocValue, setBlocValue ] = useState(null)
+	const [ blocData , setBlocData ] = useState(null)
 
 	const onBlocClick = () => {
 		console.log(" nomenclature bloc clicked")
@@ -32,16 +32,14 @@ const NomenclatureBloc = () => {
 
 	useEffect( () => {
 		const data = commonState.nomenclature
-		let value = ''
-		if (data && data.value) value = data.value
-		setBlocValue(value)
+		setBlocData(data)
 	}, [ commonState ])
 
 	return <DashboardBloc 
 		className="bloc-nomenclature" 
 		label="dashboard.bloc.nomenclature"
 		icon="nomenclature" 
-		value={blocValue} 
+		data={blocData} 
 		onClick={onBlocClick} /> 
 }
 

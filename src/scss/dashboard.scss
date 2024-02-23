@@ -62,7 +62,7 @@ $dashboard-width-limit: 480px !default;
 	overflow:hidden;
 	text-overflow: ellipsis;
 }
-.dashboard-bloc > div:hover { /* value */
+.dashboard-bloc > div:hover {
 	overflow: visible;
 	white-space: normal;
 }
@@ -72,6 +72,20 @@ $dashboard-width-limit: 480px !default;
 	min-width: 2rem;
 	min-height: 2rem;
 	max-height: 3rem;
+}
+
+/* display a × symbole (times) on the left of the counter */
+.dashboard-bloc-counter {
+	grid-area: 2/2 / 3/-2 !important;
+	overflow: visible !important;
+	position: relative;
+}
+.dashboard-bloc-counter:before {
+	content: '×';
+	position:absolute;
+	left: -2.1rem;
+	top: -0.2rem;
+	font-size: 3rem;
 }
 
 /* grid-area : lineStart / columnStart / lineEnd / columnEnd */
@@ -173,6 +187,7 @@ $dashboard-width-limit: 480px !default;
 .arrow-nomenclature-article {
 	grid-area : 14/14 / 16/16; 
 }
+
 
 
 /* switch Main dashboard / panel switcher visibility */
